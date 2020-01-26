@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 01:47:19 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/01/26 02:01:27 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/01/26 03:07:49 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,24 @@ typedef struct  s_vec
     int x;
     int y;
 }               t_vec;
+
+typedef struct  s_textures
+{
+    char *north;
+    char *south;
+    char *west;
+    char *east;
+    char *sprite;
+}               t_textures;
+
+typedef struct  s_map
+{
+    char        *map;
+    t_vec       resolution;
+    t_textures  textures;
+    int         ground_color;
+    int         ceil_color;
+}               t_map;
 
 #include "graphics_utils.h"
 #include "utils.h"
