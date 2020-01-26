@@ -1,19 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.c                                            :+:      :+:    :+:   */
+/*   ft_string.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/25 01:45:36 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/01/26 01:59:00 by bbellavi         ###   ########.fr       */
+/*   Created: 2020/01/26 01:21:06 by bbellavi          #+#    #+#             */
+/*   Updated: 2020/01/26 01:48:34 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
-#include <stdio.h>
+#   ifndef FT_STRING_H
+#   define FT_STRING_H
 
-int		main(void)
-{
-	
-}
+#include <stddef.h>
+#include <stdlib.h>
+
+size_t	ft_strlen(const char *str);
+char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strndup(const char *s, size_t len);
+
+#   endif

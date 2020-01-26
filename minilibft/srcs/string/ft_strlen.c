@@ -1,19 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.c                                            :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/25 01:45:36 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/01/26 01:59:00 by bbellavi         ###   ########.fr       */
+/*   Created: 2020/01/26 01:20:42 by bbellavi          #+#    #+#             */
+/*   Updated: 2020/01/26 01:34:58 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
-#include <stdio.h>
+#include "ft_string.h"
 
-int		main(void)
+size_t	ft_strlen(const char *str)
 {
-	
+	const char *final_str = str;
+
+	while (*str != '\0')
+		str++;
+	return (str - final_str);
 }

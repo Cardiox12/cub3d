@@ -1,19 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.c                                            :+:      :+:    :+:   */
+/*   ft_stdio.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/25 01:45:36 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/01/26 01:59:00 by bbellavi         ###   ########.fr       */
+/*   Created: 2020/01/26 01:25:41 by bbellavi          #+#    #+#             */
+/*   Updated: 2020/01/26 01:48:13 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
-#include <stdio.h>
+#   ifndef  FT_STDIO_H
+#   define  FT_STDIO_H
 
-int		main(void)
-{
-	
-}
+#include <unistd.h>
+
+void    ft_putchar(char c);
+void    ft_putstr(const char *s);
+void    ft_putnbr(int nbr);
+
+#   endif

@@ -1,19 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.c                                            :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/25 01:45:36 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/01/26 01:59:00 by bbellavi         ###   ########.fr       */
+/*   Created: 2020/01/26 01:34:34 by bbellavi          #+#    #+#             */
+/*   Updated: 2020/01/26 01:34:59 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
-#include <stdio.h>
+#include "ft_string.h"
 
-int		main(void)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	
+	const size_t	s1_len = ft_strlen(s1);
+	const size_t	s2_len = ft_strlen(s2);
+	char			*concat;
+	char			*begin;
+
+	concat = malloc(sizeof(char) * (s1_len + s2_len + 1));
+	if (concat == NULL)
+		return (NULL);
+	begin = concat;
+	while (*s1)
+		*concat++ = *s1++;
+	while (*s2)
+		*concat++ = *s2++;
+	*concat = '\0';
+	return (begin);
 }

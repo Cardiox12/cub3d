@@ -1,19 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.c                                            :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/25 01:45:36 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/01/26 01:59:00 by bbellavi         ###   ########.fr       */
+/*   Created: 2020/01/26 01:27:45 by bbellavi          #+#    #+#             */
+/*   Updated: 2020/01/26 01:29:31 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
-#include <stdio.h>
+#include "ft_stdio.h"
 
-int		main(void)
+void    ft_putstr(const char *s)
 {
-	
+    const char *final_s = s;
+
+    while (*s)
+        s++;
+    write(1, final_s, s - final_s);
 }

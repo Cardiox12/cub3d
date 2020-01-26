@@ -1,19 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.c                                            :+:      :+:    :+:   */
+/*   ft_strndup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/25 01:45:36 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/01/26 01:59:00 by bbellavi         ###   ########.fr       */
+/*   Created: 2020/01/26 01:32:29 by bbellavi          #+#    #+#             */
+/*   Updated: 2020/01/26 01:34:56 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
-#include <stdio.h>
+#include "ft_string.h"
 
-int		main(void)
+char	*ft_strndup(const char *s, size_t len)
 {
-	
+	char *string;
+	char *begin;
+
+	string = malloc(len + 1);
+	if (string == NULL)
+		return (NULL);
+	begin = string;
+	while (len-- != 0 && *s)
+		*string++ = *s++;
+	*string = '\0';
+	return (begin);
 }
