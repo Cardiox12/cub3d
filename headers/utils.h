@@ -1,28 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.c                                            :+:      :+:    :+:   */
+/*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/25 01:45:36 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/01/26 00:57:20 by bbellavi         ###   ########.fr       */
+/*   Created: 2020/01/25 03:18:15 by bbellavi          #+#    #+#             */
+/*   Updated: 2020/01/25 03:19:33 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#   ifndef FT_UTILS_H
+#   define FT_UTILS_H
+
 #include "cub3d.h"
-#include <stdio.h>
+void    init_mlx_infos(t_mlx_infos *infos);
 
-int		main(void)
-{
-	t_mlx_infos infos;
-
-	init_mlx_infos(&infos);
-	if ((infos.mlx_ptr = mlx_init()) != NULL)
-	{
-		infos.win_ptr = mlx_new_window(infos.mlx_ptr, WIDTH, HEIGHT, "mlx window");
-		ft_line(10, 10, 10, 100, &infos);
-		mlx_key_hook(infos.win_ptr, escape_hook, NULL);
-		mlx_loop(infos.mlx_ptr);
-	}
-}
+#   endif

@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "cub3d.h": "c",
+        "event_hooks.h": "c"
+    }
+}
