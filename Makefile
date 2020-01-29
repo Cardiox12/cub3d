@@ -6,14 +6,14 @@
 #    By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/25 00:45:19 by bbellavi          #+#    #+#              #
-#    Updated: 2020/01/26 00:54:31 by bbellavi         ###   ########.fr        #
+#    Updated: 2020/01/29 22:25:56 by bbellavi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 COLOR_NC			= \e[0m
 COLOR_LIGHT_GREEN	= \e[1;32m
 CC			= gcc
-CFLAGS		= -Wall -Wextra -Werror -framework OpenGL -framework AppKit
+CFLAGS		= -Wall -Wextra -Werror -framework OpenGL -framework AppKit -g
 MAKE		= make -C
 MLX_DIR		= ./minilibx
 NAME		= cub3d
