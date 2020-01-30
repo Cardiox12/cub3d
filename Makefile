@@ -6,7 +6,7 @@
 #    By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/25 00:45:19 by bbellavi          #+#    #+#              #
-#    Updated: 2020/01/29 22:25:56 by bbellavi         ###   ########.fr        #
+#    Updated: 2020/01/29 22:46:51 by bbellavi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,32 +18,43 @@ MAKE		= make -C
 MLX_DIR		= ./minilibx
 NAME		= cub3d
 MLX_NAME	= libmlx.a
+LFT_NAME	= libftmini.a
 
 GRAPH_DIR	= graphics_utils
 UTILS_DIR	= utils
 HOOK_DIR	= event_hooks
+LFT_DIR		= minilibft
 SRCS		= cub3d.c
 SRCS		+= $(GRAPH_DIR)/ft_encode_rgb.c
 SRCS		+= $(GRAPH_DIR)/ft_line.c
 SRCS		+= $(UTILS_DIR)/init_mlx_infos.c
+SRCS		+= $(UTILS_DIR)/init_textures.c
+SRCS		+= $(UTILS_DIR)/init_vec.c
+SRCS		+= $(UTILS_DIR)/init_map.c
+SRCS		+= $(UTILS_DIR)/parse_map.c
 SRCS		+= $(HOOK_DIR)/keyboard_hooks.c
 HEADERS		= headers
+LFT_HEADERS	= $(LFT_DIR)/headers
 
 all: $(NAME)
 
 $(NAME): $(SRCS)
 	@$(MAKE) $(MLX_DIR)
+	@$(MAKE) $(LFT_DIR)
 	@cp $(MLX_DIR)/libmlx.a .
+	@cp $(LFT_DIR)/libftmini.a .
 	clear
 	@printf "$(COLOR_LIGHT_GREEN)COMPILING CUB3D$(COLOR_NC)\n"
-	@$(CC) -o $(NAME) $(SRCS) $(MLX_NAME) $(CFLAGS) -I $(MLX_DIR) -I $(HEADERS)
+	@$(CC) -o $(NAME) $(SRCS) $(LFT_NAME) $(MLX_NAME) $(CFLAGS) -I $(MLX_DIR) -I $(HEADERS) -I $(LFT_HEADERS)
 
 clean: fclean
 
 fclean:
 	@printf "$(COLOR_LIGHT_GREEN)REMOVING FILES$(COLOR_NC)\n"
 	@$(MAKE) $(MLX_DIR) clean
+	@$(MAKE) $(LFT_DIR) fclean
 	@rm -rf $(MLX_NAME)
 	@rm -rf $(NAME)
+	@rm -rf cub3d.dSYM
 
 re: fclean $(NAME)

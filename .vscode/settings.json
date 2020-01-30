@@ -1,6 +1,8 @@
 {
     "files.associations": {
         "cub3d.h": "c",
-        "event_hooks.h": "c"
+        "event_hooks.h": "c",
+        "get_next_line.h": "c",
+        "ft_stdio.h": "c"
     }
 }

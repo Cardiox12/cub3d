@@ -1,30 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.c                                            :+:      :+:    :+:   */
+/*   ft_std.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/25 01:45:36 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/01/30 00:46:55 by bbellavi         ###   ########.fr       */
+/*   Created: 2020/01/30 00:14:12 by bbellavi          #+#    #+#             */
+/*   Updated: 2020/01/30 00:16:27 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
-#include "parser.h"
-#include <stdio.h>
+#   ifndef FT_STD_H
+#   define FT_STD_H
 
-int		main(int argc, char **argv)
-{
-    t_map       map;
-    t_vec       vec;
-    t_textures  textures;
+int			ft_atoi(const char *str);
 
-    map.resolution = &vec;
-    map.textures = &textures;
-    init_map(&map);
-    if (argc > 1)
-    {
-        parse_map(argv[1], &map);
-    }
-}
+#   endif

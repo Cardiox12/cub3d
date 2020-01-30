@@ -1,30 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.c                                            :+:      :+:    :+:   */
+/*   init_textures.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/25 01:45:36 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/01/30 00:46:55 by bbellavi         ###   ########.fr       */
+/*   Created: 2020/01/29 22:23:18 by bbellavi          #+#    #+#             */
+/*   Updated: 2020/01/29 22:23:38 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "parser.h"
-#include <stdio.h>
 
-int		main(int argc, char **argv)
+void    init_textures(t_textures *textures)
 {
-    t_map       map;
-    t_vec       vec;
-    t_textures  textures;
-
-    map.resolution = &vec;
-    map.textures = &textures;
-    init_map(&map);
-    if (argc > 1)
+    if (textures != NULL)
     {
-        parse_map(argv[1], &map);
+        textures->north = NULL;
+        textures->south = NULL;
+        textures->east = NULL;
+        textures->west = NULL;
+        textures->sprite = NULL;
     }
 }

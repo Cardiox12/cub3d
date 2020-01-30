@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 03:18:15 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/01/25 03:19:33 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/01/29 22:25:24 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,8 @@
 
 #include "cub3d.h"
 void    init_mlx_infos(t_mlx_infos *infos);
+void    init_textures(t_textures *textures);
+void    init_vec(t_vec *vec);
+void    init_map(t_map *map);
 
 #   endif

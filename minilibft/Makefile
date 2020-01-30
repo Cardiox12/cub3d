@@ -6,7 +6,7 @@
 #    By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/26 01:37:41 by bbellavi          #+#    #+#              #
-#    Updated: 2020/01/26 01:47:54 by bbellavi         ###   ########.fr        #
+#    Updated: 2020/01/30 00:17:14 by bbellavi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ INC_FILES	= $(INCLUDES)/ft_stdio.h $(INCLUDES)/ft_string.h $(INCLUDES)/get_next_
 BASE_DIR	= srcs
 STDIO_DIR	= $(BASE_DIR)/stdio
 STRING_DIR	= $(BASE_DIR)/string
+STD_DIR		= $(BASE_DIR)/std
 
 SRCS	= $(STDIO_DIR)/ft_putchar.c
 SRCS	+= $(STDIO_DIR)/ft_putstr.c
@@ -28,6 +29,9 @@ SRCS	+= $(STDIO_DIR)/get_next_line.c
 SRCS	+= $(STRING_DIR)/ft_strjoin.c
 SRCS	+= $(STRING_DIR)/ft_strlen.c
 SRCS	+= $(STRING_DIR)/ft_strndup.c
+SRCS	+= $(STRING_DIR)/ft_strncmp.c
+SRCS	+= $(STRING_DIR)/ft_split.c
+SRCS	+= $(STD_DIR)/ft_atoi.c
 
 OBJS	= $(SRCS:.c=.o)
 .PHONY: all re clean fclean

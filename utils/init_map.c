@@ -1,30 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.c                                            :+:      :+:    :+:   */
+/*   init_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/25 01:45:36 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/01/30 00:46:55 by bbellavi         ###   ########.fr       */
+/*   Created: 2020/01/29 22:22:53 by bbellavi          #+#    #+#             */
+/*   Updated: 2020/01/30 00:30:44 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "parser.h"
-#include <stdio.h>
 
-int		main(int argc, char **argv)
+void    init_map(t_map *map)
 {
-    t_map       map;
-    t_vec       vec;
-    t_textures  textures;
-
-    map.resolution = &vec;
-    map.textures = &textures;
-    init_map(&map);
-    if (argc > 1)
+    if (map != NULL)
     {
-        parse_map(argv[1], &map);
+        map->map = NULL;
+        map->ceil_color = 0;
+        map->ground_color = 0;
+        init_textures(map->textures);
+        init_vec(map->resolution);
     }
 }
