@@ -6,7 +6,7 @@
 #    By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/25 00:45:19 by bbellavi          #+#    #+#              #
-#    Updated: 2020/01/31 12:23:08 by bbellavi         ###   ########.fr        #
+#    Updated: 2020/01/31 20:50:40 by bbellavi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ LFT_NAME	= libftmini.a
 
 GRAPH_DIR	= graphics_utils
 UTILS_DIR	= utils
+GAME_DIR	= game
 HOOK_DIR	= event_hooks
 LFT_DIR		= minilibft
 SRCS		= cub3d.c
@@ -32,6 +33,7 @@ SRCS		+= $(UTILS_DIR)/init_textures.c
 SRCS		+= $(UTILS_DIR)/init_vec.c
 SRCS		+= $(UTILS_DIR)/init_map.c
 SRCS		+= $(UTILS_DIR)/parse_map.c
+SRCS		+= $(GAME_DIR)/game.c
 SRCS		+= $(HOOK_DIR)/keyboard_hooks.c
 HEADERS		= headers
 LFT_HEADERS	= $(LFT_DIR)/headers

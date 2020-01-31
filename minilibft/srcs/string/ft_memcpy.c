@@ -1,32 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.c                                            :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/25 01:45:36 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/01/31 20:52:19 by bbellavi         ###   ########.fr       */
+/*   Created: 2019/08/16 00:50:11 by tony              #+#    #+#             */
+/*   Updated: 2020/01/31 01:05:11 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
-#include "parser.h"
-#include <stdio.h>
-#include "game.h"
+#include "ft_string.h"
 
-int		main(int argc, char **argv)
+void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
-    t_map       map;
-    t_vec       vec;
-    t_textures  textures;
+	const unsigned char	*uchar_src = src;
+	unsigned char		*begin;
+	unsigned char		*uchar_dst;
 
-    map.resolution = &vec;
-    map.textures = &textures;
-    init_map(&map);
-    if (argc > 1)
-    {
-        parse_map(argv[1], &map);
-        game(&map);
-    }
+	uchar_dst = dst;
+	begin = uchar_dst;
+	while (n-- > 0)
+		*uchar_dst++ = *uchar_src++;
+	return (begin);
 }

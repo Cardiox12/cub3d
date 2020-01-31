@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 22:25:32 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/01/31 20:04:06 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/01/31 20:52:32 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,32 +202,32 @@ static void store_to_map(t_map *map, char *identifier, char *s)
         store_color_to_map(map, s, ident);
 }
 
-static void print_map(t_map *map)
-{
-    printf("Resolution :\n");
-    printf("\tx = %i\n", map->resolution->x);
-    printf("\ty = %i\n", map->resolution->y);
+// static void print_map(t_map *map)
+// {
+//     printf("Resolution :\n");
+//     printf("\tx = %i\n", map->resolution->x);
+//     printf("\ty = %i\n", map->resolution->y);
 
-    printf("Textures :\n");
-    printf("\tnorth = %s\n", map->textures->north);
-    printf("\tsouth = %s\n", map->textures->south);
-    printf("\twest = %s\n", map->textures->west);
-    printf("\teast = %s\n", map->textures->east);
-    printf("\tsprite = %s\n", map->textures->sprite);
+//     printf("Textures :\n");
+//     printf("\tnorth = %s\n", map->textures->north);
+//     printf("\tsouth = %s\n", map->textures->south);
+//     printf("\twest = %s\n", map->textures->west);
+//     printf("\teast = %s\n", map->textures->east);
+//     printf("\tsprite = %s\n", map->textures->sprite);
 
-    printf("Colors :\n");
-    printf("\tceil = ");
-    Debug_print_bits(map->ceil_color);
-    printf("\tfloor = ");
-    Debug_print_bits(map->ground_color);
+//     printf("Colors :\n");
+//     printf("\tceil = ");
+//     Debug_print_bits(map->ceil_color);
+//     printf("\tfloor = ");
+//     Debug_print_bits(map->ground_color);
 
-    printf("Maps : \n");
-    while (*map->map != NULL)
-    {
-        printf("\t%s\n", *map->map);
-        map->map++;
-    }
-}
+//     printf("Maps : \n");
+//     while (*map->map != NULL)
+//     {
+//         printf("\t%s\n", *map->map);
+//         map->map++;
+//     }
+// }
 
 char    *append_to_str(char **dst, char *src)
 {
@@ -287,6 +287,5 @@ void    parse_map(const char *path, t_map *map)
             free(line);
         }
         map->map = ft_split(buffer, ';');
-        print_map(map);
     }
 }

@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 02:01:35 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/01/30 19:25:26 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/01/31 20:44:48 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,14 @@ typedef enum    e_ident
     I_CEIL,
     I_FLOOR
 }               t_ident;
+
+typedef enum    e_cardinal_p
+{
+    S_NORTH     = 'N',
+    S_SOUTH     = 'S',
+    S_EAST      = 'E',
+    S_WEST      = 'W'
+}               e_cardinal_p;
 
 static char *identifiers[ID_SIZE] = {"R", "NO", "SO", "WE", "EA", "S", "F", "C"};
 void    parse_map(const char *path, t_map *map);
