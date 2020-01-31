@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 13:46:14 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/01/30 00:16:17 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/01/31 12:37:58 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int			ft_atoi(const char *str)
 
 	sign = 1;
 	result = 0;
-	while (is_space(*str))
+	while (*str && is_space(*str))
 		str++;
 	if (*str == '-' || *str == '+')
 	{

@@ -6,13 +6,13 @@
 #    By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/26 01:37:41 by bbellavi          #+#    #+#              #
-#    Updated: 2020/01/30 19:27:31 by bbellavi         ###   ########.fr        #
+#    Updated: 2020/01/31 12:34:15 by bbellavi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC			= gcc
 NAME		= libftmini.a
-CFLAGS		= -Wall -Werror -Wextra
+CFLAGS		= -Wall -Werror -Wextra -g
 
 INCLUDES	= headers
 INC_FILES	= $(INCLUDES)/ft_stdio.h $(INCLUDES)/ft_string.h $(INCLUDES)/get_next_line.h
@@ -32,6 +32,8 @@ SRCS	+= $(STRING_DIR)/ft_strndup.c
 SRCS	+= $(STRING_DIR)/ft_strncmp.c
 SRCS	+= $(STRING_DIR)/ft_split.c
 SRCS	+= $(STRING_DIR)/ft_strchr.c
+SRCS	+= $(STRING_DIR)/ft_memcpy.c
+SRCS	+= $(STRING_DIR)/ft_strtrim.c
 SRCS	+= $(STD_DIR)/ft_atoi.c
 
 OBJS	= $(SRCS:.c=.o)

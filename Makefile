@@ -6,14 +6,14 @@
 #    By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/25 00:45:19 by bbellavi          #+#    #+#              #
-#    Updated: 2020/01/29 22:46:51 by bbellavi         ###   ########.fr        #
+#    Updated: 2020/01/31 12:23:08 by bbellavi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 COLOR_NC			= \e[0m
 COLOR_LIGHT_GREEN	= \e[1;32m
 CC			= gcc
-CFLAGS		= -Wall -Wextra -Werror -framework OpenGL -framework AppKit -g
+CFLAGS		= -Wall -Wextra -Werror -framework OpenGL -framework AppKit
 MAKE		= make -C
 MLX_DIR		= ./minilibx
 NAME		= cub3d
@@ -45,7 +45,7 @@ $(NAME): $(SRCS)
 	@cp $(LFT_DIR)/libftmini.a .
 	clear
 	@printf "$(COLOR_LIGHT_GREEN)COMPILING CUB3D$(COLOR_NC)\n"
-	@$(CC) -o $(NAME) $(SRCS) $(LFT_NAME) $(MLX_NAME) $(CFLAGS) -I $(MLX_DIR) -I $(HEADERS) -I $(LFT_HEADERS)
+	@$(CC) -g -o $(NAME) $(SRCS) $(LFT_NAME) $(MLX_NAME) $(CFLAGS) -I $(MLX_DIR) -I $(HEADERS) -I $(LFT_HEADERS)
 
 clean: fclean
 
@@ -54,6 +54,7 @@ fclean:
 	@$(MAKE) $(MLX_DIR) clean
 	@$(MAKE) $(LFT_DIR) fclean
 	@rm -rf $(MLX_NAME)
+	@rm -rf $(LFT_NAME)
 	@rm -rf $(NAME)
 	@rm -rf cub3d.dSYM
 

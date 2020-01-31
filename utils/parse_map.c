@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 22:25:32 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/01/31 00:24:28 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/01/31 20:04:06 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -220,6 +220,47 @@ static void print_map(t_map *map)
     Debug_print_bits(map->ceil_color);
     printf("\tfloor = ");
     Debug_print_bits(map->ground_color);
+
+    printf("Maps : \n");
+    while (*map->map != NULL)
+    {
+        printf("\t%s\n", *map->map);
+        map->map++;
+    }
+}
+
+char    *append_to_str(char **dst, char *src)
+{
+    char *old;
+    char *prev_str;
+
+    if (*dst == NULL)
+    {
+        if ((*dst = ft_strndup(src, ft_strlen(src))) == NULL)
+            return (NULL);
+    }
+    else
+    {
+        old = *dst;
+        if ((prev_str = ft_strjoin(*dst, ";")) == NULL)
+            return (NULL);
+        if ((*dst = ft_strjoin(prev_str, src)) == NULL)
+            return (NULL);
+        free(old);
+        free(prev_str);
+    }
+    return (*dst);
+}
+
+int     is_mapline(char *line)
+{
+    while (*line)
+    {
+        if (ft_strchr(MAP_SYMBOLS, *line) == NULL)
+            return (0);
+        line++;
+    }
+    return (1);
 }
 
 void    parse_map(const char *path, t_map *map)
@@ -227,17 +268,25 @@ void    parse_map(const char *path, t_map *map)
     int         fd;
     char        *line;
     char        *identifier;
+    char        *buffer;
 
-    line = NULL;
+    buffer = NULL;
     if (is_valid_filename(path))
     {
         fd = open(path, O_RDONLY);
         while (get_next_line(fd, &line) > 0)
         {
-            if ((identifier = is_identifier(line)) != NULL)
-                store_to_map(map, identifier, line)
-            
+            if (*line != '\0')
+            {
+                line = ft_strtrim(line, " \n\t");
+                if ((identifier = is_identifier(line)) != NULL)
+                    store_to_map(map, identifier, line);
+                else if (is_mapline(line))
+                    append_to_str(&buffer, line);
+            }
+            free(line);
         }
+        map->map = ft_split(buffer, ';');
         print_map(map);
     }
 }
