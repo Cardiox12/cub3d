@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 02:01:35 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/01/30 00:48:21 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/01/30 19:25:26 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,25 @@
 #   define CEIL             "C"
 #   define TRUE             1
 #   define FALSE            0
+#   define NOT_FOUND        -1
 #   define ERR_RESOLUTION   "Bad format for resolution.\n"
+#   define ERR_TEXTURE      "Bad format for texture.\n"
+#   define ERR_COLORS       "Bad format for colors.\n"
+#   define ERR_RGB_RANGE    "Bad range for colors, value must be between [0, 255].\n"
+#   define SPACE            ' '
+#   define COMMA            ','
+#   define MAP_SYMBOLS      "012NSEW"
+
+typedef enum    e_ident
+{
+    I_NORTH,
+    I_SOUTH,
+    I_EAST,
+    I_WEST,
+    I_SPRITE,
+    I_CEIL,
+    I_FLOOR
+}               t_ident;
 
 static char *identifiers[ID_SIZE] = {"R", "NO", "SO", "WE", "EA", "S", "F", "C"};
 void    parse_map(const char *path, t_map *map);

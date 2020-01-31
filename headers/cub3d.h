@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 01:47:19 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/01/30 00:30:11 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/01/30 19:19:13 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ typedef struct  s_textures
 
 typedef struct  s_map
 {
-    char        *map;
+    char        **map;
     t_vec       *resolution;
     t_textures  *textures;
     int         ground_color;

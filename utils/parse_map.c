@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 22:25:32 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/01/30 00:49:01 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/01/30 19:32:55 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,39 @@
 #include "ft_std.h"
 #include "get_next_line.h"
 #include <stdio.h>
+
+void    Debug_print_bits(int num)
+{
+    char bits;
+    bits = sizeof(int) * 8;
+
+    while (bits != 0)
+    {
+        bits--;
+        if (num & (0x01 << bits))
+            printf("1");
+        else
+            printf("0");
+        if (bits % 8 == 0)
+            printf(" ");
+    }
+    printf("\n");
+}
+
+static int  is_texture(char *identifier)
+{
+    if (ft_strncmp(identifier, NORTH, ft_strlen(NORTH)) == 0)
+        return (I_NORTH);
+    else if (ft_strncmp(identifier, SOUTH, ft_strlen(SOUTH)) == 0)
+        return (I_SOUTH);
+    else if (ft_strncmp(identifier, EAST, ft_strlen(EAST)) == 0)
+        return (I_EAST);
+    else if (ft_strncmp(identifier, WEST, ft_strlen(WEST)) == 0)
+        return (I_WEST);
+    else if (ft_strncmp(identifier, SPRITE, ft_strlen(SPRITE)) == 0)
+        return (I_SPRITE);
+    return (NOT_FOUND);
+}
 
 static char *is_identifier(char *s)
 {
@@ -66,26 +99,127 @@ static void store_resolution_to_map(t_map *map, char *res)
     char **line;
 
     line = ft_split(res, ' ');
-    if (array_length(line) == 3)
+    if (line != NULL)
     {
-        map->resolution->x = ft_atoi(line[1]);
-        map->resolution->y = ft_atoi(line[2]);
+        if (array_length(line) == 3)
+        {
+            map->resolution->x = ft_atoi(line[1]);
+            map->resolution->y = ft_atoi(line[2]);
+        }
+        else
+        {
+            ft_putstr("Error\n");
+            ft_putstr(ERR_RESOLUTION);
+            exit(1);
+        }
     }
-    else
+}
+
+static void store_texture_to_map(t_map *map, char *texture, int ident)
+{
+    char    **line;
+
+    line = ft_split(texture, SPACE);
+    if (line != NULL)
     {
-        ft_putstr("Error\n");
-        ft_putstr(ERR_RESOLUTION);
-        exit(1);
+        if (array_length(line) == 2)
+        {
+            if (ident == I_NORTH)
+                map->textures->north = line[1];
+            else if (ident == I_SOUTH)
+                map->textures->south = line[1];
+            else if (ident == I_EAST)
+                map->textures->east = line[1];
+            else if (ident == I_WEST)
+                map->textures->west = line[1];
+            else if (ident == I_SPRITE)
+                map->textures->sprite = line[1];
+        }
+        else
+        {
+            ft_putstr("Error\n");
+            ft_putstr(ERR_TEXTURE);
+            exit(1);
+        }
+    }
+}
+
+static int is_color(char *ident)
+{
+    if (ft_strncmp(ident, FLOOR, ft_strlen(FLOOR)) == 0)
+        return (I_FLOOR);
+    else if (ft_strncmp(ident, CEIL, ft_strlen(CEIL)) == 0)
+        return (I_CEIL);
+    return (NOT_FOUND);
+}
+
+static int rgb_has_correc_range(int r, int g, int b)
+{
+    return (r >= 0 && r <= 255 && g >= 0 && g <= 255 && b >= 0 && b <= 255);
+}
+
+static void store_color_to_map(t_map *map, char *colors, int ident)
+{
+    char    **line;
+    int     red;
+    int     green;
+    int     blue;
+
+    while (*colors != '\0' && !(*colors > '0' && *colors < '9'))
+        colors++;
+    line = ft_split(colors, COMMA);
+    if (line != NULL)
+    {
+        red = ft_atoi(line[0]);
+        green = ft_atoi(line[1]);
+        blue = ft_atoi(line[2]);
+        if (array_length(line) == 3 && rgb_has_correc_range(red, green, blue))
+        {
+            if (ident == I_CEIL)
+                map->ceil_color = ft_encode_rgb(red, green, blue);
+            else if (ident == I_FLOOR)
+                map->ground_color = ft_encode_rgb(red, green, blue);
+        }
+        else
+        {
+            ft_putstr("Error\n");
+            ft_putstr(ERR_COLORS);
+            exit(1);
+        }
     }
 }
 
 static void store_to_map(t_map *map, char *identifier, char *s)
 {
-    (void)map;
-    const size_t length = ft_strlen(identifier);
+    const size_t    length = ft_strlen(identifier);
+    int             ident;
     
     if (ft_strncmp(identifier, RES, length) == 0)
         store_resolution_to_map(map, s);
+    else if ((ident = is_texture(identifier)) != NOT_FOUND)
+        store_texture_to_map(map, s, ident);
+    else if ((ident = is_color(identifier)) != NOT_FOUND)
+        store_color_to_map(map, s, ident);
+}
+
+static void print_map(t_map *map)
+{
+    printf("Resolution :\n");
+    printf("\tx = %i\n", map->resolution->x);
+    printf("\ty = %i\n", map->resolution->y);
+
+    printf("Textures :\n");
+    printf("\tnorth = %s\n", map->textures->north);
+    printf("\tsouth = %s\n", map->textures->south);
+    printf("\twest = %s\n", map->textures->west);
+    printf("\teast = %s\n", map->textures->east);
+    printf("\tsprite = %s\n", map->textures->sprite);
+
+    printf("Colors :\n");
+    printf("\tceil = ");
+    Debug_print_bits(map->ceil_color);
+    printf("\tfloor = ");
+    Debug_print_bits(map->ground_color);
 }
 
 void    parse_map(const char *path, t_map *map)
@@ -93,14 +227,17 @@ void    parse_map(const char *path, t_map *map)
     int         fd;
     char        *line;
     char        *identifier;
-    (void)map;
 
     line = NULL;
     if (is_valid_filename(path))
     {
         fd = open(path, O_RDONLY);
-        get_next_line(fd, &line);
-        if ((identifier = is_identifier(line)) != NULL)
-            store_to_map(map, identifier, line);
+        while (get_next_line(fd, &line) > 0)
+        {
+            if ((identifier = is_identifier(line)) != NULL)
+                store_to_map(map, identifier, line)
+            
+        }
+        print_map(map);
     }
 }
