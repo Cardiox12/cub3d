@@ -1,16 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_encode_rgb.c                                    :+:      :+:    :+:   */
+/*   init_player.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/25 01:41:19 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/02/19 15:53:25 by bbellavi         ###   ########.fr       */
+/*   Created: 2020/02/01 12:53:43 by bbellavi          #+#    #+#             */
+/*   Updated: 2020/02/01 12:54:48 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_encode_rgb(unsigned char red, unsigned char green, unsigned char blue)
+#include "game.h"
+
+void    init_player(t_player *player)
 {
-	return (red | (green << 8) | (blue << 16));
+    if (player != NULL)
+    {
+        player->curr_x = 0;
+        player->curr_y = 0;
+        player->heading = 0;
+    }
 }

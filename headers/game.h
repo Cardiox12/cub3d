@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 20:48:48 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/01/31 20:52:17 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/02/19 15:52:24 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,31 @@
 #include "cub3d.h"
 #include "parser.h"
 #include "utils.h"
+#include <math.h>
 
-void    game(t_map *map);
+#   define CHUNK_SIZE 1
+#   define WALL '1'
+#   define MAX_ANGLE 360
+#   define FOV 60
+
+typedef enum    e_cardinals_degree
+{
+    D_NORTH = 90,
+    D_SOUTH = 270,
+    D_EAST = 0,
+    D_WEST = 180,
+}               t_cardinals_degree;
+
+typedef struct	s_player
+{
+	int heading;
+	int curr_x;
+	int curr_y;
+	int FOVmin;
+	int FOVmax;
+}				t_player;
+
+void    game(t_map *map, t_mlx_infos *infos);
+void    init_player(t_player *player);
 
 #   endif

@@ -6,7 +6,7 @@
 #    By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/25 00:45:19 by bbellavi          #+#    #+#              #
-#    Updated: 2020/01/31 20:50:40 by bbellavi         ###   ########.fr        #
+#    Updated: 2020/02/19 15:37:48 by bbellavi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ LFT_DIR		= minilibft
 SRCS		= cub3d.c
 SRCS		+= $(GRAPH_DIR)/ft_encode_rgb.c
 SRCS		+= $(GRAPH_DIR)/ft_line.c
+SRCS		+= $(GRAPH_DIR)/ft_rect.c
 SRCS		+= $(UTILS_DIR)/init_mlx_infos.c
 SRCS		+= $(UTILS_DIR)/init_textures.c
 SRCS		+= $(UTILS_DIR)/init_vec.c

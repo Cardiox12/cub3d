@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 01:47:19 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/01/31 01:15:36 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/02/19 15:51:22 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ typedef struct  s_map
     t_textures  *textures;
     int         ground_color;
     int         ceil_color;
+    int         map_xsize;
+    int         map_ysize;
 }               t_map;
 
 #include "graphics_utils.h"

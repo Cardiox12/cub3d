@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 22:25:32 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/01/31 20:52:32 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/02/01 19:26:20 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -287,5 +287,7 @@ void    parse_map(const char *path, t_map *map)
             free(line);
         }
         map->map = ft_split(buffer, ';');
+        map->map_xsize = ft_strlen(map->map[0]);
+        map->map_ysize = array_length(map->map);
     }
 }
