@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 20:33:14 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/02/22 14:43:54 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/02/22 16:57:59 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,20 +103,24 @@ int		get_horizontal_facing(t_player *player)
 	return (DOWN);
 }
 
-int		check_horizontal(__unused t_map *map, t_player *player, __unused int px, __unused int py)
+t_vec	*check_horizontal(__unused t_map *map, t_player *player, int py, int alpha)
 {
-	// 1. Finding the coordinate of A.
-
-	// If the ray is facing up
-	// 	A.y = rounded_down(Py / 64) * (64) - 1;
-	// If the ray is facing down
-	// 	A.y = rounded_down(Py / 64) * (64) + 64;
-
+	t_vec *intersection;
 	int ay;
-	
-	ay = round(py / CHUNK_SIZE) * CHUNK_SIZE - 1;
-	print_facing(horizontal_facing(player));
-	print_facing(vertical_facing(player));
+	int Ya;
+	int Xa;
+
+	Ya = CHUNK_SIZE;
+	if (get_horizontal_facing(player) == UP)
+	{
+		ay = round(py / CHUNK_SIZE) * CHUNK_SIZE - 1;
+		Ya = -CHUNK_SIZE;
+	}
+	else
+		ay = round(py / CHUNK_SIZE) * CHUNK_SIZE + CHUNK_SIZE;
+	Xa = CHUNK_SIZE / tan(alpha);
+	if ((intersection = malloc(sizeof(t_vec))) == NULL)
+		return (NULL);
 	return (ay);
 }
 
