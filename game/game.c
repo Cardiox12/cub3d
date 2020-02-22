@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 20:33:14 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/02/19 15:57:42 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/02/22 14:43:54 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,11 @@ void	get_starting_coordinate(t_map *map, t_player *player)
 	}
 }
 
+int		is_not_limit(t_map *map, int x, int y)
+{
+	return (x >= 0 && x < map->map_xsize && y >= 0 && y < map->map_ysize);
+}
+
 int		collide(t_map *map, int x, int y)
 {
 	int rx;
@@ -64,7 +69,7 @@ int		collide(t_map *map, int x, int y)
 
 	rx = x / CHUNK_SIZE;
 	ry = y / CHUNK_SIZE;
-	if (rx >= 0 && rx < map->map_xsize && ry >= 0 && ry < map->map_ysize)
+	if (is_not_limit(map, x, y))
 	{
 		if (map->map[ry][rx] == WALL)
 			return (TRUE);
@@ -84,31 +89,46 @@ float	to_radian(int degree)
 	return (degree * M_PI / 180);
 }
 
+int		get_vertical_facing(t_player *player)
+{
+	if (player->heading >= 180 && player->heading <= 360)
+		return (LEFT);
+	return (RIGHT);
+}
+
+int		get_horizontal_facing(t_player *player)
+{
+	if ((player->heading >= 0 && player->heading <= 90) || (player->heading >= 270 && player->heading <= 360))
+		return (UP);
+	return (DOWN);
+}
+
+int		check_horizontal(__unused t_map *map, t_player *player, __unused int px, __unused int py)
+{
+	// 1. Finding the coordinate of A.
+
+	// If the ray is facing up
+	// 	A.y = rounded_down(Py / 64) * (64) - 1;
+	// If the ray is facing down
+	// 	A.y = rounded_down(Py / 64) * (64) + 64;
+
+	int ay;
+	
+	ay = round(py / CHUNK_SIZE) * CHUNK_SIZE - 1;
+	print_facing(horizontal_facing(player));
+	print_facing(vertical_facing(player));
+	return (ay);
+}
+
 void    cast_1(t_map *map, t_player *player)
 {
 	int alpha;
 	int max;
-	int x;
-	int y;
 
 	// Alpha take the current angle for every angle in the the range FOVmin - FOVmax    
 	alpha = player->FOVmin;
 	max = player->FOVmax;
-	y = player->curr_y * CHUNK_SIZE;
-	x = player->curr_x * CHUNK_SIZE;
-	while (alpha < max)
-	{
-		// Draw until collision
-		while (collide(map, x, y) == 0)
-		{
-			x += CHUNK_SIZE / tan(to_radian(alpha));
-			y += CHUNK_SIZE;
-			if (collide(map, x, y))
-				printf("COLLISION\n");
-		}
-		alpha++;
-	}
-	printf("NO COLLISION\n");
+	check_horizontal(map, player, 0, 0);
 }
 
 void    cast(t_map *map, t_player *player)

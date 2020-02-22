@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 20:48:48 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/02/19 15:52:24 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/02/22 13:17:17 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 #include "utils.h"
 #include <math.h>
 
-#   define CHUNK_SIZE 1
+#   define CHUNK_SIZE 64
 #   define WALL '1'
 #   define MAX_ANGLE 360
 #   define FOV 60
@@ -40,6 +40,14 @@ typedef struct	s_player
 	int FOVmin;
 	int FOVmax;
 }				t_player;
+
+enum	e_facing
+{
+	DOWN,
+	UP,
+	RIGHT,
+	LEFT
+};
 
 void    game(t_map *map, t_mlx_infos *infos);
 void    init_player(t_player *player);

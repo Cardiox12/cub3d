@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 01:45:36 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/02/19 15:54:02 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/02/19 16:39:14 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ int		main(int argc, __unused char **argv)
 	infos.width = 1000;
 	if (argc > 1)
 	{
-		infos.mlx_ptr = mlx_init();
-		infos.win_ptr = mlx_new_window(infos.mlx_ptr, infos.width, infos.height, "cub3d");
+		// infos.mlx_ptr = mlx_init();
+		// infos.win_ptr = mlx_new_window(infos.mlx_ptr, infos.width, infos.height, "cub3d");
 		parse_map(argv[1], &map);
 		game(&map, &infos);
 	}
