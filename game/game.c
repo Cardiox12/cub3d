@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 20:33:14 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/02/22 16:57:59 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/02/23 10:07:46 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,25 +103,19 @@ int		get_horizontal_facing(t_player *player)
 	return (DOWN);
 }
 
-t_vec	*check_horizontal(__unused t_map *map, t_player *player, int py, int alpha)
+t_vec	*check_horizontal(__unused t_map *map, t_player *player, int py, int px, int alpha)
 {
-	t_vec *intersection;
-	int ay;
-	int Ya;
-	int Xa;
+	// Get the coordinate of the first intersection and then, increment by that value
+	t_vec A;
 
-	Ya = CHUNK_SIZE;
 	if (get_horizontal_facing(player) == UP)
-	{
-		ay = round(py / CHUNK_SIZE) * CHUNK_SIZE - 1;
-		Ya = -CHUNK_SIZE;
-	}
+		A.y = floor(py / CHUNK_SIZE) * CHUNK_SIZE - 1;
 	else
-		ay = round(py / CHUNK_SIZE) * CHUNK_SIZE + CHUNK_SIZE;
-	Xa = CHUNK_SIZE / tan(alpha);
-	if ((intersection = malloc(sizeof(t_vec))) == NULL)
-		return (NULL);
-	return (ay);
+		A.y = floor(py / CHUNK_SIZE) * CHUNK_SIZE + CHUNK_SIZE;
+	A.x = px + (py - A.y) / tan(alpha);
+	printf("Ax = %i\n", A.x);
+	printf("Ay = %i\n", A.y);
+	return (NULL);
 }
 
 void    cast_1(t_map *map, t_player *player)
@@ -132,7 +126,7 @@ void    cast_1(t_map *map, t_player *player)
 	// Alpha take the current angle for every angle in the the range FOVmin - FOVmax    
 	alpha = player->FOVmin;
 	max = player->FOVmax;
-	check_horizontal(map, player, 0, 0);
+	check_horizontal(map, player, player->curr_x, player->curr_y, alpha);
 }
 
 void    cast(t_map *map, t_player *player)
