@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 20:33:14 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/02/23 10:07:46 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/02/23 13:27:43 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,15 +106,25 @@ int		get_horizontal_facing(t_player *player)
 t_vec	*check_horizontal(__unused t_map *map, t_player *player, int py, int px, int alpha)
 {
 	// Get the coordinate of the first intersection and then, increment by that value
-	t_vec A;
+	t_vec inter;
+	t_vec chunk;
+	t_vec coordinate;
 
+	chunk.y = CHUNK_SIZE;
 	if (get_horizontal_facing(player) == UP)
-		A.y = floor(py / CHUNK_SIZE) * CHUNK_SIZE - 1;
+	{
+		inter.y = floor(py / CHUNK_SIZE) * CHUNK_SIZE - 1;
+		chunk.y = -CHUNK_SIZE;
+	}
 	else
-		A.y = floor(py / CHUNK_SIZE) * CHUNK_SIZE + CHUNK_SIZE;
-	A.x = px + (py - A.y) / tan(alpha);
-	printf("Ax = %i\n", A.x);
-	printf("Ay = %i\n", A.y);
+		inter.y = floor(py / CHUNK_SIZE) * CHUNK_SIZE + CHUNK_SIZE;
+	inter.x = px + (py - inter.y) / tan(alpha);
+	chunk.x = CHUNK_SIZE / tan(alpha);
+	coordinate.x = inter.x + chunk.x;
+	coordinate.y = inter.y + chunk.x;
+	printf("Collide %s\n", 
+		(collide(map, coordinate.x, coordinate.y)) ? "True" : "False"
+	);
 	return (NULL);
 }
 
@@ -123,10 +133,14 @@ void    cast_1(t_map *map, t_player *player)
 	int alpha;
 	int max;
 
-	// Alpha take the current angle for every angle in the the range FOVmin - FOVmax    
+	// Alpha take the current angle for every angle in the the range FOVmin - FOVmax
 	alpha = player->FOVmin;
 	max = player->FOVmax;
-	check_horizontal(map, player, player->curr_x, player->curr_y, alpha);
+	while (alpha < max)
+	{
+		check_horizontal(map, player, player->curr_x, player->curr_y, alpha);
+		alpha++;
+	}
 }
 
 void    cast(t_map *map, t_player *player)
