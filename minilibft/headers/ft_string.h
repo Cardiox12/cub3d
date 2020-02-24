@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 01:21:06 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/01/31 01:05:54 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/02/24 17:37:10 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,6 @@ char    **ft_split(char const *s, char c);
 char	*ft_strchr(const char *s, int c);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 char	*ft_strtrim(char const *s, char const *set);
+void	*ft_memset(void *b, int c, size_t len);
 
 #   endif

@@ -6,7 +6,7 @@
 #    By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/26 01:37:41 by bbellavi          #+#    #+#              #
-#    Updated: 2020/01/31 12:34:15 by bbellavi         ###   ########.fr        #
+#    Updated: 2020/02/24 15:59:26 by bbellavi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,7 @@ SRCS	+= $(STRING_DIR)/ft_split.c
 SRCS	+= $(STRING_DIR)/ft_strchr.c
 SRCS	+= $(STRING_DIR)/ft_memcpy.c
 SRCS	+= $(STRING_DIR)/ft_strtrim.c
+SRCS	+= $(STRING_DIR)/ft_memset.c
 SRCS	+= $(STD_DIR)/ft_atoi.c
 
 OBJS	= $(SRCS:.c=.o)

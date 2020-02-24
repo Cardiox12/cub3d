@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 01:15:33 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/02/19 15:53:16 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/02/24 17:09:32 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void    line(int x0, int y0, int x1, int y1, t_mlx_infos *infos)
 
 	while (1)
 	{
-		mlx_pixel_put(infos->mlx_ptr, infos->win_ptr, x0, y0, 0xFFFFFF);
+		mlx_pixel_put(infos->mlx_ptr, infos->win_ptr, x0, y0, infos->color);
 		if (x0 == x1 && y0 == y1)
 			break;
 		e2 = err;

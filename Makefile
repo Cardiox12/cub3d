@@ -6,7 +6,7 @@
 #    By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/25 00:45:19 by bbellavi          #+#    #+#              #
-#    Updated: 2020/02/19 15:37:48 by bbellavi         ###   ########.fr        #
+#    Updated: 2020/02/24 17:36:17 by bbellavi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,12 +29,14 @@ SRCS		= cub3d.c
 SRCS		+= $(GRAPH_DIR)/ft_encode_rgb.c
 SRCS		+= $(GRAPH_DIR)/ft_line.c
 SRCS		+= $(GRAPH_DIR)/ft_rect.c
+SRCS		+= $(GRAPH_DIR)/ft_vert_line.c
 SRCS		+= $(UTILS_DIR)/init_mlx_infos.c
 SRCS		+= $(UTILS_DIR)/init_textures.c
 SRCS		+= $(UTILS_DIR)/init_vec.c
 SRCS		+= $(UTILS_DIR)/init_map.c
 SRCS		+= $(UTILS_DIR)/parse_map.c
 SRCS		+= $(GAME_DIR)/game.c
+SRCS		+= $(GAME_DIR)/init_player.c
 SRCS		+= $(HOOK_DIR)/keyboard_hooks.c
 HEADERS		= headers
 LFT_HEADERS	= $(LFT_DIR)/headers

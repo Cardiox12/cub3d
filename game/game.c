@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 20:33:14 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/02/23 13:27:43 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/02/24 17:58:13 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,26 @@ static int	is_cardinal_point(char c)
 void	set_heading(t_player *player, char cardinal_p)
 {
 	if (cardinal_p == S_SOUTH)
-		player->heading = D_SOUTH;
+	{
+		player->posX = 0;
+		player->posY = 1;
+	}
 	else if (cardinal_p == S_NORTH)
+	{
 		player->heading = D_NORTH;
+		player->posX = 0;
+		player->posY = -1;
+	}
 	else if (cardinal_p == S_WEST)
-		player->heading = D_WEST;
+	{
+		player->posX = -1;
+		player->posY = 0;
+	}
 	else if (cardinal_p == S_EAST)
-		player->heading = D_EAST;
+	{
+		player->posX = 1;
+		player->posY = 0;
+	}
 }
 
 void	get_starting_coordinate(t_map *map, t_player *player)
@@ -45,8 +58,8 @@ void	get_starting_coordinate(t_map *map, t_player *player)
 			{
 				if (is_cardinal_point(map->map[i][j]))
 				{
-					player->curr_x = j;
-					player->curr_y = i;
+					player->posX = j;
+					player->posY = i;
 					set_heading(player, map->map[i][j]);
 				}
 				j++;
@@ -57,105 +70,87 @@ void	get_starting_coordinate(t_map *map, t_player *player)
 	}
 }
 
-int		is_not_limit(t_map *map, int x, int y)
+void	set_ray_dir(t_player *player)
 {
-	return (x >= 0 && x < map->map_xsize && y >= 0 && y < map->map_ysize);
-}
-
-int		collide(t_map *map, int x, int y)
-{
-	int rx;
-	int ry;
-
-	rx = x / CHUNK_SIZE;
-	ry = y / CHUNK_SIZE;
-	if (is_not_limit(map, x, y))
+	if (player->rayDirX < 0)
 	{
-		if (map->map[ry][rx] == WALL)
-			return (TRUE);
-	}
-	return (FALSE);
-}
-
-int		angle(int degree)
-{
-    if (degree < 0)
-        return (MAX_ANGLE + degree % MAX_ANGLE);
-    return (degree % MAX_ANGLE);
-}
-
-float	to_radian(int degree)
-{
-	return (degree * M_PI / 180);
-}
-
-int		get_vertical_facing(t_player *player)
-{
-	if (player->heading >= 180 && player->heading <= 360)
-		return (LEFT);
-	return (RIGHT);
-}
-
-int		get_horizontal_facing(t_player *player)
-{
-	if ((player->heading >= 0 && player->heading <= 90) || (player->heading >= 270 && player->heading <= 360))
-		return (UP);
-	return (DOWN);
-}
-
-t_vec	*check_horizontal(__unused t_map *map, t_player *player, int py, int px, int alpha)
-{
-	// Get the coordinate of the first intersection and then, increment by that value
-	t_vec inter;
-	t_vec chunk;
-	t_vec coordinate;
-
-	chunk.y = CHUNK_SIZE;
-	if (get_horizontal_facing(player) == UP)
-	{
-		inter.y = floor(py / CHUNK_SIZE) * CHUNK_SIZE - 1;
-		chunk.y = -CHUNK_SIZE;
+		player->stepX = -1;
+		player->sideDistX = (player->posX - player->mapX) * player->deltaDistX;
 	}
 	else
-		inter.y = floor(py / CHUNK_SIZE) * CHUNK_SIZE + CHUNK_SIZE;
-	inter.x = px + (py - inter.y) / tan(alpha);
-	chunk.x = CHUNK_SIZE / tan(alpha);
-	coordinate.x = inter.x + chunk.x;
-	coordinate.y = inter.y + chunk.x;
-	printf("Collide %s\n", 
-		(collide(map, coordinate.x, coordinate.y)) ? "True" : "False"
-	);
-	return (NULL);
-}
-
-void    cast_1(t_map *map, t_player *player)
-{
-	int alpha;
-	int max;
-
-	// Alpha take the current angle for every angle in the the range FOVmin - FOVmax
-	alpha = player->FOVmin;
-	max = player->FOVmax;
-	while (alpha < max)
 	{
-		check_horizontal(map, player, player->curr_x, player->curr_y, alpha);
-		alpha++;
+		player->stepX = 1;
+		player->sideDistX = (player->mapX + 1.0 - player->posX) * player->deltaDistX;
+	}
+	if (player->rayDirY < 0)
+	{
+		player->stepY = -1;
+		player->sideDistY = (player->posY - player->mapY) * player->deltaDistY;
+	}
+	else
+	{
+		player->stepX = 1;
+		player->sideDistX = (player->mapY + 1.0 - player->posY) * player->deltaDistY;
 	}
 }
 
-void    cast(t_map *map, t_player *player)
+void	raycasting(t_player *player, t_map *map)
 {
-	player->FOVmin = angle(player->heading - FOV / 2);
-	player->FOVmax = angle(player->heading + FOV / 2);
-
-	if (player->FOVmin < player->FOVmax)
-		cast_1(map, player);
+	double x;
+	
+	x = 0;
+	while (x < map->resolution->x)
+	{
+		player->cameraX = 2 * x / (double)map->resolution->x - 1;
+		player->rayDirX = player->dirX + player->planX * player->cameraX;
+		player->rayDirY = player->dirY + player->planY * player->cameraX;
+		player->sideDistX = (player->planX == 0) ? 1 : abs(1 / player->planX);
+		player->sideDistY = (player->planY == 0) ? 1 : abs(1 / player->planY);
+		set_ray_dir(player);
+		// DDA algorithm
+		while (player->hit == FALSE)
+		{
+			if (player->sideDistX < player->sideDistY)
+			{
+				player->sideDistX += player->sideDistX;
+				player->mapX += player->stepX;
+				player->side = 0;
+			}
+			else
+			{
+				player->sideDistY += player->sideDistY;
+				player->mapY += player->stepY;
+				player->side = 1;
+			}
+			if (map->map[(int)player->mapX][(int)player->mapY] != '0')
+				player->hit = TRUE;
+		}
+		// We calculate the distance in function of the side that has been touched
+		if (player->side == 0)
+			player->wallDist = (player->mapX - player->posX + (1 - player->stepX) / 2) / player->rayDirX;
+		else
+			player->wallDist = (player->mapY - player->posY + (1 - player->stepY) / 2) / player->rayDirY;
+		// Now we calculate the line to be drawn
+		player->lineHeight = (int)(map->resolution->y / player->wallDist);
+		player->drawStart = -player->lineHeight / 2 + map->resolution->y / 2;
+		if (player->drawStart < 0)
+			player->drawStart = 0;
+		player->drawEnd = player->lineHeight / 2 + map->resolution->y / 2;
+		if (player->drawEnd >= map->resolution->y)
+			player->drawEnd = map->resolution->y - 1;
+		// Colouring every wall with white color
+		if (player->side == 1)
+			player->infos->color = ft_encode_rgb(255, 255, 255);
+		line(x, player->drawStart, x, player->drawEnd, player->infos);
+	}
 }
 
-void	game(t_map *map, __unused t_mlx_infos *infos)
+void	game(t_map *map, t_mlx_infos *infos)
 {
 	t_player	player;
-
+	
+	init_player(&player);
+	player.infos = infos;
 	get_starting_coordinate(map, &player);
-	cast(map, &player);
+	raycasting(&player, map);
 }

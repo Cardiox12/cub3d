@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   graphics_utils.h                                   :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/25 01:14:03 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/02/24 17:34:32 by bbellavi         ###   ########.fr       */
+/*   Created: 2019/10/22 15:39:44 by bbellavi          #+#    #+#             */
+/*   Updated: 2020/02/24 17:41:45 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#   ifndef FT_LIBGL_H
-#   define FT_LIBGL_H
+#include "ft_string.h"
 
-#include "cub3d.h"
+void	*ft_memset(void *b, int c, size_t len)
+{
+	unsigned char	*bytes;
 
-void	rect(int x, int y, int w, int h, t_mlx_infos *infos);
-void    line(int x1, int y1, int x2, int y2, t_mlx_infos *infos);
-int		ft_encode_rgb(unsigned char red, unsigned char green, unsigned char blue);
-void	vertical_line(int x, int height, int width, t_mlx_infos *infos);
-
-#   endif
+	bytes = (unsigned char *)b;
+	while (len-- != 0)
+		bytes[len] = c;
+	return (b);
+}

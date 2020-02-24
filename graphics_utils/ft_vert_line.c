@@ -1,23 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   graphics_utils.h                                   :+:      :+:    :+:   */
+/*   ft_vert_line.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/25 01:14:03 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/02/24 17:34:32 by bbellavi         ###   ########.fr       */
+/*   Created: 2020/02/24 17:15:13 by bbellavi          #+#    #+#             */
+/*   Updated: 2020/02/24 17:18:43 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#   ifndef FT_LIBGL_H
-#   define FT_LIBGL_H
+#include "graphics_utils.h"
 
-#include "cub3d.h"
+void	vertical_line(int x, int height, int width, t_mlx_infos *infos)
+{
+	line(x, height, x, width, infos);
+}
 
-void	rect(int x, int y, int w, int h, t_mlx_infos *infos);
-void    line(int x1, int y1, int x2, int y2, t_mlx_infos *infos);
-int		ft_encode_rgb(unsigned char red, unsigned char green, unsigned char blue);
-void	vertical_line(int x, int height, int width, t_mlx_infos *infos);
-
-#   endif

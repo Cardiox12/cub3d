@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 15:32:26 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/02/19 15:53:29 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/02/24 17:09:50 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	rect(int x, int y, int w, int h, t_mlx_infos *infos)
 	{
 		while (x1 < x + w)
 		{
-			mlx_pixel_put(infos->mlx_ptr, infos->win_ptr, x1, y1, 0xFFFFFF);
+			mlx_pixel_put(infos->mlx_ptr, infos->win_ptr, x1, y1, infos->color);
 			x1++;
 		}
 		x1 = x;
