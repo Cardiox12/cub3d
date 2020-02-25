@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 12:45:46 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/02/25 14:54:04 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/02/25 16:25:56 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,9 @@ void			draw_img_line(int x0, int y0, int x1, int y1, t_game *game)
 void			draw_img_vert_line(int x, int height, int width, t_game *data)
 {
 	draw_img_line(x, height, x, width, data);
+}
+
+void			reset_img(t_game *data)
+{
+	ft_memset(data->image->img_data_addr, 0, sizeof(char) * data->infos->width * data->infos->height * 4);
 }

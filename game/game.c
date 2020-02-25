@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 20:33:14 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/02/25 14:49:13 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/02/25 17:10:31 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void	raycasting(t_game *data)
 	double x;
 	
 	x = 0;
-	while (x < data->map->resolution->x)
+	while (x < data->infos->width)
 	{
 		data->camera->cameraX = 2 * x / (double)data->map->resolution->x - 1;
 		data->camera->rayDirX = data->camera->dirX + data->camera->planX * data->camera->cameraX;
@@ -142,11 +142,11 @@ void	raycasting(t_game *data)
 		if (data->camera->side == 1)
 			data->infos->color = ft_encode_rgb(255, 255, 255);
 		else
-			data->infos->color = ft_encode_rgb(255, 255, 0);
+			data->infos->color = 0xFFC0CB;
 		draw_img_vert_line(x, data->camera->drawStart, data->camera->drawEnd, data);
-		mlx_put_image_to_window(data->infos->mlx_ptr, data->infos->win_ptr, data->image->img_ref, 0, 0);
+		x++;
 	}
-
+	mlx_put_image_to_window(data->infos->mlx_ptr, data->infos->win_ptr, data->image->img_ref, 0, 0);
 }
 
 void	game(t_game *data)

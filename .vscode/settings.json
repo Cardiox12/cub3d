@@ -6,6 +6,7 @@
 		"ft_stdio.h": "c",
 		"ft_vector.h": "c",
 		"complex": "c",
-		"game.h": "c"
+		"game.h": "c",
+		"parser.h": "c"
 	}
 }

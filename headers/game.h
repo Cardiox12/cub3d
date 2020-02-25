@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 20:48:48 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/02/25 13:55:48 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/02/25 15:34:31 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,5 +114,6 @@ void	game(t_game *data);
 void    init_player(t_camera *player);
 void	draw_img_line(int x0, int y0, int x1, int y1, t_game *game);
 void	draw_img_vert_line(int x, int height, int width, t_game *data);
+void	reset_img(t_game *data);
 
 #   endif
