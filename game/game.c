@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 20:33:14 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/02/24 17:58:13 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/02/25 14:49:13 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	is_cardinal_point(char c)
 	return (c == S_SOUTH || c == S_NORTH || c == S_EAST || c == S_WEST);
 }
 
-void	set_heading(t_player *player, char cardinal_p)
+void	set_heading(t_camera *player, char cardinal_p)
 {
 	if (cardinal_p == S_SOUTH)
 	{
@@ -43,24 +43,24 @@ void	set_heading(t_player *player, char cardinal_p)
 	}
 }
 
-void	get_starting_coordinate(t_map *map, t_player *player)
+void	get_starting_coordinate(t_game *data)
 {
 	int i;
 	int j;
 
 	i = 0;
 	j = 0;
-	if (map->map != NULL)
+	if (data->map->map != NULL)
 	{
-		while (map->map[i] != NULL)
+		while (data->map->map[i] != NULL)
 		{
-			while (map->map[i][j] != '\0')
+			while (data->map->map[i][j] != '\0')
 			{
-				if (is_cardinal_point(map->map[i][j]))
+				if (is_cardinal_point(data->map->map[i][j]))
 				{
-					player->posX = j;
-					player->posY = i;
-					set_heading(player, map->map[i][j]);
+					data->camera->posX = j;
+					data->camera->posY = i;
+					set_heading(data->camera, data->map->map[i][j]);
 				}
 				j++;
 			}
@@ -70,7 +70,7 @@ void	get_starting_coordinate(t_map *map, t_player *player)
 	}
 }
 
-void	set_ray_dir(t_player *player)
+void	set_ray_dir(t_camera *player)
 {
 	if (player->rayDirX < 0)
 	{
@@ -94,63 +94,64 @@ void	set_ray_dir(t_player *player)
 	}
 }
 
-void	raycasting(t_player *player, t_map *map)
+void	raycasting(t_game *data)
 {
 	double x;
 	
 	x = 0;
-	while (x < map->resolution->x)
+	while (x < data->map->resolution->x)
 	{
-		player->cameraX = 2 * x / (double)map->resolution->x - 1;
-		player->rayDirX = player->dirX + player->planX * player->cameraX;
-		player->rayDirY = player->dirY + player->planY * player->cameraX;
-		player->sideDistX = (player->planX == 0) ? 1 : abs(1 / player->planX);
-		player->sideDistY = (player->planY == 0) ? 1 : abs(1 / player->planY);
-		set_ray_dir(player);
+		data->camera->cameraX = 2 * x / (double)data->map->resolution->x - 1;
+		data->camera->rayDirX = data->camera->dirX + data->camera->planX * data->camera->cameraX;
+		data->camera->rayDirY = data->camera->dirY + data->camera->planY * data->camera->cameraX;
+		data->camera->sideDistX = (data->camera->planX == 0) ? 1 : abs(1 / data->camera->planX);
+		data->camera->sideDistY = (data->camera->planY == 0) ? 1 : abs(1 / data->camera->planY);
+		set_ray_dir(data->camera);
 		// DDA algorithm
-		while (player->hit == FALSE)
+		while (data->camera->hit == FALSE)
 		{
-			if (player->sideDistX < player->sideDistY)
+			if (data->camera->sideDistX < data->camera->sideDistY)
 			{
-				player->sideDistX += player->sideDistX;
-				player->mapX += player->stepX;
-				player->side = 0;
+				data->camera->sideDistX += data->camera->sideDistX;
+				data->camera->mapX += data->camera->stepX;
+				data->camera->side = 0;
 			}
 			else
 			{
-				player->sideDistY += player->sideDistY;
-				player->mapY += player->stepY;
-				player->side = 1;
+				data->camera->sideDistY += data->camera->sideDistY;
+				data->camera->mapY += data->camera->stepY;
+				data->camera->side = 1;
 			}
-			if (map->map[(int)player->mapX][(int)player->mapY] != '0')
-				player->hit = TRUE;
+			if (data->map->map[(int)data->camera->mapX][(int)data->camera->mapY] != '0')
+				data->camera->hit = TRUE;
 		}
 		// We calculate the distance in function of the side that has been touched
-		if (player->side == 0)
-			player->wallDist = (player->mapX - player->posX + (1 - player->stepX) / 2) / player->rayDirX;
+		if (data->camera->side == 0)
+			data->camera->wallDist = (data->camera->mapX - data->camera->posX + (1 - data->camera->stepX) / 2) / data->camera->rayDirX;
 		else
-			player->wallDist = (player->mapY - player->posY + (1 - player->stepY) / 2) / player->rayDirY;
+			data->camera->wallDist = (data->camera->mapY - data->camera->posY + (1 - data->camera->stepY) / 2) / data->camera->rayDirY;
 		// Now we calculate the line to be drawn
-		player->lineHeight = (int)(map->resolution->y / player->wallDist);
-		player->drawStart = -player->lineHeight / 2 + map->resolution->y / 2;
-		if (player->drawStart < 0)
-			player->drawStart = 0;
-		player->drawEnd = player->lineHeight / 2 + map->resolution->y / 2;
-		if (player->drawEnd >= map->resolution->y)
-			player->drawEnd = map->resolution->y - 1;
+		data->camera->lineHeight = (int)(data->map->resolution->y / data->camera->wallDist);
+		data->camera->drawStart = -data->camera->lineHeight / 2 + data->map->resolution->y / 2;
+		if (data->camera->drawStart < 0)
+			data->camera->drawStart = 0;
+		data->camera->drawEnd = data->camera->lineHeight / 2 + data->map->resolution->y / 2;
+		if (data->camera->drawEnd >= data->map->resolution->y)
+			data->camera->drawEnd = data->map->resolution->y - 1;
 		// Colouring every wall with white color
-		if (player->side == 1)
-			player->infos->color = ft_encode_rgb(255, 255, 255);
-		line(x, player->drawStart, x, player->drawEnd, player->infos);
+		if (data->camera->side == 1)
+			data->infos->color = ft_encode_rgb(255, 255, 255);
+		else
+			data->infos->color = ft_encode_rgb(255, 255, 0);
+		draw_img_vert_line(x, data->camera->drawStart, data->camera->drawEnd, data);
+		mlx_put_image_to_window(data->infos->mlx_ptr, data->infos->win_ptr, data->image->img_ref, 0, 0);
 	}
+
 }
 
-void	game(t_map *map, t_mlx_infos *infos)
+void	game(t_game *data)
 {
-	t_player	player;
-	
-	init_player(&player);
-	player.infos = infos;
-	get_starting_coordinate(map, &player);
-	raycasting(&player, map);
+	init_player(data->camera);
+	get_starting_coordinate(data);
+	raycasting(data);
 }

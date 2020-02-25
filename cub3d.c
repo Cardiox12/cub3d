@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 01:45:36 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/02/24 17:44:13 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/02/25 15:09:53 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,40 @@
 #include <stdio.h>
 #include "game.h"
 
+
 int		main(int argc, __unused char **argv)
 {
+	t_game		data;
+	t_camera	camera;
 	t_map		map;
 	t_vec		vec;
 	t_textures	textures;
 	t_mlx_infos	infos;
+	t_image		image;
 
-	map.resolution = &vec;
-	map.textures = &textures;
-	init_map(&map);
-	init_mlx_infos(&infos);
-	infos.height = 1000;
-	infos.width = 1000;
 	if (argc > 1)
 	{
+		map.resolution = &vec;
+		map.textures = &textures;
+		init_map(&map);
+		init_mlx_infos(&infos);
+		infos.height = 1000;
+		infos.width = 1000;
+		data.camera = &camera;
+		data.map = &map;
+		data.image = &image;
 		infos.mlx_ptr = mlx_init();
 		infos.win_ptr = mlx_new_window(infos.mlx_ptr, infos.width, infos.height, "cub3d");
+		data.infos = &infos;
+		data.image->img_ref = mlx_new_image(data.infos->mlx_ptr, data.infos->width, data.infos->height);
+		data.image->img_data_addr = mlx_get_data_addr(
+		data.image->img_ref,
+		&data.image->bits_per_pixel,
+		&data.image->line_size,
+		&data.image->line_size);
+
 		parse_map(argv[1], &map);
-		game(&map, &infos);
+		game(&data);
 		mlx_loop(infos.mlx_ptr);
 	}
 }

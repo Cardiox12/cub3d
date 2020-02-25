@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 20:48:48 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/02/24 17:36:37 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/02/25 13:55:48 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,18 @@ typedef enum    e_cardinals_degree
     D_WEST = 180,
 }               t_cardinals_degree;
 
-typedef struct	s_player
+typedef struct	s_image
 {
-	t_mlx_infos *infos;
+	void	*img_ref;
+	char	*img_data_addr;
+	int		bits_per_pixel;
+	int		line_size;
+	int		endian;
+}				t_image;
+
+
+typedef struct	s_camera
+{
 	int side;
 	int hit;
 	int heading;
@@ -83,7 +92,15 @@ typedef struct	s_player
 	int drawStart;
 	int drawEnd;
 	int lineHeight;
-}				t_player;
+}				t_camera;
+
+typedef struct	s_game
+{
+	t_camera	*camera;
+	t_mlx_infos	*infos;
+	t_image		*image;
+	t_map		*map;
+}				t_game;
 
 enum	e_facing
 {
@@ -93,7 +110,9 @@ enum	e_facing
 	LEFT
 };
 
-void    game(t_map *map, t_mlx_infos *infos);
-void    init_player(t_player *player);
+void	game(t_game *data);
+void    init_player(t_camera *player);
+void	draw_img_line(int x0, int y0, int x1, int y1, t_game *game);
+void	draw_img_vert_line(int x, int height, int width, t_game *data);
 
 #   endif

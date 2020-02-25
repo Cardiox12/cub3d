@@ -1,3 +1,4 @@
+
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
@@ -37,6 +38,7 @@ SRCS		+= $(UTILS_DIR)/init_map.c
 SRCS		+= $(UTILS_DIR)/parse_map.c
 SRCS		+= $(GAME_DIR)/game.c
 SRCS		+= $(GAME_DIR)/init_player.c
+SRCS		+= $(GAME_DIR)/image.c
 SRCS		+= $(HOOK_DIR)/keyboard_hooks.c
 HEADERS		= headers
 LFT_HEADERS	= $(LFT_DIR)/headers
