@@ -6,13 +6,13 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 12:45:46 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/02/25 16:25:56 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/02/25 18:39:31 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game.h"
 #define BYTE_SIZE 8
-
+#define SLICE_WIDTH 1
 
 static int		get_pos_ptr(int x, int y, t_game *game)
 {
@@ -52,9 +52,12 @@ void			draw_img_line(int x0, int y0, int x1, int y1, t_game *game)
 	}
 }
 
+#include <stdio.h>
+
 void			draw_img_vert_line(int x, int height, int width, t_game *data)
 {
-	draw_img_line(x, height, x, width, data);
+	printf("X = %i - Height : %i - Width - %i\n", x, height, width);
+	draw_img_line(x, SLICE_WIDTH, x, height, data);
 }
 
 void			reset_img(t_game *data)
