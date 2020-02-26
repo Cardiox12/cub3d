@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 20:48:48 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/02/25 15:34:31 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/02/26 12:29:55 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include "parser.h"
 #include "utils.h"
 #include "ft_string.h"
+#include "graphics_utils.h"
 #include <math.h>
 
 #   define CHUNK_SIZE 64
@@ -110,10 +111,22 @@ enum	e_facing
 	LEFT
 };
 
+typedef struct	s_rect
+{
+	t_game 	*game;
+	int		height;
+	int		width;
+	int		x;
+	int		y;
+	int		color;
+}				t_rect;
+
 void	game(t_game *data);
 void    init_player(t_camera *player);
 void	draw_img_line(int x0, int y0, int x1, int y1, t_game *game);
-void	draw_img_vert_line(int x, int height, int width, t_game *data);
+void	draw_img_vert_line(int x, int height, t_game *data);
 void	reset_img(t_game *data);
+void	draw_img_rect(t_rect *rect);
+void	draw_ceil_and_floor(t_game *data);
 
 #   endif

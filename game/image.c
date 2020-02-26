@@ -6,10 +6,11 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 12:45:46 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/02/25 18:39:31 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/02/26 12:44:23 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "game.h"
 #include "game.h"
 #define BYTE_SIZE 8
 #define SLICE_WIDTH 1
@@ -21,7 +22,7 @@ static int		get_pos_ptr(int x, int y, t_game *game)
 
 static void		set_color(int x, int y, t_game *game)
 {
-	game->image->img_data_addr[get_pos_ptr(x, y, game)] = (unsigned int)game->infos->color;
+	game->image->img_data_addr[get_pos_ptr(x, y, game)] = game->infos->color;
 }
 
 void			draw_img_line(int x0, int y0, int x1, int y1, t_game *game)
@@ -54,13 +55,49 @@ void			draw_img_line(int x0, int y0, int x1, int y1, t_game *game)
 
 #include <stdio.h>
 
-void			draw_img_vert_line(int x, int height, int width, t_game *data)
+void			draw_img_vert_line(int x, int height, t_game *data)
 {
-	printf("X = %i - Height : %i - Width - %i\n", x, height, width);
 	draw_img_line(x, SLICE_WIDTH, x, height, data);
 }
 
 void			reset_img(t_game *data)
 {
 	ft_memset(data->image->img_data_addr, 0, sizeof(char) * data->infos->width * data->infos->height * 4);
+}
+
+void			draw_img_rect(t_rect *rect)
+{
+	int x1;
+	int y1;
+
+	x1 = rect->x;
+	y1 = rect->y;
+	rect->game->infos->color = rect->color;
+	while (y1 < rect->y + rect->height)
+	{
+		while (x1 < rect->x + rect->width)
+		{
+			set_color(x1, y1, rect->game);
+			x1++;
+		}
+		x1 = rect->x;
+		y1++;
+	}
+}
+
+void			draw_ceil_and_floor(t_game *data)
+{
+	t_rect rect;
+	
+	// Drawing ceil first
+	rect.game = data;
+	rect.color = data->map->ceil_color;
+	rect.height = data->infos->height / 2;
+	rect.width = data->infos->width;
+	rect.x = 0;
+	rect.y = 0;
+	draw_img_rect(&rect);
+	rect.y = data->infos->height / 2;
+	rect.color = data->map->ground_color;
+	draw_img_rect(&rect);
 }
