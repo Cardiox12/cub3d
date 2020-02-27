@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 01:47:19 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/02/24 17:09:02 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/02/27 12:09:04 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,12 @@ typedef struct  s_map
     int         map_xsize;
     int         map_ysize;
 }               t_map;
+
+typedef struct	s_list
+{
+	void			*ptr;
+	struct s_list	*next;
+}				t_list;
 
 #include "graphics_utils.h"
 #include "utils.h"
