@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 01:14:03 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/02/26 12:45:50 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/03/02 13:16:23 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #   define FT_LIBGL_H
 
 #include "cub3d.h"
-#include "game.h"
+#include "render.h"
 
 
 void	rect(int x, int y, int w, int h, t_mlx_infos *infos);

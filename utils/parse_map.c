@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 22:25:32 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/02/19 16:10:33 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/03/02 13:21:32 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,8 +103,8 @@ static void store_resolution_to_map(t_map *map, char *res)
     {
         if (array_length(line) == 3)
         {
-            map->resolution->x = ft_atoi(line[1]);
-            map->resolution->y = ft_atoi(line[2]);
+            map->resolution.x = ft_atoi(line[1]);
+            map->resolution.y = ft_atoi(line[2]);
         }
         else
         {

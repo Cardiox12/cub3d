@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 01:47:19 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/02/27 12:09:04 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/03/02 13:11:38 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,6 @@
 #include <math.h>
 #include <stdlib.h>
 #include "mlx.h"
-
-#   define HEIGHT 1000
-#   define WIDTH 1000
 
 typedef struct  s_mlx_infos
 {
@@ -48,7 +45,7 @@ typedef struct  s_textures
 typedef struct  s_map
 {
     char        **map;
-    t_vec       *resolution;
+    t_vec       resolution;
     t_textures  *textures;
     int         ground_color;
     int         ceil_color;
