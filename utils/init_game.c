@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   keyboard_hooks.c                                   :+:      :+:    :+:   */
+/*   init_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/26 00:44:00 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/02/29 11:28:12 by bbellavi         ###   ########.fr       */
+/*   Created: 2020/02/27 12:14:39 by bbellavi          #+#    #+#             */
+/*   Updated: 2020/02/27 12:18:18 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "event_hooks.h"
-#include <stdio.h>
-#define ESC_KEY 53
+#include "utils.h"
+#include "ft_string.h"
 
-int     keyboard_hook(int keycode, void *param)
+void	init_game_struct(t_game *data)
 {
-	(void)param;
-	if (keycode == ESC_KEY)
-		exit(0);
-    return (0);
+	if (data != NULL)
+	{
+		ft_memset(data->camera, 0, sizeof(t_camera));
+		ft_memset(data->image, 0, sizeof(t_image));
+		ft_memset(data->infos, 0, sizeof(t_mlx_infos));
+		ft_memset(data->map, 0, sizeof(t_map));
+	}
 }

@@ -1,23 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   keyboard_hooks.c                                   :+:      :+:    :+:   */
+/*   colors.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/26 00:44:00 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/02/29 11:28:12 by bbellavi         ###   ########.fr       */
+/*   Created: 2020/03/01 16:26:17 by bbellavi          #+#    #+#             */
+/*   Updated: 2020/03/01 16:28:42 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "event_hooks.h"
-#include <stdio.h>
-#define ESC_KEY 53
+#ifndef FT_COLORS_H
+# define FT_COLORS_H
 
-int     keyboard_hook(int keycode, void *param)
-{
-	(void)param;
-	if (keycode == ESC_KEY)
-		exit(0);
-    return (0);
-}
+#define BLUE_SKY 0x87CEEB
+#define BROWN 0x582900
+
+#endif

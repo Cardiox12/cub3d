@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 00:51:02 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/01/26 00:56:52 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/02/27 18:01:52 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,6 @@
 #include <stdlib.h>
 #include "mlx.h"
 
-int     escape_hook(int keycode, void *param);
+int     keyboard_hook(int keycode, void *param);
 
 #   endif

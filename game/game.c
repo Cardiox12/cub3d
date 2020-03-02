@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 20:33:14 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/02/27 16:28:58 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/03/02 08:22:00 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void	get_starting_coordinate(t_game *data)
 					data->camera->posX = j;
 					data->camera->posY = i;
 					set_heading(data->camera, data->map->map[i][j]);
+					return ;
 				}
 				j++;
 			}
@@ -104,8 +105,12 @@ void	raycasting(t_game *data)
 		data->camera->cameraX = 2 * x / (double)data->map->resolution->x - 1;
 		data->camera->rayDirX = data->camera->dirX + data->camera->planX * data->camera->cameraX;
 		data->camera->rayDirY = data->camera->dirY + data->camera->planY * data->camera->cameraX;
-		data->camera->sideDistX = (data->camera->planX == 0) ? 1 : abs(1 / data->camera->planX);
-		data->camera->sideDistY = (data->camera->planY == 0) ? 1 : abs(1 / data->camera->planY);
+
+		data->camera->mapX = data->camera->posX;
+		data->camera->mapY = data->camera->posY;
+
+		data->camera->deltaDistX = (data->camera->planX == 0) ? 1 : abs(1 / data->camera->planX);
+		data->camera->deltaDistY = (data->camera->planY == 0) ? 1 : abs(1 / data->camera->planY);
 
 		set_ray_dir(data->camera);
 		// DDA algorithm
@@ -113,13 +118,13 @@ void	raycasting(t_game *data)
 		{
 			if (data->camera->sideDistX < data->camera->sideDistY)
 			{
-				data->camera->sideDistX += data->camera->sideDistX;
+				data->camera->sideDistX += data->camera->deltaDistX;
 				data->camera->mapX += data->camera->stepX;
 				data->camera->side = 0;
 			}
 			else
 			{
-				data->camera->sideDistY += data->camera->sideDistY;
+				data->camera->sideDistY += data->camera->deltaDistY;
 				data->camera->mapY += data->camera->stepY;
 				data->camera->side = 1;
 			}
@@ -127,10 +132,12 @@ void	raycasting(t_game *data)
 				data->camera->hit = TRUE;
 		}
 		// We calculate the distance in function of the side that has been touched
+
 		if (data->camera->side == 0)
 			data->camera->wallDist = (data->camera->mapX - data->camera->posX + (1 - data->camera->stepX) / 2) / data->camera->rayDirX;
 		else
 			data->camera->wallDist = (data->camera->mapY - data->camera->posY + (1 - data->camera->stepY) / 2) / data->camera->rayDirY;
+			
 		// Now we calculate the line to be drawn
 		data->camera->lineHeight = (int)(data->map->resolution->y / data->camera->wallDist);
 		data->camera->drawStart = -data->camera->lineHeight / 2 + data->map->resolution->y / 2;
@@ -150,40 +157,10 @@ void	raycasting(t_game *data)
 	mlx_put_image_to_window(data->infos->mlx_ptr, data->infos->win_ptr, data->image->img_ref, 0, 0);
 }
 
-void	print_data(t_game *data)
-{
-	printf("side : %i\n", data->camera->side);
-	printf("hit : %i\n", data->camera->hit);
-	printf("heading : %i\n", data->camera->heading);
-	printf("posX : %i\n", data->camera->posX);
-	printf("posY : %i\n", data->camera->posY);
-	printf("dirX : %i\n", data->camera->dirX);
-	printf("dirY : %i\n", data->camera->dirY);
-	printf("planX : %i\n", data->camera->planX);
-	printf("planY : %i\n", data->camera->planY);
-	printf("rayDirX : %f\n", data->camera->rayDirX);
-	printf("rayDirY : %f\n", data->camera->rayDirY);
-	printf("cameraX : %f\n", data->camera->cameraX);
-	printf("mapX : %f\n", data->camera->mapX);
-	printf("mapY : %f\n", data->camera->mapY);
-	printf("sideDistX : %f\n", data->camera->sideDistX);
-	printf("sideDistY : %f\n", data->camera->sideDistY);
-	printf("deltaDistX : %f\n", data->camera->deltaDistX);
-	printf("deltaDistY : %f\n", data->camera->deltaDistY);
-	printf("stepX : %f\n", data->camera->stepX);
-	printf("stepY : %f\n", data->camera->stepY);
-	printf("wallDist : %f\n", data->camera->wallDist);
-	printf("drawStart : %i\n", data->camera->drawStart);
-	printf("drawEnd : %i\n", data->camera->drawEnd);
-	printf("line height : %i\n", data->camera->lineHeight);
-}
-
 void	game(t_game *data)
 {
 	init_player(data->camera);
 	get_starting_coordinate(data);
 	draw_ceil_and_floor(data);
 	raycasting(data);
-	print_data(data);
-	mlx_put_image_to_window(data->infos->mlx_ptr, data->infos->win_ptr, data->image->img_ref, 0, 0);
 }
