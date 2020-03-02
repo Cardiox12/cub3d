@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 20:33:14 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/03/02 16:01:20 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/03/02 18:35:27 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,17 @@ void	raycasting(t_game __unused *data)
 
 }
 
-void	render(t_game *data)
+void	render(__unused t_game *data)
 {
+	data->image.img_ref = mlx_new_image(
+			data->infos.mlx_ptr,
+			data->map.resolution.x,
+			data->map.resolution.y);
+	data->image.img_data_addr = mlx_get_data_addr(
+		data->image.img_ref,
+		&data->image.bits_per_pixel,
+		&data->image.line_size,
+		&data->image.endian);
 	draw_ceil_and_floor(data);
 	mlx_put_image_to_window(
 		data->infos.mlx_ptr,
@@ -57,6 +66,10 @@ void	render(t_game *data)
 		data->image.img_ref,
 		data->map.resolution.x,
 		data->map.resolution.y
+	);
+	mlx_destroy_image(
+		data->infos.mlx_ptr,
+		data->image.img_ref
 	);
 	// raycasting(data);
 }

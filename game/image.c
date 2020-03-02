@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 12:45:46 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/03/02 13:36:26 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/03/02 18:08:31 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,15 @@
 #define BYTE_SIZE 8
 #define SLICE_WIDTH 1
 
-static int		get_pos_ptr(int x, int y, t_game *data)
+static void		set_color(t_game *data, int x, int y, int color)
 {
-	return (y * data->image.line_size + x * (data->image.bits_per_pixel / BYTE_SIZE));
+    int (*pix_array)[data->map.resolution.x][1]; // prepare the cast
+
+    pix_array = (void*)data->image.img_ref; // cast for change 1 dimension array to 2 dimensions
+    *pix_array[y][x] = color; // set the pixel at the coord x,y with the color value
 }
 
-static void		set_color(int x, int y, t_game *game)
-{
-	game->image.img_data_addr[get_pos_ptr(x, y, game)] = game->infos.color;
-}
-
-void			draw_img_line(int x0, int y0, int x1, int y1, t_game *game)
+void			draw_img_line(int x0, int y0, int x1, int y1, t_game *data)
 {
 	int dx = abs(x1 - x0);
 	int sx = (x0 < x1) ? 1 : -1;
@@ -35,7 +33,7 @@ void			draw_img_line(int x0, int y0, int x1, int y1, t_game *game)
 
 	while (1)
 	{
-		set_color(x0, y0, game);
+		set_color(data, x0, y0, data->infos.color);
 		if (x0 == x1 && y0 == y1)
 			break;
 		e2 = err;
@@ -75,12 +73,11 @@ void			draw_img_rect(t_rect *rect)
 
 	x1 = rect->x;
 	y1 = rect->y;
-	rect->game->infos.color = rect->color;
 	while (y1 < rect->y + rect->height)
 	{
 		while (x1 < rect->x + rect->width)
 		{
-			set_color(x1, y1, rect->game);
+			set_color(rect->game, x1, y1, rect->game->infos.color);
 			x1++;
 		}
 		x1 = rect->x;
