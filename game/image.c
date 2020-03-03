@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 12:45:46 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/03/03 12:57:56 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/03/03 14:40:50 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void			draw_img_line(int x0, int y0, int x1, int y1, t_game *data)
 	int err = (dx > dy ? dx : -dy) / 2;
 	int e2;
 
-	while (1)
+	while (TRUE)
 	{
 		set_color(data, x0, y0, data->infos.color);
 		if (x0 == x1 && y0 == y1)
@@ -48,8 +48,6 @@ void			draw_img_line(int x0, int y0, int x1, int y1, t_game *data)
 		}
 	}
 }
-
-#include <stdio.h>
 
 void			draw_img_vert_line(int x, int height, t_game *data)
 {
@@ -88,7 +86,6 @@ void			draw_ceil_and_floor(t_game *data)
 {
 	t_rect rect;
 	
-	// Drawing ceil first
 	rect.game = data;
 	rect.color = data->map.ceil_color;
 	rect.height = data->map.resolution.y / 2;

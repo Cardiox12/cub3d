@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 01:45:36 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/03/03 11:13:33 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/03/03 13:43:00 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int		main(int argc, char __unused **argv)
 	if (argc > 1)
 	{
 		init_game(&data);
-		
+		parse_map(argv[1], &data.map);
 		render(&data);
 		mlx_key_hook(data.infos.win_ptr, keyboard_hook, NULL);
 		mlx_loop(data.infos.mlx_ptr);

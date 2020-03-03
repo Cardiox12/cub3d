@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 22:25:32 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/03/02 13:21:32 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/03/03 14:48:25 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,8 +196,8 @@ static void store_to_map(t_map *map, char *identifier, char *s)
     
     if (ft_strncmp(identifier, RES, length) == 0)
         store_resolution_to_map(map, s);
-    else if ((ident = is_texture(identifier)) != NOT_FOUND)
-        store_texture_to_map(map, s, ident);
+    // else if ((ident = is_texture(identifier)) != NOT_FOUND)
+    //     store_texture_to_map(map, s, ident);
     else if ((ident = is_color(identifier)) != NOT_FOUND)
         store_color_to_map(map, s, ident);
 }
