@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 20:48:48 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/03/02 13:08:54 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/03/03 12:50:57 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef enum    e_cardinals_degree
 typedef struct	s_image
 {
 	void	*img_ref;
-	char	*img_data_addr;
+	int		*img_data_addr;
 	int		bits_per_pixel;
 	int		line_size;
 	int		endian;

@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 12:45:46 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/03/02 18:08:31 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/03/03 12:57:56 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,9 @@
 
 static void		set_color(t_game *data, int x, int y, int color)
 {
-    int (*pix_array)[data->map.resolution.x][1]; // prepare the cast
+	int pixel = y * data->map.resolution.x + x;
 
-    pix_array = (void*)data->image.img_ref; // cast for change 1 dimension array to 2 dimensions
-    *pix_array[y][x] = color; // set the pixel at the coord x,y with the color value
+	data->image.img_data_addr[pixel] = color;
 }
 
 void			draw_img_line(int x0, int y0, int x1, int y1, t_game *data)
@@ -77,7 +76,7 @@ void			draw_img_rect(t_rect *rect)
 	{
 		while (x1 < rect->x + rect->width)
 		{
-			set_color(rect->game, x1, y1, rect->game->infos.color);
+			set_color(rect->game, x1, y1, rect->color);
 			x1++;
 		}
 		x1 = rect->x;
