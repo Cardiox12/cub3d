@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 20:33:14 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/03/03 14:42:37 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/03/05 11:12:40 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,14 @@ void	raycasting(t_game *data)
 				data->camera.mapX += data->camera.stepY;
 				data->camera.side = 1;
 			}
+
+			// Temporary code
+			if (data->camera.mapX >= 1)
+				data->camera.mapX -= 1;
+
+			if (data->camera.mapY >= 1)
+				data->camera.mapY -= 1;
+
 			if (data->map.map[(int)data->camera.mapY][(int)data->camera.mapX] != '0')
 				data->camera.hit = 0;
 		}
