@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 20:33:14 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/03/05 11:12:40 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/03/05 14:48:24 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ void	raycasting(t_game *data)
 		data->camera.deltaDistX = fabs(1 / data->camera.rayDirX);
 		data->camera.deltaDistY = fabs(1 / data->camera.rayDirY);
 
-		data->camera.hit = 0;
+		data->camera.hit = FALSE;
 
 		get_side(data);
 
@@ -132,22 +132,25 @@ void	raycasting(t_game *data)
 				data->camera.side = 1;
 			}
 
-			// Temporary code
-			if (data->camera.mapX >= 1)
-				data->camera.mapX -= 1;
+			// // Temporary code
+			// if (data->camera.mapX >= 1)
+			// 	data->camera.mapX -= 1;
 
-			if (data->camera.mapY >= 1)
-				data->camera.mapY -= 1;
+			// if (data->camera.mapY >= 1)
+			// 	data->camera.mapY -= 1;
 
 			if (data->map.map[(int)data->camera.mapY][(int)data->camera.mapX] != '0')
-				data->camera.hit = 0;
+				data->camera.hit = TRUE;
 		}
 		if (data->camera.side == 0)
 			data->camera.wallDist = (data->camera.mapX - data->camera.posX + (1 - data->camera.stepX) / 2) / data->camera.rayDirX;
 		else
 			data->camera.wallDist = (data->camera.mapY - data->camera.posY + (1 - data->camera.stepY) / 2) / data->camera.rayDirY;
 		
-		data->camera.lineHeight = (int)(data->map.resolution.y / data->camera.wallDist);
+		if (data->camera.wallDist != 0)
+			data->camera.lineHeight = (int)(data->map.resolution.y / data->camera.wallDist);
+		else
+			data->camera.lineHeight = 1;
 		
 		data->camera.drawStart = -data->camera.lineHeight / 2 + data->map.resolution.y / 2;
 		if (data->camera.drawStart < 0)
@@ -174,6 +177,7 @@ void	render(t_game *data)
 		&data->image.endian);
 		
 	draw_ceil_and_floor(data);
+	// raycasting(data);
 
 	mlx_put_image_to_window(
 		data->infos.mlx_ptr,
@@ -186,5 +190,4 @@ void	render(t_game *data)
 		data->infos.mlx_ptr,
 		data->image.img_ref
 	);
-	raycasting(data);
 }

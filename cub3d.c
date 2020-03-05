@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 01:45:36 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/03/03 17:34:35 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/03/05 14:48:15 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ void	define_map(t_map *map)
 	};
 
 	map->map = str_map;
-	map->resolution.x = WINDOW_WIDTH;
-	map->resolution.y = WINDOW_HEIGHT;
 	map->ceil_color = COLOR_CEIL;
 	map->ground_color = COLOR_FLOOR;
 	map->map_xsize = 5;
