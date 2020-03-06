@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 14:33:13 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/03/06 14:34:25 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/03/06 18:19:50 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,8 @@ typedef struct	s_camera
 	int heading;
 
 	// Position vector
-	int posX;
-	int posY;
+	float posX;
+	float posY;
 
 	// Direction vector
 	int dirX;

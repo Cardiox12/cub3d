@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 20:33:14 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/03/06 14:28:40 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/03/06 19:10:45 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,16 +99,16 @@ void	raycasting(__unused t_game *data)
 	
 }
 
-#define SQUARE_SIZE 50
-
 void	minimap(t_game *data)
 {
+	t_vec2	cp;
 	t_vec	vi;
 	t_vec	i;
 	t_vec	s;
 
-	s = (typeof(s)){SQUARE_SIZE, SQUARE_SIZE};
 	vi.y = 0;
+	s = (typeof(s)){SQUARE_SIZE, SQUARE_SIZE};
+	cp = (typeof(cp)){data->camera.posX * SQUARE_SIZE, data->camera.posY * SQUARE_SIZE};
 	while (vi.y < data->map.map_ysize)
 	{
 		vi.x = 0;
@@ -121,10 +121,11 @@ void	minimap(t_game *data)
 		}
 		vi.y++;
 	}
+	draw_circle((t_vec){(int)cp.x, (int)cp.y}, 5, &data->image, 0xFF00FF);
 }
 
 void	render(t_game *data)
 {
-	// draw_ceil_and_floor(data);
+	draw_ceil_and_floor(data);
 	minimap(data);
 }
