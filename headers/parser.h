@@ -6,15 +6,16 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 02:01:35 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/02/19 16:12:07 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/03/06 14:37:22 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #   ifndef FT_PARSER_H
 #   define FT_PARSER_H
 
-#include "cub3d.h"
 #include <fcntl.h>
+#include "types.h"
+#include "graphics_utils.h"
 
 #   define ID_SIZE          8
 #   define CUB_EXTENSION    ".cub"

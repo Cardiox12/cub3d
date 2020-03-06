@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 12:45:46 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/03/06 11:54:55 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/03/06 14:16:59 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,4 +99,23 @@ void			draw_ceil_and_floor(t_game *data)
 	rect.y = data->map.resolution.y / 2;
 	rect.color = data->map.ground_color;
 	draw_img_rect(&rect);
+}
+
+#include <stdio.h>
+
+void			draw_rect(t_vec pos, t_vec size, t_image *img, uint32_t color)
+{
+	int				w = img->line_size / 4;
+	t_vec			i;
+
+	i.y = pos.y;
+	size.x += pos.x;
+	size.y += pos.y;
+	while (i.y >= 0 && i.y < size.y && i.y < img->line_count)
+	{
+		i.x = pos.x;
+		while (i.x >= 0 && i.x < size.x && i.x < w)
+			img->img_data_addr[i.x++ + i.y * w] = color;
+		++i.y;
+	}
 }

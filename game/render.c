@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 20:33:14 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/03/06 13:02:12 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/03/06 14:28:40 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,109 +94,37 @@ void	get_side(t_game *data)
 	}
 }
 
-void	raycasting(t_game *data)
+void	raycasting(__unused t_game *data)
 {
-	int x;
+	
+}
 
-	x = 0;
-	data->camera.planY = 0.66;
-	while (x < data->map.resolution.x)
+#define SQUARE_SIZE 50
+
+void	minimap(t_game *data)
+{
+	t_vec	vi;
+	t_vec	i;
+	t_vec	s;
+
+	s = (typeof(s)){SQUARE_SIZE, SQUARE_SIZE};
+	vi.y = 0;
+	while (vi.y < data->map.map_ysize)
 	{
-		data->camera.cameraX = 2 * x / (double)data->map.resolution.x - 1;
-
-		data->camera.rayDirX = data->camera.dirX + data->camera.planX * data->camera.cameraX;
-		data->camera.rayDirY = data->camera.dirY + data->camera.planY * data->camera.cameraX;
-		
-		data->camera.mapX = data->camera.posX;
-		data->camera.mapY = data->camera.posY;
-
-		data->camera.deltaDistX = fabs(1 / data->camera.rayDirX);
-		data->camera.deltaDistY = fabs(1 / data->camera.rayDirY);
-
-		data->camera.hit = FALSE;
-
-		get_side(data);
-
-		// Make DDA algorithm
-		while (data->camera.hit == FALSE)
+		vi.x = 0;
+		while (vi.x < data->map.map_xsize)
 		{
-			if (data->camera.sideDistX < data->camera.sideDistY)
-			{
-				data->camera.sideDistX += data->camera.deltaDistX;
-				data->camera.mapX += data->camera.stepX;
-				data->camera.side = 0;
-			}
-			else
-			{
-				data->camera.sideDistY += data->camera.deltaDistY;
-				data->camera.mapY += data->camera.stepY;
-				data->camera.side = 1;
-			}
-
-			if (data->map.map[(int)data->camera.mapY][(int)data->camera.mapX] != '0')
-				data->camera.hit = TRUE;
+			i.x = vi.x * SQUARE_SIZE;
+			i.y = vi.y * SQUARE_SIZE;
+			draw_rect(i, s, &data->image, (data->map.map[vi.y][vi.x] == '1') ? 0x0000FF : 0xFFFFFF);
+			vi.x++;
 		}
-
-		// float m = 0.0;
-		// const float vx = data->camera.rayDirX;
-		// const float vy = data->camera.rayDirY;
-		// const float ax = data->camera.sideDistX;
-		// const float ay = data->camera.sideDistY;
-		// const float bx = data->camera.deltaDistX;
-		// const float by = data->camera.deltaDistY;
-		// while (data->camera.hit == FALSE)
-		// {
-		// 	(ax + m * bx);
-		// 	(ay + m * by);
-		// 	++m;
-		// }
-
-		if (data->camera.side == 0)
-			data->camera.wallDist = (data->camera.mapX - data->camera.posX + (1 - data->camera.stepX) / 2) / data->camera.rayDirX;
-		else
-			data->camera.wallDist = (data->camera.mapY - data->camera.posY + (1 - data->camera.stepY) / 2) / data->camera.rayDirY;
-		
-		if (data->camera.wallDist != 0)
-			data->camera.lineHeight = (int)(data->map.resolution.y / data->camera.wallDist);
-		else
-			data->camera.lineHeight = 1;
-		
-		data->camera.drawStart = -data->camera.lineHeight / 2 + data->map.resolution.y / 2;
-		if (data->camera.drawStart < 0)
-			data->camera.drawStart = 0;
-		data->camera.drawEnd = data->camera.lineHeight / 2 + data->map.resolution.y / 2;
-		if (data->camera.drawEnd >= data->map.resolution.y)
-			data->camera.drawEnd = data->map.resolution.y;
-
-		draw_img_vert_line(x, abs(data->camera.drawStart - data->camera.drawEnd), data);
-		x++;
+		vi.y++;
 	}
 }
 
 void	render(t_game *data)
 {
-	data->image.img_ref = mlx_new_image(
-			data->infos.mlx_ptr,
-			data->map.resolution.x,
-			data->map.resolution.y);
-	data->image.img_data_addr = (int*)mlx_get_data_addr(
-		data->image.img_ref,
-		&data->image.bits_per_pixel,
-		&data->image.line_size,
-		&data->image.endian);
-		
-	draw_ceil_and_floor(data);
-	raycasting(data);
-
-	mlx_put_image_to_window(
-		data->infos.mlx_ptr,
-		data->infos.win_ptr,
-		data->image.img_ref,
-		0,
-		0
-	);
-	mlx_destroy_image(
-		data->infos.mlx_ptr,
-		data->image.img_ref
-	);
+	// draw_ceil_and_floor(data);
+	minimap(data);
 }

@@ -34,6 +34,7 @@ SRCS		+= $(GRAPH_DIR)/ft_vert_line.c
 SRCS		+= $(UTILS_DIR)/init_textures.c
 SRCS		+= $(UTILS_DIR)/parse_map.c
 SRCS		+= $(GAME_DIR)/render.c
+SRCS		+= $(GAME_DIR)/loop.c
 SRCS		+= $(GAME_DIR)/image.c
 SRCS		+= $(HOOK_DIR)/keyboard_hooks.c
 HEADERS		= headers
