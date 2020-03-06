@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 12:45:46 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/03/05 14:49:14 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/03/06 11:54:55 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,12 @@
 
 static void		set_color(t_game *data, int x, int y, int color)
 {
-	int pixel;
-	
-	// if (x >= 0 && x < data->map.resolution.x && y >= 0 && x < data->map.resolution.y)
-	// {
-		pixel = y * data->map.resolution.x + x;
-		data->image.img_data_addr[pixel] = color;
-	// }
+	const int w = data->map.resolution.x;
+
+	if (x >= 0 && x < data->map.resolution.x && y >= 0 && y < data->map.resolution.y)
+	{
+		data->image.img_data_addr[y * w + x] = color;
+	}
 }
 
 void			draw_img_line(int x0, int y0, int x1, int y1, t_game *data)

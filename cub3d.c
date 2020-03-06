@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 01:45:36 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/03/05 14:48:15 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/03/06 11:37:12 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 #include "render.h"
 #include "colors.h"
 #define WINDOW_NAME "cub3d"
-#define WINDOW_HEIGHT 1080
-#define WINDOW_WIDTH 1920
+#define WINDOW_HEIGHT 720
+#define WINDOW_WIDTH 1280
 #define HEIGHT 10
 #define WIDTH 10
 

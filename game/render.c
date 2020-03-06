@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 20:33:14 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/03/05 14:48:24 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/03/06 13:02:12 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,9 +99,10 @@ void	raycasting(t_game *data)
 	int x;
 
 	x = 0;
+	data->camera.planY = 0.66;
 	while (x < data->map.resolution.x)
 	{
-		data->camera.cameraX = 2 * data->map.resolution.x - 1;
+		data->camera.cameraX = 2 * x / (double)data->map.resolution.x - 1;
 
 		data->camera.rayDirX = data->camera.dirX + data->camera.planX * data->camera.cameraX;
 		data->camera.rayDirY = data->camera.dirY + data->camera.planY * data->camera.cameraX;
@@ -122,26 +123,34 @@ void	raycasting(t_game *data)
 			if (data->camera.sideDistX < data->camera.sideDistY)
 			{
 				data->camera.sideDistX += data->camera.deltaDistX;
-				data->camera.mapY += data->camera.stepX;
+				data->camera.mapX += data->camera.stepX;
 				data->camera.side = 0;
 			}
 			else
 			{
 				data->camera.sideDistY += data->camera.deltaDistY;
-				data->camera.mapX += data->camera.stepY;
+				data->camera.mapY += data->camera.stepY;
 				data->camera.side = 1;
 			}
-
-			// // Temporary code
-			// if (data->camera.mapX >= 1)
-			// 	data->camera.mapX -= 1;
-
-			// if (data->camera.mapY >= 1)
-			// 	data->camera.mapY -= 1;
 
 			if (data->map.map[(int)data->camera.mapY][(int)data->camera.mapX] != '0')
 				data->camera.hit = TRUE;
 		}
+
+		// float m = 0.0;
+		// const float vx = data->camera.rayDirX;
+		// const float vy = data->camera.rayDirY;
+		// const float ax = data->camera.sideDistX;
+		// const float ay = data->camera.sideDistY;
+		// const float bx = data->camera.deltaDistX;
+		// const float by = data->camera.deltaDistY;
+		// while (data->camera.hit == FALSE)
+		// {
+		// 	(ax + m * bx);
+		// 	(ay + m * by);
+		// 	++m;
+		// }
+
 		if (data->camera.side == 0)
 			data->camera.wallDist = (data->camera.mapX - data->camera.posX + (1 - data->camera.stepX) / 2) / data->camera.rayDirX;
 		else
@@ -177,7 +186,7 @@ void	render(t_game *data)
 		&data->image.endian);
 		
 	draw_ceil_and_floor(data);
-	// raycasting(data);
+	raycasting(data);
 
 	mlx_put_image_to_window(
 		data->infos.mlx_ptr,

@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 20:48:48 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/03/05 12:15:01 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/03/06 13:02:06 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ typedef struct	s_camera
 	int dirY;
 
 	// Camera plan vector
-	int planX;
-	int planY;
+	double planX;
+	double planY;
 
 	// Deltas
 	double rayDirX;
