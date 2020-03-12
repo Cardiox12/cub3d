@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 20:48:48 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/03/06 19:02:24 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/03/06 22:39:04 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ void	draw_img_vert_line(int x, int height, t_game *data);
 void	reset_img(t_game *data);
 void	draw_img_rect(t_rect *rect);
 void	draw_ceil_and_floor(t_game *data);
-void			draw_circle(t_vec pos, int radius, t_image *img, uint32_t color);
+void	draw_circle(t_vec pos, int radius, t_image *img, uint32_t color);
 
-#define SQUARE_SIZE 100
+#define SQUARE_SIZE 40
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 01:45:36 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/03/06 18:59:42 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/03/12 11:55:04 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,14 +76,9 @@ int		main(int argc, char __unused **argv)
 			&data.image.endian);
 		data.image.line_count = data.map.resolution.y;
 		
-		mlx_hook(
-			data.infos.win_ptr,
-			2,
-			KEY_PRESS_MASK,
-			keyboard_hook,
-			&data
-		);
-		mlx_key_hook(data.infos.win_ptr, keyboard_hook, &data);
+		mlx_hook(data.infos.win_ptr, KEY_PRESS_CODE, KEY_PRESS_MASK, key_pressed, &data);
+		mlx_hook(data.infos.win_ptr, KEY_RELEASE_CODE, KEY_RELEASE_MASK, key_released, &data);
+
 		mlx_loop_hook(data.infos.mlx_ptr, loop, &data);
 		mlx_loop(data.infos.mlx_ptr);
 	}

@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 14:33:13 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/03/06 18:19:50 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/03/12 12:29:18 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,5 +154,8 @@ typedef struct	s_vec2
 	float		x;
 	float		y;
 }				t_vec2;
+
+# define TRUE 1
+# define FALSE 0
 
 #endif
