@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 01:45:36 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/03/12 11:55:04 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/03/12 19:22:47 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <stdio.h>
 #include "render.h"
 #include "colors.h"
+#include "render.h"
 #define WINDOW_NAME "cub3d"
 #define WINDOW_HEIGHT 720
 #define WINDOW_WIDTH 1280
@@ -75,7 +76,7 @@ int		main(int argc, char __unused **argv)
 			&data.image.line_size,
 			&data.image.endian);
 		data.image.line_count = data.map.resolution.y;
-		
+
 		mlx_hook(data.infos.win_ptr, KEY_PRESS_CODE, KEY_PRESS_MASK, key_pressed, &data);
 		mlx_hook(data.infos.win_ptr, KEY_RELEASE_CODE, KEY_RELEASE_MASK, key_released, &data);
 

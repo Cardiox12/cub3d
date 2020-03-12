@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 20:33:14 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/03/06 22:29:39 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/03/12 19:24:36 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,26 +46,24 @@ void	set_heading(t_camera *player, char cardinal_p)
 
 int		get_starting_point(t_game *data)
 {
-	int x;
-	int y;
+	t_vec i;
 
-	x = 0;
-	y = 0;
-	while (y < data->map.map_ysize)
+	i = (typeof(i)){0, 0};
+	while (i.y < data->map.map_ysize)
 	{
-		while (x < data->map.map_xsize)
+		while (i.x < data->map.map_xsize)
 		{
-			if (is_cardinal_point(data->map.map[y][x]))
+			if (is_cardinal_point(data->map.map[i.y][i.x]))
 			{
-				set_heading(&data->camera, data->map.map[y][x]);
-				data->camera.posX = x;
-				data->camera.posX = y;
+				set_heading(&data->camera, data->map.map[i.y][i.x]);
+				data->camera.posX = i.x;
+				data->camera.posX = i.y;
 				return (FOUND);
 			}	
-			x++;
+			i.x++;
 		}
-		x = 0;
-		y++;
+		i.x = 0;
+		i.y++;
 	}
 	return (NOT_FOUND);
 }
@@ -122,6 +120,8 @@ void	minimap(t_game *data)
 		vi.y++;
 	}
 	draw_circle((t_vec){(int)cp.x, (int)cp.y}, 5, &data->image, 0xFF00FF);
+	// printf("posX : %f - posY %f\n", data->camera.posX, data->camera.posY);
+	draw_img_line((t_vec){(int)cp.x, (int)cp.y}, (t_vec){data->camera.planX, data->camera.planY}, data);
 }
 
 void	render(t_game *data)

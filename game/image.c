@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 12:45:46 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/03/06 18:45:40 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/03/12 19:22:20 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,37 +24,37 @@ static void		set_color(t_game *data, int x, int y, int color)
 	}
 }
 
-void			draw_img_line(int x0, int y0, int x1, int y1, t_game *data)
+void			draw_img_line(t_vec a, t_vec b, t_game *data)
 {
-	int dx = abs(x1 - x0);
-	int sx = (x0 < x1) ? 1 : -1;
-	int dy = abs(y1 - y0);
-	int sy = (y0 < y1) ? 1 : -1; 
+	int dx = abs(b.x - a.x);
+	int sx = (a.x < b.x) ? 1 : -1;
+	int dy = abs(b.y - a.y);
+	int sy = (a.y < b.y) ? 1 : -1; 
 	int err = (dx > dy ? dx : -dy) / 2;
 	int e2;
 
 	while (TRUE)
 	{
-		set_color(data, x0, y0, data->infos.color);
-		if (x0 == x1 && y0 == y1)
+		set_color(data, a.x, a.y, data->infos.color);
+		if (a.x == b.x && a.y == b.y)
 			break;
 		e2 = err;
 		if (e2 > -dx)
 		{
 			err -= dy; 
-			x0 += sx;
+			a.x += sx;
 		}
 		if (e2 < dy)
 		{
 			err += dx; 
-			y0 += sy;
+			a.y += sy;
 		}
 	}
 }
 
 void			draw_img_vert_line(int x, int height, t_game *data)
 {
-	draw_img_line(x, SLICE_WIDTH, x, height, data);
+	draw_img_line((t_vec){x, SLICE_WIDTH}, (t_vec){x, height}, data);
 }
 
 void			reset_img(t_game *data)
@@ -100,8 +100,6 @@ void			draw_ceil_and_floor(t_game *data)
 	rect.color = data->map.ground_color;
 	draw_img_rect(&rect);
 }
-
-#include <stdio.h>
 
 void			draw_rect(t_vec pos, t_vec size, t_image *img, uint32_t color)
 {
