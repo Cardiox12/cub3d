@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 20:33:14 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/03/12 19:24:36 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/03/13 14:39:01 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <stdio.h>
 #include "errors.h"
 
-static int	is_cardinal_point(char c)
+int		is_cardinal_point(char c)
 {
 	return (c == S_SOUTH || c == S_NORTH || c == S_EAST || c == S_WEST);
 }
@@ -28,7 +28,6 @@ void	set_heading(t_camera *player, char cardinal_p)
 	}
 	else if (cardinal_p == S_NORTH)
 	{
-		player->heading = D_NORTH;
 		player->planX = 0;
 		player->planY = -1;
 	}
@@ -97,6 +96,8 @@ void	raycasting(__unused t_game *data)
 	
 }
 
+# define SCALE_FACTOR 10
+
 void	minimap(t_game *data)
 {
 	t_vec2	cp;
@@ -120,8 +121,10 @@ void	minimap(t_game *data)
 		vi.y++;
 	}
 	draw_circle((t_vec){(int)cp.x, (int)cp.y}, 5, &data->image, 0xFF00FF);
-	// printf("posX : %f - posY %f\n", data->camera.posX, data->camera.posY);
-	draw_img_line((t_vec){(int)cp.x, (int)cp.y}, (t_vec){data->camera.planX, data->camera.planY}, data);
+	// printf("dirX : %f - dirY %f\n", (int)cp.x + data->camera.planX * SQUARE_SIZE);
+	draw_img_line(
+		(t_vec){(int)cp.x, (int)cp.y}, 
+		(t_vec){(int)cp.x + data->camera.planX * SQUARE_SIZE, (int)cp.y + data->camera.planY * SQUARE_SIZE}, data);
 }
 
 void	render(t_game *data)
