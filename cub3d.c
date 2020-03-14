@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tony <tony@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 01:45:36 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/03/13 14:20:23 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/03/13 18:03:48 by tony             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,8 @@
 #include "colors.h"
 #include "render.h"
 #define WINDOW_NAME "cub3d"
-// #define WINDOW_HEIGHT 720
-// #define WINDOW_WIDTH 1280
-#define WINDOW_HEIGHT 400
-#define WINDOW_WIDTH 400
+#define WINDOW_HEIGHT 720
+#define WINDOW_WIDTH 1280
 #define HEIGHT 10
 #define WIDTH 10
 
@@ -55,8 +53,8 @@ void	init_game(t_game *data)
 	);
 	data->map.ceil_color = COLOR_CEIL;
 	data->map.ground_color = COLOR_FLOOR;
-	data->camera.posX = 5;
-	data->camera.posY = 3;
+	data->camera.pos.x = 5;
+	data->camera.pos.y = 3;
 }
 
 int		main(int argc, char __unused **argv)

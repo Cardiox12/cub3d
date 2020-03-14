@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tony <tony@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 20:33:14 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/03/13 14:39:01 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/03/14 00:47:06 by tony             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,23 +23,23 @@ void	set_heading(t_camera *player, char cardinal_p)
 {
 	if (cardinal_p == S_SOUTH)
 	{
-		player->planX = 0;
-		player->planY = 1;
+		player->plan.x = 0;
+		player->plan.y = 1;
 	}
 	else if (cardinal_p == S_NORTH)
 	{
-		player->planX = 0;
-		player->planY = -1;
+		player->plan.x = 0;
+		player->plan.y = -1;
 	}
 	else if (cardinal_p == S_WEST)
 	{
-		player->planX = -1;
-		player->planY = 0;
+		player->plan.x = -1;
+		player->plan.y = 0;
 	}
 	else if (cardinal_p == S_EAST)
 	{
-		player->planX = 1;
-		player->planY = 0;
+		player->plan.x = 1;
+		player->plan.y = 0;
 	}
 }
 
@@ -55,8 +55,8 @@ int		get_starting_point(t_game *data)
 			if (is_cardinal_point(data->map.map[i.y][i.x]))
 			{
 				set_heading(&data->camera, data->map.map[i.y][i.x]);
-				data->camera.posX = i.x;
-				data->camera.posX = i.y;
+				data->camera.pos.x = i.x;
+				data->camera.pos.y = i.y;
 				return (FOUND);
 			}	
 			i.x++;
@@ -72,22 +72,22 @@ void	get_side(t_game *data)
 	if (data->camera.rayDirX < 0)
 	{
 		data->camera.stepX = -1;
-		data->camera.sideDistX = (data->camera.posX - data->camera.mapX);
+		data->camera.sideDistX = (data->camera.pos.x - data->camera.mapX);
 	}
 	else
 	{
 		data->camera.stepX = 1;
-		data->camera.sideDistX = (data->camera.mapX + 1.0 - data->camera.posX) * data->camera.deltaDistX;
+		data->camera.sideDistX = (data->camera.mapX + 1.0 - data->camera.pos.x) * data->camera.deltaDistX;
 	}
 	if (data->camera.rayDirY < 0)
 	{
 		data->camera.stepY = -1;
-		data->camera.sideDistY = (data->camera.posY - data->camera.mapY) * data->camera.deltaDistY;
+		data->camera.sideDistY = (data->camera.pos.y - data->camera.mapY) * data->camera.deltaDistY;
 	}
 	else
 	{
 		data->camera.stepY = 1;
-		data->camera.sideDistY = (data->camera.mapY + 1.0 - data->camera.posY) * data->camera.deltaDistX;
+		data->camera.sideDistY = (data->camera.mapY + 1.0 - data->camera.pos.y) * data->camera.deltaDistX;
 	}
 }
 
@@ -107,7 +107,7 @@ void	minimap(t_game *data)
 
 	vi.y = 0;
 	s = (typeof(s)){SQUARE_SIZE, SQUARE_SIZE};
-	cp = (typeof(cp)){data->camera.posX * SQUARE_SIZE, data->camera.posY * SQUARE_SIZE};
+	cp = (typeof(cp)){data->camera.pos.x * SQUARE_SIZE, data->camera.pos.y * SQUARE_SIZE};
 	while (vi.y < data->map.map_ysize)
 	{
 		vi.x = 0;
@@ -121,10 +121,9 @@ void	minimap(t_game *data)
 		vi.y++;
 	}
 	draw_circle((t_vec){(int)cp.x, (int)cp.y}, 5, &data->image, 0xFF00FF);
-	// printf("dirX : %f - dirY %f\n", (int)cp.x + data->camera.planX * SQUARE_SIZE);
 	draw_img_line(
 		(t_vec){(int)cp.x, (int)cp.y}, 
-		(t_vec){(int)cp.x + data->camera.planX * SQUARE_SIZE, (int)cp.y + data->camera.planY * SQUARE_SIZE}, data);
+		(t_vec){(int)cp.x + data->camera.plan.x * SQUARE_SIZE, (int)cp.y + data->camera.plan.y * SQUARE_SIZE}, data);
 }
 
 void	render(t_game *data)

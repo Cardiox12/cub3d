@@ -3,16 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tony <tony@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 03:18:15 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/03/13 14:11:51 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/03/14 01:09:53 by tony             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_UTILS_H
 # define FT_UTILS_H
 
-t_vec	add(t_vec a, t_vec b);
+t_vec	add_vec(t_vec a, t_vec b);
+t_vec2	add_vec2(t_vec2 a, t_vec2 b);
+t_vec2	norm_vec(t_vec2 a);
 
 #endif

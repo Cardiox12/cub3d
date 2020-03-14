@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   types.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tony <tony@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 14:33:13 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/03/12 12:29:18 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/03/13 18:47:31 by tony             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,12 @@ typedef struct  s_mlx_infos
     int     width;
     int     color;
 }               t_mlx_infos;
+
+typedef struct	s_vec2
+{
+	float		x;
+	float		y;
+}				t_vec2;
 
 typedef struct  s_vec
 {
@@ -80,16 +86,18 @@ typedef struct	s_camera
 	int heading;
 
 	// Position vector
-	float posX;
-	float posY;
+	t_vec2 pos;
+	// float posX;
+	// float posY;
 
 	// Direction vector
 	int dirX;
 	int dirY;
 
 	// Camera plan vector
-	double planX;
-	double planY;
+	t_vec2 plan;
+	// double planX;
+	// double planY;
 
 	// Deltas
 	double rayDirX;
@@ -148,12 +156,6 @@ typedef struct	s_rect
 	int		y;
 	int		color;
 }				t_rect;
-
-typedef struct	s_vec2
-{
-	float		x;
-	float		y;
-}				t_vec2;
 
 # define TRUE 1
 # define FALSE 0
