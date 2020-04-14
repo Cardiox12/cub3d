@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 12:45:46 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/03/12 19:22:20 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/04/09 14:51:27 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,18 +87,10 @@ void			draw_img_rect(t_rect *rect)
 
 void			draw_ceil_and_floor(t_game *data)
 {
-	t_rect rect;
-	
-	rect.game = data;
-	rect.color = data->map.ceil_color;
-	rect.height = data->map.resolution.y / 2;
-	rect.width = data->map.resolution.x;
-	rect.x = 0;
-	rect.y = 0;
-	draw_img_rect(&rect);
-	rect.y = data->map.resolution.y / 2;
-	rect.color = data->map.ground_color;
-	draw_img_rect(&rect);
+	const t_vec size = (t_vec){data->map.resolution.x, data->map.resolution.y / 2};
+
+	draw_rect((t_vec){0, 0}, size, &data->image, data->map.ceil_color);
+	draw_rect((t_vec){0, data->map.resolution.y / 2}, size, &data->image, data->map.ground_color);
 }
 
 void			draw_rect(t_vec pos, t_vec size, t_image *img, uint32_t color)

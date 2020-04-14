@@ -1,36 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   keyboard_hooks.c                                   :+:      :+:    :+:   */
+/*   rotate.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/26 00:44:00 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/04/09 14:37:16 by bbellavi         ###   ########.fr       */
+/*   Created: 2020/04/09 14:53:31 by bbellavi          #+#    #+#             */
+/*   Updated: 2020/04/11 17:48:43 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "cub3d.h"
-#include "event_hooks.h"
+#include "math.h"
+#include "types.h"
 
-int		key_pressed(int keycode, t_game *data)
-{
-	if (keycode == KEY_ESC)
-	{
-		mlx_destroy_image(
-			data->infos.mlx_ptr,
-			data->image.img_ref
-			);
-		exit(0);
-	}
-	event_array[keycode] = TRUE;
-	return (0);
-}
+/*
+	Rotate 2d vector by theta angle.
 
-int		key_released(int keycode, t_game *data)
+	IMPORTANT : The angle is in radians.
+*/
+
+t_vec2	rotate(t_vec2 u, double theta)
 {
-	(void)data;
-	event_array[keycode] = FALSE;
-	return (0);
+	t_vec2 v;
+
+	v.x = cos(theta) * u.x - sin(theta) * u.y;
+	v.y = sin(theta) * u.x + cos(theta) * u.y;
+	return (v);
 }

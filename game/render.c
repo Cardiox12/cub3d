@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tony <tony@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 20:33:14 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/03/14 00:47:06 by tony             ###   ########.fr       */
+/*   Updated: 2020/04/14 16:57:53 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,26 +21,17 @@ int		is_cardinal_point(char c)
 
 void	set_heading(t_camera *player, char cardinal_p)
 {
+
+	player->plan = (t_vec2){0.0f, -1.0f};
 	if (cardinal_p == S_SOUTH)
-	{
-		player->plan.x = 0;
-		player->plan.y = 1;
-	}
+		player->camera_angle = to_radians(ANGLE_south);
 	else if (cardinal_p == S_NORTH)
-	{
-		player->plan.x = 0;
-		player->plan.y = -1;
-	}
+		player->camera_angle = to_radians(ANGLE_north);
 	else if (cardinal_p == S_WEST)
-	{
-		player->plan.x = -1;
-		player->plan.y = 0;
-	}
+		player->camera_angle = to_radians(ANGLE_west);
 	else if (cardinal_p == S_EAST)
-	{
-		player->plan.x = 1;
-		player->plan.y = 0;
-	}
+		player->camera_angle = to_radians(ANGLE_east);
+	player->plan = rotate(player->plan, player->camera_angle);
 }
 
 int		get_starting_point(t_game *data)

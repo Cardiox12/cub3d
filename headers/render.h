@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tony <tony@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 20:48:48 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/03/13 01:06:03 by tony             ###   ########.fr       */
+/*   Updated: 2020/03/15 01:54:04 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,11 @@
 #include "ft_string.h"
 #include "graphics_utils.h"
 #include "types.h"
+
+# define ANGLE_south 180
+# define ANGLE_north 0
+# define ANGLE_east 90
+# define ANGLE_west 270
 
 # define SQUARE_SIZE 40
 # define WALL '1'

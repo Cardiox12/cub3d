@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tony <tony@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 14:23:36 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/03/14 15:10:51 by tony             ###   ########.fr       */
+/*   Updated: 2020/04/14 16:58:32 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,28 @@
 
 #include <stdio.h>
 
-// void	check_event(t_game *data)
-// {
-// 	if (event_array[I_KEY_DOWN])
-// 		data->camera.pos.y += (STEP * (float)SQUARE_SIZE);
-// 	else if (event_array[I_KEY_UP])
-// 		data->camera.pos.y -= (STEP * (float)SQUARE_SIZE);
-// 	else if (event_array[I_KEY_LEFT])
-// 		data->camera.pos.x -= (STEP * (float)SQUARE_SIZE);
-// 	else if (event_array[I_KEY_RIGHT])
-// 		data->camera.pos.x += (STEP * (float)SQUARE_SIZE);
-// }
-
 void	check_event(t_game *data)
 {
-	
+	if (event_array[KEY_DOWN])
+		data->camera.pos.y += (STEP * (float)SQUARE_SIZE);
+	else if (event_array[KEY_UP])
+		data->camera.pos.y -= (STEP * (float)SQUARE_SIZE);
+	else if (event_array[KEY_LEFT])
+		data->camera.pos.x -= (STEP * (float)SQUARE_SIZE);
+	else if (event_array[KEY_RIGHT])
+		data->camera.pos.x += (STEP * (float)SQUARE_SIZE);
+	else if (event_array[KEY_A])
+	{
+		data->camera.camera_angle -= to_radians(1);
+		printf("angle : %f\n", data->camera.camera_angle);
+		data->camera.plan = rotate(data->camera.plan, to_radians(data->camera.camera_angle));
+	}
+	else if (event_array[KEY_D])
+	{
+		data->camera.camera_angle += to_radians(1);
+		printf("angle : %f\n", data->camera.camera_angle);
+		data->camera.plan = rotate(data->camera.plan, to_radians(data->camera.camera_angle));
+	}
 }
 
 int		loop(t_game *data)

@@ -1,36 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   keyboard_hooks.c                                   :+:      :+:    :+:   */
+/*   to_radians.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/26 00:44:00 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/04/09 14:37:16 by bbellavi         ###   ########.fr       */
+/*   Created: 2020/04/11 17:08:38 by bbellavi          #+#    #+#             */
+/*   Updated: 2020/04/11 17:13:50 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "cub3d.h"
-#include "event_hooks.h"
+#include "types.h"
+#include "utils.h"
 
-int		key_pressed(int keycode, t_game *data)
+double	to_radians(int degrees)
 {
-	if (keycode == KEY_ESC)
-	{
-		mlx_destroy_image(
-			data->infos.mlx_ptr,
-			data->image.img_ref
-			);
-		exit(0);
-	}
-	event_array[keycode] = TRUE;
-	return (0);
-}
-
-int		key_released(int keycode, t_game *data)
-{
-	(void)data;
-	event_array[keycode] = FALSE;
-	return (0);
+	return (degrees * M_PI / 180);
 }

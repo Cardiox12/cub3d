@@ -3,18 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tony <tony@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 03:18:15 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/03/14 01:09:53 by tony             ###   ########.fr       */
+/*   Updated: 2020/04/11 17:33:55 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_UTILS_H
 # define FT_UTILS_H
 
-t_vec	add_vec(t_vec a, t_vec b);
-t_vec2	add_vec2(t_vec2 a, t_vec2 b);
-t_vec2	norm_vec(t_vec2 a);
+#include <math.h>
+
+t_vec2	rotate(t_vec2 u, double theta);
+double	to_radians(int degrees);
 
 #endif

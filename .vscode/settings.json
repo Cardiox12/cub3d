@@ -8,6 +8,7 @@
 		"complex": "c",
 		"game.h": "c",
 		"parser.h": "c",
-		"types.h": "c"
+		"types.h": "c",
+		"util.h": "c"
 	}
 }
