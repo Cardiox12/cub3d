@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tony <tony@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 14:23:36 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/04/23 17:30:02 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/04/23 18:16:32 by tony             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 
 void	check_event(t_game *data)
 {
+	char dir;
+
 	if (event_array[KEY_DOWN])
 		data->camera.pos.y += (STEP * (float)SQUARE_SIZE);
 	else if (event_array[KEY_UP])
@@ -26,15 +28,11 @@ void	check_event(t_game *data)
 		data->camera.pos.x -= (STEP * (float)SQUARE_SIZE);
 	else if (event_array[KEY_RIGHT])
 		data->camera.pos.x += (STEP * (float)SQUARE_SIZE);
-	else if (event_array[KEY_A])
+	else if (event_array[KEY_A] || event_array[KEY_D])
 	{
-		data->camera.camera_angle += to_radians(-1);
-		data->camera.plan = rotate(data->camera.plan, data->camera.camera_angle, ANTI_CLOCKWISE);
-	}
-	else if (event_array[KEY_D])
-	{
-		data->camera.camera_angle += to_radians(1);
-		data->camera.plan = rotate(data->camera.plan, data->camera.camera_angle, CLOCKWISE);
+		data->camera.camera_angle += (event_array[KEY_A]) ? -to_radians(1) : to_radians(1);
+		dir = (event_array[KEY_A]) ? ANTI_CLOCKWISE : CLOCKWISE;
+		data->camera.plan = rotate(data->camera.plan, to_radians(1), dir);
 	}
 }
 

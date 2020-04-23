@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   to_radians.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tony <tony@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/11 17:08:38 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/04/11 17:13:50 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/04/23 18:07:26 by tony             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "types.h"
 #include "utils.h"
 
-double	to_radians(int degrees)
+double	to_radians(double degrees)
 {
 	return (degrees * M_PI / 180);
 }
