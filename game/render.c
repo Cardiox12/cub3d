@@ -6,7 +6,7 @@
 /*   By: tony <tony@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 20:33:14 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/04/23 18:06:04 by tony             ###   ########.fr       */
+/*   Updated: 2020/04/23 18:37:06 by tony             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ int		is_cardinal_point(char c)
 
 void	set_heading(t_camera *player, char cardinal_p)
 {
-
-	player->plan = (t_vec2){0.0f, -1.0f};
+	player->plan_front = (t_vec2){0.0f, -1.0f};
+	player->plan_right = (t_vec2){0.0f, 1.0f};
 	if (cardinal_p == S_SOUTH)
 		player->camera_angle = to_radians(ANGLE_south);
 	else if (cardinal_p == S_NORTH)
@@ -31,7 +31,8 @@ void	set_heading(t_camera *player, char cardinal_p)
 		player->camera_angle = to_radians(ANGLE_west);
 	else if (cardinal_p == S_EAST)
 		player->camera_angle = to_radians(ANGLE_east);
-	player->plan = rotate(player->plan, player->camera_angle, CLOCKWISE);
+	player->plan_front = rotate(player->plan_front, player->camera_angle, CLOCKWISE);
+	player->plan_right = rotate(player->plan_right, player->camera_angle + to_radians(90), CLOCKWISE);
 }
 
 int		get_starting_point(t_game *data)
@@ -114,11 +115,14 @@ void	minimap(t_game *data)
 	draw_circle((t_vec){(int)cp.x, (int)cp.y}, 5, &data->image, 0xFF00FF);
 	draw_img_line(
 		(t_vec){(int)cp.x, (int)cp.y}, 
-		(t_vec){(int)cp.x + data->camera.plan.x * SQUARE_SIZE,
-		(int)cp.y + data->camera.plan.y * SQUARE_SIZE},
+		(t_vec){(int)cp.x + data->camera.plan_front.x * SQUARE_SIZE,
+		(int)cp.y + data->camera.plan_front.y * SQUARE_SIZE},
 		data,
 		0xFF00FF
 	);
+	draw_img_line(
+		(t_vec){(int)cp.x, (int)cp.y}, 
+		(t_vec){(int)cp.x + data->camera.plan_right.x * SQUARE_SIZE, (int)cp.y + data->camera.plan_right.y * SQUARE_SIZE}, data, 0xFF00FF);
 }
 
 void	render(t_game *data)
