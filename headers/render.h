@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 20:48:48 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/03/15 01:54:04 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/04/23 17:12:02 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,15 @@
 # define FALSE 0
 
 
-void	draw_rect(t_vec pos, t_vec size, t_image *img, uint32_t color);
 void	render(t_game *data);
-void	draw_img_line(t_vec a, t_vec b, t_game *data);
-void	draw_img_vert_line(int x, int height, t_game *data);
+
+void	draw_rect(t_vec pos, t_vec size, t_image *img, uint32_t color);
+void	draw_img_vert_line(int x, int height, t_game *data, uint32_t color);
 void	reset_img(t_game *data);
-void	draw_img_rect(t_rect *rect);
 void	draw_ceil_and_floor(t_game *data);
 void	draw_circle(t_vec pos, int radius, t_image *img, uint32_t color);
+void	draw_img_line(t_vec a, t_vec b, t_game *data, uint32_t color);
+
 int		is_cardinal_point(char c);
 void	set_heading(t_camera *player, char cardinal_p);
 void	get_side(t_game *data);

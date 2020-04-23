@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 12:45:46 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/04/09 14:51:27 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/04/23 17:09:54 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,37 +24,35 @@ static void		set_color(t_game *data, int x, int y, int color)
 	}
 }
 
-void			draw_img_line(t_vec a, t_vec b, t_game *data)
+void			draw_img_line(t_vec a, t_vec b, t_game *data, uint32_t color)
 {
-	int dx = abs(b.x - a.x);
-	int sx = (a.x < b.x) ? 1 : -1;
-	int dy = abs(b.y - a.y);
-	int sy = (a.y < b.y) ? 1 : -1; 
-	int err = (dx > dy ? dx : -dy) / 2;
+	const t_vec delta = (t_vec){abs(b.x - a.x), abs(b.y - a.y)};
+	const t_vec s = (t_vec){(a.x < b.x) ? 1 : -1, (a.y < b.y) ? 1 : -1};
+	int err = (delta.x > delta.y ? delta.x : -delta.y) / 2;
 	int e2;
 
 	while (TRUE)
 	{
-		set_color(data, a.x, a.y, data->infos.color);
+		set_color(data, a.x, a.y, color);
 		if (a.x == b.x && a.y == b.y)
 			break;
 		e2 = err;
-		if (e2 > -dx)
+		if (e2 > -delta.x)
 		{
-			err -= dy; 
-			a.x += sx;
+			err -= delta.y;
+			a.x += s.x;
 		}
-		if (e2 < dy)
+		if (e2 < delta.y)
 		{
-			err += dx; 
-			a.y += sy;
+			err += delta.x;
+			a.y += s.y;
 		}
 	}
 }
 
-void			draw_img_vert_line(int x, int height, t_game *data)
+void			draw_img_vert_line(int x, int height, t_game *data, uint32_t color)
 {
-	draw_img_line((t_vec){x, SLICE_WIDTH}, (t_vec){x, height}, data);
+	draw_img_line((t_vec){x, SLICE_WIDTH}, (t_vec){x, height}, data, color);
 }
 
 void			reset_img(t_game *data)
@@ -64,25 +62,6 @@ void			reset_img(t_game *data)
 		0, 
 		sizeof(char) * data->map.resolution.x * data->map.resolution.y * 4
 	);
-}
-
-void			draw_img_rect(t_rect *rect)
-{
-	int x1;
-	int y1;
-
-	x1 = rect->x;
-	y1 = rect->y;
-	while (y1 < rect->y + rect->height)
-	{
-		while (x1 < rect->x + rect->width)
-		{
-			set_color(rect->game, x1, y1, rect->color);
-			x1++;
-		}
-		x1 = rect->x;
-		y1++;
-	}
 }
 
 void			draw_ceil_and_floor(t_game *data)

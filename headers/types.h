@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 14:33:13 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/03/15 01:49:51 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/04/23 17:16:34 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,5 +159,8 @@ typedef struct	s_rect
 
 # define TRUE 1
 # define FALSE 0
+# define CLOCKWISE 1
+# define ANTI_CLOCKWISE 0
+
 
 #endif

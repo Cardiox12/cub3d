@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 20:33:14 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/04/14 16:57:53 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/04/23 17:20:09 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	set_heading(t_camera *player, char cardinal_p)
 		player->camera_angle = to_radians(ANGLE_west);
 	else if (cardinal_p == S_EAST)
 		player->camera_angle = to_radians(ANGLE_east);
-	player->plan = rotate(player->plan, player->camera_angle);
+	player->plan = rotate(player->plan, player->camera_angle, CLOCKWISE);
 }
 
 int		get_starting_point(t_game *data)
@@ -114,7 +114,11 @@ void	minimap(t_game *data)
 	draw_circle((t_vec){(int)cp.x, (int)cp.y}, 5, &data->image, 0xFF00FF);
 	draw_img_line(
 		(t_vec){(int)cp.x, (int)cp.y}, 
-		(t_vec){(int)cp.x + data->camera.plan.x * SQUARE_SIZE, (int)cp.y + data->camera.plan.y * SQUARE_SIZE}, data);
+		(t_vec){(int)cp.x + data->camera.plan.x * SQUARE_SIZE,
+		(int)cp.y + data->camera.plan.y * SQUARE_SIZE},
+		data,
+		0xFF00FF
+	);
 }
 
 void	render(t_game *data)

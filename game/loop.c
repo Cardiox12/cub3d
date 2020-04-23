@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 14:23:36 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/04/14 16:58:32 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/04/23 17:30:02 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,13 @@ void	check_event(t_game *data)
 		data->camera.pos.x += (STEP * (float)SQUARE_SIZE);
 	else if (event_array[KEY_A])
 	{
-		data->camera.camera_angle -= to_radians(1);
-		printf("angle : %f\n", data->camera.camera_angle);
-		data->camera.plan = rotate(data->camera.plan, to_radians(data->camera.camera_angle));
+		data->camera.camera_angle += to_radians(-1);
+		data->camera.plan = rotate(data->camera.plan, data->camera.camera_angle, ANTI_CLOCKWISE);
 	}
 	else if (event_array[KEY_D])
 	{
 		data->camera.camera_angle += to_radians(1);
-		printf("angle : %f\n", data->camera.camera_angle);
-		data->camera.plan = rotate(data->camera.plan, to_radians(data->camera.camera_angle));
+		data->camera.plan = rotate(data->camera.plan, data->camera.camera_angle, CLOCKWISE);
 	}
 }
 

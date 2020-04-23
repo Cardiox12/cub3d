@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 00:51:02 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/04/09 14:35:08 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/04/23 17:10:36 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,18 +38,6 @@
 char	event_array[EVENT_MAX_SIZE];
 
 #define STEP (1.0f / 1000.0f)
-
-// typedef enum	e_event_index
-// {
-// 	I_KEY_DOWN,
-// 	I_KEY_UP,
-// 	I_KEY_LEFT,
-// 	I_KEY_RIGHT,
-// 	I_KEY_W,
-// 	I_KEY_A,
-// 	I_KEY_S,
-// 	I_KEY_D
-// }				t_event_index;
 
 // int     keyboard_hook(int keycode, t_game *data);
 int		key_pressed(int keycode, t_game *data);
