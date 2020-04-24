@@ -6,7 +6,7 @@
 /*   By: tony <tony@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 20:33:14 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/04/23 18:37:06 by tony             ###   ########.fr       */
+/*   Updated: 2020/04/24 15:03:05 by tony             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int		is_cardinal_point(char c)
 void	set_heading(t_camera *player, char cardinal_p)
 {
 	player->plan_front = (t_vec2){0.0f, -1.0f};
-	player->plan_right = (t_vec2){0.0f, 1.0f};
+	player->plan_right = (t_vec2){1.0f, 0.0f};
 	if (cardinal_p == S_SOUTH)
 		player->camera_angle = to_radians(ANGLE_south);
 	else if (cardinal_p == S_NORTH)
@@ -31,8 +31,12 @@ void	set_heading(t_camera *player, char cardinal_p)
 		player->camera_angle = to_radians(ANGLE_west);
 	else if (cardinal_p == S_EAST)
 		player->camera_angle = to_radians(ANGLE_east);
+		
 	player->plan_front = rotate(player->plan_front, player->camera_angle, CLOCKWISE);
-	player->plan_right = rotate(player->plan_right, player->camera_angle + to_radians(90), CLOCKWISE);
+	player->plan_right = rotate(player->plan_right, player->camera_angle, CLOCKWISE);
+
+	player->fov_left = rotate(player->plan_front, to_radians(player->field_of_view / 2), ANTI_CLOCKWISE);
+	player->fov_right = rotate(player->plan_front, to_radians(player->field_of_view / 2), CLOCKWISE);
 }
 
 int		get_starting_point(t_game *data)
@@ -88,7 +92,29 @@ void	raycasting(__unused t_game *data)
 	
 }
 
-# define SCALE_FACTOR 10
+void	draw_plan(t_game *data, t_vec2 cp)
+{
+	draw_img_line(to_vec(cp), (t_vec){(int)cp.x + data->camera.plan_front.x * SQUARE_SIZE, (int)cp.y + data->camera.plan_front.y * SQUARE_SIZE},
+		data,
+		0xFF00FF
+	);
+	draw_img_line(to_vec(cp), (t_vec){(int)cp.x + data->camera.plan_right.x * SQUARE_SIZE, (int)cp.y + data->camera.plan_right.y * SQUARE_SIZE},
+		data,
+		0xFF0000
+	);
+}
+
+void	draw_fov(t_game *data, t_vec2 cp)
+{	
+	draw_img_line(to_vec(cp), (t_vec){(int)cp.x + data->camera.fov_left.x * SQUARE_SIZE, (int)cp.y + data->camera.fov_left.y * SQUARE_SIZE},
+		data,
+		0xFF00FF
+	);
+	draw_img_line(to_vec(cp), (t_vec){(int)cp.x + data->camera.fov_right.x * SQUARE_SIZE, (int)cp.y + data->camera.fov_right.y * SQUARE_SIZE},
+		data,
+		0xFF00FF
+	);
+}
 
 void	minimap(t_game *data)
 {
@@ -107,22 +133,15 @@ void	minimap(t_game *data)
 		{
 			i.x = vi.x * SQUARE_SIZE;
 			i.y = vi.y * SQUARE_SIZE;
-			draw_rect(i, s, &data->image, (data->map.map[vi.y][vi.x] == '1') ? 0x0000FF : 0xFFFFFF);
+			draw_rect(i, s, &data->image, (data->map.map[vi.y][vi.x] == '1') ? 0x000000 : 0xFFFFFF);
 			vi.x++;
 		}
 		vi.y++;
 	}
+	if (data->camera.debug)
+		draw_plan(data, cp);
+	draw_fov(data, cp);
 	draw_circle((t_vec){(int)cp.x, (int)cp.y}, 5, &data->image, 0xFF00FF);
-	draw_img_line(
-		(t_vec){(int)cp.x, (int)cp.y}, 
-		(t_vec){(int)cp.x + data->camera.plan_front.x * SQUARE_SIZE,
-		(int)cp.y + data->camera.plan_front.y * SQUARE_SIZE},
-		data,
-		0xFF00FF
-	);
-	draw_img_line(
-		(t_vec){(int)cp.x, (int)cp.y}, 
-		(t_vec){(int)cp.x + data->camera.plan_right.x * SQUARE_SIZE, (int)cp.y + data->camera.plan_right.y * SQUARE_SIZE}, data, 0xFF00FF);
 }
 
 void	render(t_game *data)

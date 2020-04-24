@@ -6,7 +6,7 @@
 /*   By: tony <tony@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 01:45:36 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/04/23 17:59:03 by tony             ###   ########.fr       */
+/*   Updated: 2020/04/24 15:26:44 by tony             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@
 #include "colors.h"
 #include "render.h"
 #define WINDOW_NAME "cub3d"
-#define WINDOW_HEIGHT 600
-#define WINDOW_WIDTH 800
+#define WINDOW_HEIGHT 980
+#define WINDOW_WIDTH 1220
+#define FIELD_OF_VIEW 66
 #define HEIGHT 10
 #define WIDTH 10
 
@@ -27,7 +28,7 @@ void	define_map(t_map *map)
 	static char *str_map[HEIGHT] = {
 		"1111111111",
 		"1000000001",
-		"1W00110001",
+		"1E00110001",
 		"1000000001",
 		"1111111111",
 		NULL
@@ -55,6 +56,8 @@ void	init_game(t_game *data)
 	data->map.ground_color = COLOR_FLOOR;
 	data->camera.pos.x = 5;
 	data->camera.pos.y = 3;
+	data->camera.field_of_view = FIELD_OF_VIEW;
+	data->camera.debug = FALSE;
 }
 
 int		main(int argc, char __unused **argv)

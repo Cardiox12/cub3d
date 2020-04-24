@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   event_hooks.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tony <tony@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 00:51:02 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/04/23 17:10:36 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/04/24 15:03:45 by tony             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@
 # define KEY_W 13
 # define KEY_A 0
 # define KEY_S 1
-# define KEY_D 2 
+# define KEY_D 2
+# define KEY_SHIFT 257
 
 # define KEY_PRESS_CODE 02
 # define KEY_RELEASE_CODE 03
@@ -37,7 +38,7 @@
 # define EVENT_MAX_SIZE 1024
 char	event_array[EVENT_MAX_SIZE];
 
-#define STEP (1.0f / 1000.0f)
+# define STEP (1.0f / 1000.0f)
 
 // int     keyboard_hook(int keycode, t_game *data);
 int		key_pressed(int keycode, t_game *data);

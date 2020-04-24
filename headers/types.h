@@ -6,7 +6,7 @@
 /*   By: tony <tony@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 14:33:13 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/04/23 18:27:58 by tony             ###   ########.fr       */
+/*   Updated: 2020/04/24 15:01:24 by tony             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ typedef struct	s_camera
 	int side;
 	int hit;
 	float camera_angle;
+	char debug;
 
 	// Position vector
 	t_vec2 pos;
@@ -95,12 +96,15 @@ typedef struct	s_camera
 	int dirY;
 
 	// Camera plan vector
-	t_vec2 plan;
 	t_vec2 plan_front;
 	t_vec2 plan_right;
-
 	// double planX;
 	// double planY;
+
+	// fov
+	float field_of_view;
+	t_vec2 fov_right;
+	t_vec2 fov_left;
 
 	// Deltas
 	double rayDirX;
@@ -164,6 +168,5 @@ typedef struct	s_rect
 # define FALSE 0
 # define CLOCKWISE 1
 # define ANTI_CLOCKWISE 0
-
 
 #endif
