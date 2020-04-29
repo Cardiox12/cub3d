@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tony <tony@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 20:48:48 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/04/24 15:27:25 by tony             ###   ########.fr       */
+/*   Updated: 2020/04/29 18:04:19 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,12 @@ int		is_cardinal_point(char c);
 void	set_heading(t_camera *player, char cardinal_p);
 void	get_side(t_game *data);
 int		get_starting_point(t_game *data);
+
+
+// Raycaster 2d
+void    Ray_update(t_ray *ray, t_vec2 pos);
+void    Ray_rotate(t_ray *ray, double theta, char clockwise);
+void    Rays_update(t_ray *rays, t_vec2 pos);
+void    Rays_rotate(t_ray *rays, double theta, char clockwise);
 
 #endif

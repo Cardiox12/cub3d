@@ -6,7 +6,7 @@
 /*   By: tony <tony@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 20:33:14 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/04/24 15:03:05 by tony             ###   ########.fr       */
+/*   Updated: 2020/04/27 21:57:35 by tony             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,12 @@ void	set_heading(t_camera *player, char cardinal_p)
 	else if (cardinal_p == S_EAST)
 		player->camera_angle = to_radians(ANGLE_east);
 		
+
 	player->plan_front = rotate(player->plan_front, player->camera_angle, CLOCKWISE);
 	player->plan_right = rotate(player->plan_right, player->camera_angle, CLOCKWISE);
 
-	player->fov_left = rotate(player->plan_front, to_radians(player->field_of_view / 2), ANTI_CLOCKWISE);
-	player->fov_right = rotate(player->plan_front, to_radians(player->field_of_view / 2), CLOCKWISE);
+	// player->fov_left = rotate(player->plan_front, to_radians(player->field_of_view / 2), ANTI_CLOCKWISE);
+	// player->fov_right = rotate(player->plan_front, to_radians(player->field_of_view / 2), CLOCKWISE);
 }
 
 int		get_starting_point(t_game *data)
@@ -104,16 +105,33 @@ void	draw_plan(t_game *data, t_vec2 cp)
 	);
 }
 
-void	draw_fov(t_game *data, t_vec2 cp)
-{	
-	draw_img_line(to_vec(cp), (t_vec){(int)cp.x + data->camera.fov_left.x * SQUARE_SIZE, (int)cp.y + data->camera.fov_left.y * SQUARE_SIZE},
-		data,
-		0xFF00FF
-	);
-	draw_img_line(to_vec(cp), (t_vec){(int)cp.x + data->camera.fov_right.x * SQUARE_SIZE, (int)cp.y + data->camera.fov_right.y * SQUARE_SIZE},
-		data,
-		0xFF00FF
-	);
+// void	draw_fov(t_game *data, t_vec2 cp)
+// {	
+// 	draw_img_line(to_vec(cp), (t_vec){(int)cp.x + data->camera.fov_left.x * SQUARE_SIZE, (int)cp.y + data->camera.fov_left.y * SQUARE_SIZE},
+// 		data,
+// 		0xFF00FF
+// 	);
+// 	draw_img_line(to_vec(cp), (t_vec){(int)cp.x + data->camera.fov_right.x * SQUARE_SIZE, (int)cp.y + data->camera.fov_right.y * SQUARE_SIZE},
+// 		data,
+// 		0xFF00FF
+// 	);
+// }
+
+void    minimap_raycaster(t_game *data, t_vec2 pos)
+{
+	t_vec proj;
+	t_ray	ray;
+	int index;
+
+    index = 0;
+    while (index < RAYS_NUMBER)
+    {   
+		ray = data->camera.rays[index];
+		ray.pos = pos;
+		proj = add_vec(to_vec(pos), to_vec(mult_vec2(ray.dir, 50)));
+		draw_img_line(to_vec(ray.pos), proj, data, 0xFF00FF);
+        index++;
+    }
 }
 
 void	minimap(t_game *data)
@@ -140,7 +158,8 @@ void	minimap(t_game *data)
 	}
 	if (data->camera.debug)
 		draw_plan(data, cp);
-	draw_fov(data, cp);
+	// draw_fov(data, cp);
+	minimap_raycaster(data, cp);
 	draw_circle((t_vec){(int)cp.x, (int)cp.y}, 5, &data->image, 0xFF00FF);
 }
 

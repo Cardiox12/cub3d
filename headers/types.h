@@ -6,12 +6,14 @@
 /*   By: tony <tony@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 14:33:13 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/04/24 15:01:24 by tony             ###   ########.fr       */
+/*   Updated: 2020/04/29 18:36:28 by tony             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_TYPES_H
 # define FT_TYPES_H
+
+# define RAYS_NUMBER 10
 
 typedef struct  s_mlx_infos
 {
@@ -33,6 +35,13 @@ typedef struct  s_vec
     int x;
     int y;
 }               t_vec;
+
+typedef struct	s_ray
+{
+	t_vec2 pos;
+	t_vec2 dir;
+	t_vec2 proj;
+}				t_ray;
 
 typedef struct  s_textures
 {
@@ -102,9 +111,8 @@ typedef struct	s_camera
 	// double planY;
 
 	// fov
+	t_ray rays[RAYS_NUMBER];
 	float field_of_view;
-	t_vec2 fov_right;
-	t_vec2 fov_left;
 
 	// Deltas
 	double rayDirX;

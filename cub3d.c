@@ -6,7 +6,7 @@
 /*   By: tony <tony@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 01:45:36 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/04/24 15:26:44 by tony             ###   ########.fr       */
+/*   Updated: 2020/04/29 18:36:10 by tony             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 #define WINDOW_NAME "cub3d"
 #define WINDOW_HEIGHT 980
 #define WINDOW_WIDTH 1220
-#define FIELD_OF_VIEW 66
+#define FIELD_OF_VIEW 90.0f
 #define HEIGHT 10
 #define WIDTH 10
 
@@ -39,6 +39,27 @@ void	define_map(t_map *map)
 	map->ground_color = COLOR_FLOOR;
 	map->map_xsize = 10;
 	map->map_ysize = 5;
+}
+
+void	init_rays(t_camera *cam)
+{
+	const float		fov_mid = cam->field_of_view / 2;
+	const float		step = FIELD_OF_VIEW / ((RAYS_NUMBER == 1) ? 2 : RAYS_NUMBER - 1);
+	const t_vec2	dir = (t_vec2){1, 0};
+	size_t			index;
+
+	index = 0; 
+	while (index < RAYS_NUMBER)
+	{
+		cam->rays[index].pos.x = 0;
+		cam->rays[index].pos.y = 0;
+		cam->rays[index].proj.x = 0;
+		cam->rays[index].proj.y = 0;
+		cam->rays[index].dir = dir;
+		Ray_rotate(&cam->rays[index], to_radians(step * index), CLOCKWISE);
+		index++;
+	}
+	Rays_rotate(cam->rays, to_radians(fov_mid), ANTI_CLOCKWISE);
 }
 
 void	init_game(t_game *data)
@@ -81,6 +102,7 @@ int		main(int argc, char __unused **argv)
 		data.image.line_count = data.map.resolution.y;
 
 		get_starting_point(&data);
+		init_rays(&data.camera);
 
 		mlx_hook(data.infos.win_ptr, KEY_PRESS_CODE, KEY_PRESS_MASK, key_pressed, &data);
 		mlx_hook(data.infos.win_ptr, KEY_RELEASE_CODE, KEY_RELEASE_MASK, key_released, &data);
