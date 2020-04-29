@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   render.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tony <tony@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 20:48:48 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/04/29 18:04:19 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/04/29 20:45:24 by tony             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#   ifndef FT_RENDER_H
-#   define FT_RENDER_H
+#ifndef FT_RENDER_H
+# define FT_RENDER_H
 
 #include <math.h>
 #include <stdlib.h>
@@ -50,9 +50,20 @@ int		get_starting_point(t_game *data);
 
 
 // Raycaster 2d
+void    Ray_extend(t_ray *ray);
 void    Ray_update(t_ray *ray, t_vec2 pos);
 void    Ray_rotate(t_ray *ray, double theta, char clockwise);
 void    Rays_update(t_ray *rays, t_vec2 pos);
 void    Rays_rotate(t_ray *rays, double theta, char clockwise);
+
+// Movements
+void	player_move_down(t_game *data);
+void	player_move_up(t_game *data);
+void	player_move_left(t_game *data);
+void	player_move_right(t_game *data);
+void	player_rotate(t_game *data);
+
+// Collision
+int		is_out_of_bound(t_vec2 pos, t_game *data);
 
 #endif

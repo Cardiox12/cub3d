@@ -9,6 +9,12 @@
 		"game.h": "c",
 		"parser.h": "c",
 		"types.h": "c",
-		"util.h": "c"
+		"util.h": "c",
+		"__split_buffer": "c",
+		"array": "c",
+		"string": "c",
+		"string_view": "c",
+		"vector": "c",
+		"render.h": "c"
 	}
 }

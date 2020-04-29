@@ -6,7 +6,7 @@
 /*   By: tony <tony@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 20:33:14 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/04/27 21:57:35 by tony             ###   ########.fr       */
+/*   Updated: 2020/04/29 19:30:04 by tony             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,9 +119,9 @@ void	draw_plan(t_game *data, t_vec2 cp)
 
 void    minimap_raycaster(t_game *data, t_vec2 pos)
 {
-	t_vec proj;
+	t_vec	proj;
 	t_ray	ray;
-	int index;
+	int		index;
 
     index = 0;
     while (index < RAYS_NUMBER)

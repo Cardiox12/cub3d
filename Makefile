@@ -40,6 +40,7 @@ SRCS		+= $(GAME_DIR)/render.c
 SRCS		+= $(GAME_DIR)/loop.c
 SRCS		+= $(GAME_DIR)/image.c
 SRCS		+= $(GAME_DIR)/rays.c
+SRCS		+= $(GAME_DIR)/movements.c
 SRCS		+= $(HOOK_DIR)/keyboard_hooks.c
 HEADERS		= headers
 LFT_HEADERS	= $(LFT_DIR)/headers

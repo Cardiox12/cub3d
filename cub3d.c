@@ -6,7 +6,7 @@
 /*   By: tony <tony@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 01:45:36 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/04/29 18:36:10 by tony             ###   ########.fr       */
+/*   Updated: 2020/04/29 20:37:38 by tony             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,25 +26,27 @@
 void	define_map(t_map *map)
 {
 	static char *str_map[HEIGHT] = {
-		"1111111111",
-		"1000000001",
-		"1E00110001",
-		"1000000001",
-		"1111111111",
+		"11111111111111",
+		"10000100000001",
+		"10E01100000001",
+		"10000000000001",
+		"10000000000001",
+		"10000000000001",
+		"11111111111111",
 		NULL
 	};
 
 	map->map = str_map;
 	map->ceil_color = COLOR_CEIL;
 	map->ground_color = COLOR_FLOOR;
-	map->map_xsize = 10;
-	map->map_ysize = 5;
+	map->map_xsize = 14;
+	map->map_ysize = 7;
 }
 
 void	init_rays(t_camera *cam)
 {
 	const float		fov_mid = cam->field_of_view / 2;
-	const float		step = FIELD_OF_VIEW / ((RAYS_NUMBER == 1) ? 2 : RAYS_NUMBER - 1);
+	const float		step = FIELD_OF_VIEW / ((RAYS_NUMBER == 1) ? 1 : RAYS_NUMBER - 1);
 	const t_vec2	dir = (t_vec2){1, 0};
 	size_t			index;
 
