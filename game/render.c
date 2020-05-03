@@ -6,7 +6,7 @@
 /*   By: tony <tony@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 20:33:14 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/04/29 19:30:04 by tony             ###   ########.fr       */
+/*   Updated: 2020/05/03 03:45:51 by tony             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,6 @@ void	set_heading(t_camera *player, char cardinal_p)
 
 	player->plan_front = rotate(player->plan_front, player->camera_angle, CLOCKWISE);
 	player->plan_right = rotate(player->plan_right, player->camera_angle, CLOCKWISE);
-
-	// player->fov_left = rotate(player->plan_front, to_radians(player->field_of_view / 2), ANTI_CLOCKWISE);
-	// player->fov_right = rotate(player->plan_front, to_radians(player->field_of_view / 2), CLOCKWISE);
 }
 
 int		get_starting_point(t_game *data)
@@ -105,33 +102,28 @@ void	draw_plan(t_game *data, t_vec2 cp)
 	);
 }
 
-// void	draw_fov(t_game *data, t_vec2 cp)
-// {	
-// 	draw_img_line(to_vec(cp), (t_vec){(int)cp.x + data->camera.fov_left.x * SQUARE_SIZE, (int)cp.y + data->camera.fov_left.y * SQUARE_SIZE},
-// 		data,
-// 		0xFF00FF
-// 	);
-// 	draw_img_line(to_vec(cp), (t_vec){(int)cp.x + data->camera.fov_right.x * SQUARE_SIZE, (int)cp.y + data->camera.fov_right.y * SQUARE_SIZE},
-// 		data,
-// 		0xFF00FF
-// 	);
-// }
+# define TO_DEG(angle) (angle * (180 / M_PI))
 
-void    minimap_raycaster(t_game *data, t_vec2 pos)
+void    minimap_raycaster(t_game *data, __unused t_vec2 pos)
 {
-	t_vec	proj;
-	t_ray	ray;
-	int		index;
+	t_ray	curr_ray;
+	size_t	index;
+	float	ref_1;
+	float	ref_2;
 
-    index = 0;
-    while (index < RAYS_NUMBER)
-    {   
-		ray = data->camera.rays[index];
-		ray.pos = pos;
-		proj = add_vec(to_vec(pos), to_vec(mult_vec2(ray.dir, 50)));
-		draw_img_line(to_vec(ray.pos), proj, data, 0xFF00FF);
-        index++;
-    }
+	index = 0;
+	while (index < RAYS_NUMBER)
+	{
+		curr_ray = data->camera.rays[index];
+		ref_1 = TO_DEG(get_angle2(curr_ray.dir, (t_vec2){1, 0}));
+		ref_2 = TO_DEG(get_angle2(curr_ray.dir, (t_vec2){0, -1}));
+
+		if (ref_1 >= 0 && ref_1 <= 180 && ref_2 >= 0 && ref_2 <= 90)
+			printf("Facing up\n");
+		else
+			printf("Facing down\n");
+		index++;
+	}
 }
 
 void	minimap(t_game *data)
@@ -158,7 +150,6 @@ void	minimap(t_game *data)
 	}
 	if (data->camera.debug)
 		draw_plan(data, cp);
-	// draw_fov(data, cp);
 	minimap_raycaster(data, cp);
 	draw_circle((t_vec){(int)cp.x, (int)cp.y}, 5, &data->image, 0xFF00FF);
 }

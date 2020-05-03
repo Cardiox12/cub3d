@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tony <tony@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 01:45:36 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/04/29 20:37:38 by tony             ###   ########.fr       */
+/*   Updated: 2020/05/02 13:58:04 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 #include "colors.h"
 #include "render.h"
 #define WINDOW_NAME "cub3d"
-#define WINDOW_HEIGHT 980
-#define WINDOW_WIDTH 1220
+#define WINDOW_HEIGHT 400
+#define WINDOW_WIDTH 600
 #define FIELD_OF_VIEW 90.0f
 #define HEIGHT 10
 #define WIDTH 10
@@ -55,13 +55,14 @@ void	init_rays(t_camera *cam)
 	{
 		cam->rays[index].pos.x = 0;
 		cam->rays[index].pos.y = 0;
-		cam->rays[index].proj.x = 0;
-		cam->rays[index].proj.y = 0;
+		cam->rays[index].particle.x = 0;
+		cam->rays[index].particle.y = 0;
 		cam->rays[index].dir = dir;
 		Ray_rotate(&cam->rays[index], to_radians(step * index), CLOCKWISE);
 		index++;
 	}
-	Rays_rotate(cam->rays, to_radians(fov_mid), ANTI_CLOCKWISE);
+	if (RAYS_NUMBER != 1)
+		Rays_rotate(cam->rays, to_radians(fov_mid), ANTI_CLOCKWISE);
 }
 
 void	init_game(t_game *data)
