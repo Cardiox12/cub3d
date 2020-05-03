@@ -6,7 +6,7 @@
 /*   By: tony <tony@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 14:33:13 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/02 22:50:17 by tony             ###   ########.fr       */
+/*   Updated: 2020/05/03 16:13:51 by tony             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 #include <stddef.h>
 
-# define RAYS_NUMBER 1
+# define RAYS_NUMBER 10
 
 typedef struct  s_mlx_infos
 {
@@ -40,9 +40,10 @@ typedef struct  s_vec
 
 typedef struct	s_ray
 {
-	t_vec2 pos;
-	t_vec2 dir;
-	t_vec2 particle;
+	t_vec2 	pos;
+	t_vec2 	dir;
+	t_vec2 	particle;
+	float	angle;
 }				t_ray;
 
 typedef struct  s_textures

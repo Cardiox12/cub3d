@@ -6,7 +6,7 @@
 /*   By: tony <tony@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/27 20:19:19 by tony              #+#    #+#             */
-/*   Updated: 2020/05/01 20:30:34 by tony             ###   ########.fr       */
+/*   Updated: 2020/05/03 15:29:41 by tony             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void    Ray_update(t_ray *ray, t_vec2 pos)
 
 void    Ray_rotate(t_ray *ray, double theta, char clockwise)
 {
+    ray->angle += (clockwise) ? theta : -theta;
     ray->dir = rotate(ray->dir, theta, clockwise);
 }
 

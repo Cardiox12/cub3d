@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tony <tony@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 20:33:14 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/03 03:45:51 by tony             ###   ########.fr       */
+/*   Updated: 2020/05/03 21:00:31 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,26 +102,18 @@ void	draw_plan(t_game *data, t_vec2 cp)
 	);
 }
 
-# define TO_DEG(angle) (angle * (180 / M_PI))
-
-void    minimap_raycaster(t_game *data, __unused t_vec2 pos)
+void    minimap_raycaster(t_game *data, t_vec2 pos)
 {
-	t_ray	curr_ray;
+	t_vec2	ray;
 	size_t	index;
-	float	ref_1;
-	float	ref_2;
 
 	index = 0;
 	while (index < RAYS_NUMBER)
 	{
-		curr_ray = data->camera.rays[index];
-		ref_1 = TO_DEG(get_angle2(curr_ray.dir, (t_vec2){1, 0}));
-		ref_2 = TO_DEG(get_angle2(curr_ray.dir, (t_vec2){0, -1}));
-
-		if (ref_1 >= 0 && ref_1 <= 180 && ref_2 >= 0 && ref_2 <= 90)
-			printf("Facing up\n");
-		else
-			printf("Facing down\n");
+		ray = data->camera.rays[index].dir;
+		ray = mult_vec2(ray, SQUARE_SIZE);
+		ray = add_vec2(ray, pos);
+		draw_img_line(to_vec(pos), to_vec(ray), data, 0xFF00FF);
 		index++;
 	}
 }

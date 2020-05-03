@@ -6,7 +6,7 @@
 /*   By: tony <tony@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 03:18:15 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/03 03:15:04 by tony             ###   ########.fr       */
+/*   Updated: 2020/05/03 15:40:12 by tony             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ float	dot_vec2(t_vec2 a, t_vec2 b);
 float	get_angle(t_vec a, t_vec b);
 float	get_angle2(t_vec2 a, t_vec2 b);
 
-double	to_radians(double degrees);
+float	to_radians(float degrees);
+float	to_degrees(float radians);
 
 #endif

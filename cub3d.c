@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tony <tony@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 01:45:36 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/02 13:58:04 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/03 15:24:48 by tony             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void	init_rays(t_camera *cam)
 		cam->rays[index].particle.x = 0;
 		cam->rays[index].particle.y = 0;
 		cam->rays[index].dir = dir;
+		cam->rays[index].angle = 0;
 		Ray_rotate(&cam->rays[index], to_radians(step * index), CLOCKWISE);
 		index++;
 	}
