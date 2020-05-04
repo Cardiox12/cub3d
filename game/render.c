@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 20:33:14 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/03 21:00:31 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/04 16:33:15 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,7 @@ void	minimap(t_game *data)
 			vi.x++;
 		}
 		vi.y++;
-	}
+	}	
 	if (data->camera.debug)
 		draw_plan(data, cp);
 	minimap_raycaster(data, cp);
