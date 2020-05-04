@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   types.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tony <tony@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 14:33:13 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/03 16:13:51 by tony             ###   ########.fr       */
+/*   Updated: 2020/05/04 22:45:09 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ typedef struct	s_camera
 	// Camera plan vector
 	t_vec2 plan_front;
 	t_vec2 plan_right;
+	t_vec2 plane;
 	// double planX;
 	// double planY;
 
@@ -118,8 +119,9 @@ typedef struct	s_camera
 	float field_of_view;
 
 	// Deltas
-	double rayDirX;
-	double rayDirY;
+	t_vec2 ray_dir;
+	// double rayDirX;
+	// double rayDirY;
 
 	// Camera
 	double cameraX;
@@ -129,24 +131,34 @@ typedef struct	s_camera
 	double mapY;
 
 	// Side distance
-	double sideDistX;
-	double sideDistY;
+	t_vec2	side_dist;
+	// double sideDistX;
+	// double sideDistY;
+
+	// Distances
+	double perp_wall_dist;
 
 	// Deltas distance
-	double deltaDistX;
-	double deltaDistY;
+	t_vec2 delta_dist;
+	// double deltaDistX;
+	// double deltaDistY;
 
 	// Steps
-	double stepX;
-	double stepY;
+	t_vec2 step;
+	// double stepX;
+	// double stepY;
 
 	// Distance from the wall
 	double wallDist;
 
+
+	// Map post
+	t_vec map_pos;
+
 	// Draw wall variables
-	int drawStart;
-	int drawEnd;
-	int lineHeight;
+	int draw_start;
+	int draw_end;
+	int line_height;
 }				t_camera;
 
 typedef struct	s_game

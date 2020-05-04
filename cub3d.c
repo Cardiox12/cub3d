@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tony <tony@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 01:45:36 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/03 15:24:48 by tony             ###   ########.fr       */
+/*   Updated: 2020/05/04 23:09:33 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 #include "colors.h"
 #include "render.h"
 #define WINDOW_NAME "cub3d"
-#define WINDOW_HEIGHT 400
-#define WINDOW_WIDTH 600
+#define WINDOW_HEIGHT 600
+#define WINDOW_WIDTH 1000
 #define FIELD_OF_VIEW 90.0f
 #define HEIGHT 10
 #define WIDTH 10
@@ -93,7 +93,7 @@ int		main(int argc, char __unused **argv)
 	{
 		init_game(&data);
 		define_map(&data.map);
-
+		
 		data.image.img_ref = mlx_new_image(
 			data.infos.mlx_ptr,
 			data.map.resolution.x,
@@ -107,7 +107,7 @@ int		main(int argc, char __unused **argv)
 
 		get_starting_point(&data);
 		init_rays(&data.camera);
-
+		
 		mlx_hook(data.infos.win_ptr, KEY_PRESS_CODE, KEY_PRESS_MASK, key_pressed, &data);
 		mlx_hook(data.infos.win_ptr, KEY_RELEASE_CODE, KEY_RELEASE_MASK, key_released, &data);
 

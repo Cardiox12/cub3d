@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 20:33:14 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/04 16:33:15 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/04 23:11:55 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,91 +63,97 @@ int		get_starting_point(t_game *data)
 
 void	get_side(t_game *data)
 {
-	if (data->camera.rayDirX < 0)
+	if (data->camera.ray_dir.x < 0)
 	{
-		data->camera.stepX = -1;
-		data->camera.sideDistX = (data->camera.pos.x - data->camera.mapX);
+		data->camera.step.x = -1;
+		data->camera.side_dist.x = (data->camera.pos.x - data->camera.map_pos.x) * data->camera.delta_dist.x;
 	}
 	else
 	{
-		data->camera.stepX = 1;
-		data->camera.sideDistX = (data->camera.mapX + 1.0 - data->camera.pos.x) * data->camera.deltaDistX;
+		data->camera.step.x = 1;
+		data->camera.side_dist.x = (data->camera.map_pos.x + 1.0 - data->camera.pos.x) * data->camera.delta_dist.x;
 	}
-	if (data->camera.rayDirY < 0)
+	if (data->camera.ray_dir.y < 0)
 	{
-		data->camera.stepY = -1;
-		data->camera.sideDistY = (data->camera.pos.y - data->camera.mapY) * data->camera.deltaDistY;
+		data->camera.step.y = -1;
+		data->camera.side_dist.y = (data->camera.pos.y - data->camera.map_pos.y) * data->camera.delta_dist.y;
 	}
 	else
 	{
-		data->camera.stepY = 1;
-		data->camera.sideDistY = (data->camera.mapY + 1.0 - data->camera.pos.y) * data->camera.deltaDistX;
+		data->camera.step.y = 1;
+		data->camera.side_dist.y= (data->camera.map_pos.y + 1.0 - data->camera.pos.y) * data->camera.delta_dist.y;
 	}
 }
 
-void	raycasting(__unused t_game *data)
+void	raycasting(t_game *data)
 {
-	
-}
+	uint32_t	color;
+	t_vec		draw;
+	int			x;
 
-void	draw_plan(t_game *data, t_vec2 cp)
-{
-	draw_img_line(to_vec(cp), (t_vec){(int)cp.x + data->camera.plan_front.x * SQUARE_SIZE, (int)cp.y + data->camera.plan_front.y * SQUARE_SIZE},
-		data,
-		0xFF00FF
-	);
-	draw_img_line(to_vec(cp), (t_vec){(int)cp.x + data->camera.plan_right.x * SQUARE_SIZE, (int)cp.y + data->camera.plan_right.y * SQUARE_SIZE},
-		data,
-		0xFF0000
-	);
-}
-
-void    minimap_raycaster(t_game *data, t_vec2 pos)
-{
-	t_vec2	ray;
-	size_t	index;
-
-	index = 0;
-	while (index < RAYS_NUMBER)
+	x = 0;
+	color = 0x00FF00;
+	while (x < data->map.resolution.x)
 	{
-		ray = data->camera.rays[index].dir;
-		ray = mult_vec2(ray, SQUARE_SIZE);
-		ray = add_vec2(ray, pos);
-		draw_img_line(to_vec(pos), to_vec(ray), data, 0xFF00FF);
-		index++;
-	}
-}
+		//calculate ray position and direction
+		data->camera.cameraX = 2 * x / (double)data->map.resolution.x - 1;
+		data->camera.ray_dir.x = data->camera.plan_front.x * data->camera.cameraX;
+		data->camera.ray_dir.y = data->camera.plan_front.y * data->camera.cameraX;
 
-void	minimap(t_game *data)
-{
-	t_vec2	cp;
-	t_vec	vi;
-	t_vec	i;
-	t_vec	s;
+		//which box of the map we're in
+		data->camera.map_pos = to_vec(data->camera.pos);
+		
+		data->camera.delta_dist.x = fabs(1 / data->camera.ray_dir.x);
+		data->camera.delta_dist.y = fabs(1 / data->camera.ray_dir.y);
 
-	vi.y = 0;
-	s = (typeof(s)){SQUARE_SIZE, SQUARE_SIZE};
-	cp = (typeof(cp)){data->camera.pos.x * SQUARE_SIZE, data->camera.pos.y * SQUARE_SIZE};
-	while (vi.y < data->map.map_ysize)
-	{
-		vi.x = 0;
-		while (vi.x < data->map.map_xsize)
+		//calculate step and initial sideDist
+		get_side(data);
+		while (TRUE)
 		{
-			i.x = vi.x * SQUARE_SIZE;
-			i.y = vi.y * SQUARE_SIZE;
-			draw_rect(i, s, &data->image, (data->map.map[vi.y][vi.x] == '1') ? 0x000000 : 0xFFFFFF);
-			vi.x++;
+			if(data->camera.side_dist.x < data->camera.side_dist.y)
+			{
+				data->camera.side_dist.x += data->camera.delta_dist.x;
+				data->camera.map_pos.x += data->camera.step.x;
+				data->camera.side = 0;
+			}
+			else
+			{
+				data->camera.side_dist.y += data->camera.delta_dist.y;
+				data->camera.map_pos.y += data->camera.step.y;
+				data->camera.side = 1;
+			}
+			if (data->map.map[data->camera.map_pos.y][data->camera.map_pos.x] == WALL)
+				break;
 		}
-		vi.y++;
-	}	
-	if (data->camera.debug)
-		draw_plan(data, cp);
-	minimap_raycaster(data, cp);
-	draw_circle((t_vec){(int)cp.x, (int)cp.y}, 5, &data->image, 0xFF00FF);
+
+		//Calculate distance projected on camera direction (Euclidean distance will give fisheye effect!)
+		if (data->camera.side == 0)
+			data->camera.perp_wall_dist = (data->camera.map_pos.x - data->camera.pos.x + (1 - data->camera.step.x) / 2) / data->camera.ray_dir.x;
+		else
+			data->camera.perp_wall_dist = (data->camera.map_pos.y - data->camera.pos.y + (1 - data->camera.step.y) / 2) / data->camera.ray_dir.y;
+
+		data->camera.line_height = (data->map.resolution.y / data->camera.perp_wall_dist);
+		
+		//calculate lowest and highest pixel to fill in current stripe
+		data->camera.draw_start = -data->camera.line_height / 2 + data->map.resolution.y / 2;
+		if (data->camera.draw_start < 0)
+			data->camera.draw_start = 0;
+		data->camera.draw_end = data->camera.line_height / 2 + data->map.resolution.y / 2;
+		if (data->camera.draw_end >= data->map.resolution.y)
+			data->camera.draw_end = data->map.resolution.y - 1;
+
+		if (data->camera.side == 1)
+			color = color / 2;
+
+		draw = (typeof(draw)){data->camera.draw_start, data->camera.draw_end};
+		draw_img_vert_line(x, draw, data, color);
+		x++;
+	}
 }
 
 void	render(t_game *data)
 {
 	draw_ceil_and_floor(data);
+	raycasting(data);
 	minimap(data);
 }

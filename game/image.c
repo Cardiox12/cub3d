@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   image.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tony <tony@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 12:45:46 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/04/24 19:46:40 by tony             ###   ########.fr       */
+/*   Updated: 2020/05/04 22:59:36 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,10 @@ void			draw_img_line(t_vec a, t_vec b, t_game *data, uint32_t color)
 	}
 }
 
-void			draw_img_vert_line(int x, int height, t_game *data, uint32_t color)
+void			draw_img_vert_line(int x, t_vec draw, t_game *data, uint32_t color)
 {
-	const t_vec a = (t_vec){x, SLICE_WIDTH};
-	const t_vec b = (t_vec){x, height};
+	const t_vec a = (t_vec){x, draw.x};
+	const t_vec b = (t_vec){x, draw.y};
 	
 	draw_img_line(a, b, data, color);
 }

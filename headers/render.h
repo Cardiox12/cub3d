@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tony <tony@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 20:48:48 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/04/29 20:45:24 by tony             ###   ########.fr       */
+/*   Updated: 2020/05/04 23:10:27 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # define ANGLE_east 90
 # define ANGLE_west 270
 
-# define SQUARE_SIZE 40
+# define SQUARE_SIZE 20
 # define WALL '1'
 # define MAX_ANGLE 360
 # define TRUE 1
@@ -37,7 +37,7 @@
 void	render(t_game *data);
 
 void	draw_rect(t_vec pos, t_vec size, t_image *img, uint32_t color);
-void	draw_img_vert_line(int x, int height, t_game *data, uint32_t color);
+void	draw_img_vert_line(int x, t_vec draw, t_game *data, uint32_t color);
 void	reset_img(t_game *data);
 void	draw_ceil_and_floor(t_game *data);
 void	draw_circle(t_vec pos, int radius, t_image *img, uint32_t color);
@@ -65,5 +65,10 @@ void	player_rotate(t_game *data);
 
 // Collision
 int		is_out_of_bound(t_vec2 pos, t_game *data);
+
+// Minimap
+void	draw_plan(t_game *data, t_vec2 cp);
+void    minimap_raycaster(t_game *data, t_vec2 pos);
+void	minimap(t_game *data);
 
 #endif
