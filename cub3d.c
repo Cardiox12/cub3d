@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tony <tony@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 01:45:36 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/04 23:09:33 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/07 07:52:10 by tony             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ void	define_map(t_map *map)
 {
 	static char *str_map[HEIGHT] = {
 		"11111111111111",
-		"10000100000001",
-		"10E01100000001",
-		"10000000000001",
-		"10000000000001",
-		"10000000000001",
+		"10000001000001",
+		"10001001000001",
+		"10E00000010001",
+		"10001001000001",
+		"10000001000001",
 		"11111111111111",
 		NULL
 	};
@@ -83,6 +83,8 @@ void	init_game(t_game *data)
 	data->camera.pos.y = 3;
 	data->camera.field_of_view = FIELD_OF_VIEW;
 	data->camera.debug = FALSE;
+	data->camera.plane.x = 0;
+	data->camera.plane.y = 0.66f;
 }
 
 int		main(int argc, char __unused **argv)

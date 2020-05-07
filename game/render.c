@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tony <tony@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 20:33:14 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/04 23:11:55 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/07 07:51:08 by tony             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,28 +81,32 @@ void	get_side(t_game *data)
 	else
 	{
 		data->camera.step.y = 1;
-		data->camera.side_dist.y= (data->camera.map_pos.y + 1.0 - data->camera.pos.y) * data->camera.delta_dist.y;
+		data->camera.side_dist.y = (data->camera.map_pos.y + 1.0 - data->camera.pos.y) * data->camera.delta_dist.y;
 	}
 }
 
 void	raycasting(t_game *data)
 {
+	const int	h = data->map.resolution.y;
 	uint32_t	color;
 	t_vec		draw;
 	int			x;
 
 	x = 0;
-	color = 0x00FF00;
+	color = 0;
 	while (x < data->map.resolution.x)
 	{
 		//calculate ray position and direction
 		data->camera.cameraX = 2 * x / (double)data->map.resolution.x - 1;
-		data->camera.ray_dir.x = data->camera.plan_front.x * data->camera.cameraX;
-		data->camera.ray_dir.y = data->camera.plan_front.y * data->camera.cameraX;
+		data->camera.ray_dir.x = data->camera.plan_front.x + data->camera.plane.x * data->camera.cameraX;
+		data->camera.ray_dir.y = data->camera.plan_front.y + data->camera.plane.y * data->camera.cameraX;
 
 		//which box of the map we're in
 		data->camera.map_pos = to_vec(data->camera.pos);
 		
+		data->camera.ray_dir.x = (data->camera.ray_dir.x == 0) ? 1 : data->camera.ray_dir.x;
+		data->camera.ray_dir.y = (data->camera.ray_dir.y == 0) ? 1 : data->camera.ray_dir.y;
+
 		data->camera.delta_dist.x = fabs(1 / data->camera.ray_dir.x);
 		data->camera.delta_dist.y = fabs(1 / data->camera.ray_dir.y);
 
@@ -132,20 +136,17 @@ void	raycasting(t_game *data)
 		else
 			data->camera.perp_wall_dist = (data->camera.map_pos.y - data->camera.pos.y + (1 - data->camera.step.y) / 2) / data->camera.ray_dir.y;
 
-		data->camera.line_height = (data->map.resolution.y / data->camera.perp_wall_dist);
-		
+		data->camera.line_height = (int)(h / data->camera.perp_wall_dist);
+
 		//calculate lowest and highest pixel to fill in current stripe
-		data->camera.draw_start = -data->camera.line_height / 2 + data->map.resolution.y / 2;
+		data->camera.draw_start = -data->camera.line_height / 2 + h / 2;
 		if (data->camera.draw_start < 0)
 			data->camera.draw_start = 0;
-		data->camera.draw_end = data->camera.line_height / 2 + data->map.resolution.y / 2;
-		if (data->camera.draw_end >= data->map.resolution.y)
-			data->camera.draw_end = data->map.resolution.y - 1;
+		data->camera.draw_end = data->camera.line_height / 2 + h / 2;
+		if (data->camera.draw_end >= h)
+			data->camera.draw_end = h - 1;
 
-		if (data->camera.side == 1)
-			color = color / 2;
-
-		draw = (typeof(draw)){data->camera.draw_start, data->camera.draw_end};
+		draw = (typeof(draw)){data->camera.draw_end, data->camera.draw_start};
 		draw_img_vert_line(x, draw, data, color);
 		x++;
 	}
