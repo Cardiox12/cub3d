@@ -6,7 +6,7 @@
 /*   By: tony <tony@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 20:33:14 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/07 07:51:08 by tony             ###   ########.fr       */
+/*   Updated: 2020/05/09 18:46:48 by tony             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,6 +145,8 @@ void	raycasting(t_game *data)
 		data->camera.draw_end = data->camera.line_height / 2 + h / 2;
 		if (data->camera.draw_end >= h)
 			data->camera.draw_end = h - 1;
+
+		// printf("Texture : %i\n", data->map.map[data->camera.map_pos.y][data->camera.map_pos.x] - '0');
 
 		draw = (typeof(draw)){data->camera.draw_end, data->camera.draw_start};
 		draw_img_vert_line(x, draw, data, color);

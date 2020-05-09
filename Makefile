@@ -3,21 +3,21 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+         #
+#    By: tony <tony@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/25 00:45:19 by bbellavi          #+#    #+#              #
-#    Updated: 2020/02/24 17:36:17 by bbellavi         ###   ########.fr        #
+#    Updated: 2020/05/09 18:41:14 by tony             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 COLOR_NC			= \e[0m
 COLOR_LIGHT_GREEN	= \e[1;32m
 CC			= gcc
-CFLAGS		= -Wall -Wextra -Werror -framework OpenGL -framework AppKit
+CFLAGS		= -Wall -Wextra -Werror # -framework OpenGL -framework AppKit
 MAKE		= make -C
 MLX_DIR		= ./minilibx
 NAME		= cub3d
-MLX_NAME	= libmlx.a
+MLX_NAME	= libmlx.dylib
 LFT_NAME	= libftmini.a
 
 GRAPH_DIR	= graphics_utils
@@ -30,8 +30,7 @@ SRCS		+= $(GRAPH_DIR)/ft_encode_rgb.c
 SRCS		+= $(GRAPH_DIR)/ft_line.c
 SRCS		+= $(GRAPH_DIR)/ft_rect.c
 SRCS		+= $(GRAPH_DIR)/ft_vert_line.c
-SRCS		+= $(UTILS_DIR)/init_textures.c
-SRCS		+= $(UTILS_DIR)/parse_map.c
+# SRCS		+= $(UTILS_DIR)/parse_map.c
 SRCS		+= $(UTILS_DIR)/vectors.c
 SRCS		+= $(UTILS_DIR)/rotate.c
 SRCS		+= $(UTILS_DIR)/angle.c
@@ -50,8 +49,8 @@ all: $(NAME)
 $(NAME): $(SRCS)
 	@$(MAKE) $(MLX_DIR)
 	@$(MAKE) $(LFT_DIR)
-	@cp $(MLX_DIR)/libmlx.a .
-	@cp $(LFT_DIR)/libftmini.a .
+	@cp $(MLX_DIR)/$(MLX_NAME) .
+	@cp $(LFT_DIR)/$(LFT_NAME) .
 	clear
 	@printf "$(COLOR_LIGHT_GREEN)COMPILING CUB3D$(COLOR_NC)\n"
 	@$(CC) -g -o $(NAME) $(SRCS) $(LFT_NAME) $(MLX_NAME) $(CFLAGS) -I $(MLX_DIR) -I $(HEADERS) -I $(LFT_HEADERS)

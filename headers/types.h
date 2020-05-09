@@ -6,7 +6,7 @@
 /*   By: tony <tony@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 14:33:13 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/07 07:49:44 by tony             ###   ########.fr       */
+/*   Updated: 2020/05/09 03:37:57 by tony             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <stddef.h>
 
 # define RAYS_NUMBER 10
+# define TEX_NUMBERS 5
 
 typedef struct  s_mlx_infos
 {
@@ -46,20 +47,28 @@ typedef struct	s_ray
 	float	angle;
 }				t_ray;
 
+typedef struct	s_texture
+{
+	void	*img;
+	char	*path;
+	int		width;
+	int		height;
+}				t_texture;
+
 typedef struct  s_textures
 {
-    char *north;
-    char *south;
-    char *west;
-    char *east;
-    char *sprite;
+    t_texture	north;
+    t_texture	south;
+    t_texture	west;
+    t_texture	east;
+    t_texture	sprite;
 }               t_textures;
 
 typedef struct  s_map
 {
     char        **map;
     t_vec       resolution;
-    t_textures  *textures;
+    t_texture	textures[TEX_NUMBERS];
     int         ground_color;
     int         ceil_color;
     int         map_xsize;
@@ -100,8 +109,6 @@ typedef struct	s_camera
 
 	// Position vector
 	t_vec2 pos;
-	// float posX;
-	// float posY;
 
 	// Direction vector
 
@@ -109,8 +116,6 @@ typedef struct	s_camera
 	t_vec2 plan_front;
 	t_vec2 plan_right;
 	t_vec2 plane;
-	// double planX;
-	// double planY;
 
 	// fov
 	t_ray rays[RAYS_NUMBER];
@@ -118,8 +123,6 @@ typedef struct	s_camera
 
 	// Deltas
 	t_vec2 ray_dir;
-	// double rayDirX;
-	// double rayDirY;
 
 	// Camera
 	double cameraX;
@@ -130,21 +133,15 @@ typedef struct	s_camera
 
 	// Side distance
 	t_vec2	side_dist;
-	// double sideDistX;
-	// double sideDistY;
 
 	// Distances
 	double perp_wall_dist;
 
 	// Deltas distance
 	t_vec2 delta_dist;
-	// double deltaDistX;
-	// double deltaDistY;
 
 	// Steps
 	t_vec2 step;
-	// double stepX;
-	// double stepY;
 
 	// Distance from the wall
 	double wallDist;
@@ -189,5 +186,13 @@ typedef struct	s_rect
 # define FALSE 0
 # define CLOCKWISE 1
 # define ANTI_CLOCKWISE 0
+
+enum	e_texture_index
+{
+	TEX_NORTH,
+	TEX_SOUTH,
+	TEX_WEST,
+	TEX_EAST
+};
 
 #endif
