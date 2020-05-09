@@ -6,7 +6,7 @@
 /*   By: tony <tony@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 14:33:13 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/09 03:37:57 by tony             ###   ########.fr       */
+/*   Updated: 2020/05/09 23:50:45 by tony             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,19 @@ typedef struct	s_ray
 	float	angle;
 }				t_ray;
 
+typedef struct	s_image
+{
+	void	*img_ref;
+	int		*img_data_addr;
+	int		bits_per_pixel;
+	int		line_size;
+	int		endian;
+	int		line_count;
+}				t_image;
+
 typedef struct	s_texture
 {
-	void	*img;
+	t_image image;
 	char	*path;
 	int		width;
 	int		height;
@@ -89,23 +99,19 @@ typedef enum    e_cardinals_degree
     D_WEST = 180,
 }               t_cardinals_degree;
 
-typedef struct	s_image
-{
-	void	*img_ref;
-	int		*img_data_addr;
-	int		bits_per_pixel;
-	int		line_size;
-	int		endian;
-	int		line_count;
-}				t_image;
-
 
 typedef struct	s_camera
 {
-	int side;
-	int hit;
-	float camera_angle;
-	char debug;
+	int		side;
+	int		hit;
+	float	camera_angle;
+	char	debug;
+	float	wallX;
+
+	// Texture coordinates
+	t_vec tex;
+	double tex_step;
+	double tex_pos;
 
 	// Position vector
 	t_vec2 pos;

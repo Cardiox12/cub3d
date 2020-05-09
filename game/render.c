@@ -6,7 +6,7 @@
 /*   By: tony <tony@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 20:33:14 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/09 18:46:48 by tony             ###   ########.fr       */
+/*   Updated: 2020/05/09 23:14:27 by tony             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,75 +82,6 @@ void	get_side(t_game *data)
 	{
 		data->camera.step.y = 1;
 		data->camera.side_dist.y = (data->camera.map_pos.y + 1.0 - data->camera.pos.y) * data->camera.delta_dist.y;
-	}
-}
-
-void	raycasting(t_game *data)
-{
-	const int	h = data->map.resolution.y;
-	uint32_t	color;
-	t_vec		draw;
-	int			x;
-
-	x = 0;
-	color = 0;
-	while (x < data->map.resolution.x)
-	{
-		//calculate ray position and direction
-		data->camera.cameraX = 2 * x / (double)data->map.resolution.x - 1;
-		data->camera.ray_dir.x = data->camera.plan_front.x + data->camera.plane.x * data->camera.cameraX;
-		data->camera.ray_dir.y = data->camera.plan_front.y + data->camera.plane.y * data->camera.cameraX;
-
-		//which box of the map we're in
-		data->camera.map_pos = to_vec(data->camera.pos);
-		
-		data->camera.ray_dir.x = (data->camera.ray_dir.x == 0) ? 1 : data->camera.ray_dir.x;
-		data->camera.ray_dir.y = (data->camera.ray_dir.y == 0) ? 1 : data->camera.ray_dir.y;
-
-		data->camera.delta_dist.x = fabs(1 / data->camera.ray_dir.x);
-		data->camera.delta_dist.y = fabs(1 / data->camera.ray_dir.y);
-
-		//calculate step and initial sideDist
-		get_side(data);
-		while (TRUE)
-		{
-			if(data->camera.side_dist.x < data->camera.side_dist.y)
-			{
-				data->camera.side_dist.x += data->camera.delta_dist.x;
-				data->camera.map_pos.x += data->camera.step.x;
-				data->camera.side = 0;
-			}
-			else
-			{
-				data->camera.side_dist.y += data->camera.delta_dist.y;
-				data->camera.map_pos.y += data->camera.step.y;
-				data->camera.side = 1;
-			}
-			if (data->map.map[data->camera.map_pos.y][data->camera.map_pos.x] == WALL)
-				break;
-		}
-
-		//Calculate distance projected on camera direction (Euclidean distance will give fisheye effect!)
-		if (data->camera.side == 0)
-			data->camera.perp_wall_dist = (data->camera.map_pos.x - data->camera.pos.x + (1 - data->camera.step.x) / 2) / data->camera.ray_dir.x;
-		else
-			data->camera.perp_wall_dist = (data->camera.map_pos.y - data->camera.pos.y + (1 - data->camera.step.y) / 2) / data->camera.ray_dir.y;
-
-		data->camera.line_height = (int)(h / data->camera.perp_wall_dist);
-
-		//calculate lowest and highest pixel to fill in current stripe
-		data->camera.draw_start = -data->camera.line_height / 2 + h / 2;
-		if (data->camera.draw_start < 0)
-			data->camera.draw_start = 0;
-		data->camera.draw_end = data->camera.line_height / 2 + h / 2;
-		if (data->camera.draw_end >= h)
-			data->camera.draw_end = h - 1;
-
-		// printf("Texture : %i\n", data->map.map[data->camera.map_pos.y][data->camera.map_pos.x] - '0');
-
-		draw = (typeof(draw)){data->camera.draw_end, data->camera.draw_start};
-		draw_img_vert_line(x, draw, data, color);
-		x++;
 	}
 }
 

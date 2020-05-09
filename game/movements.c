@@ -6,7 +6,7 @@
 /*   By: tony <tony@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/29 20:42:29 by tony              #+#    #+#             */
-/*   Updated: 2020/05/07 07:50:39 by tony             ###   ########.fr       */
+/*   Updated: 2020/05/09 22:57:37 by tony             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int		is_out_of_bound(t_vec2 pos, t_game *data)
 	
 	if (x >= 0 && x < data->map.map_xsize && y >= 0 && y < data->map.map_ysize)
 	{
-		if (data->map.map[y][x] == WALL)
+		if (is_wall(data->map.map[y][x]))
 			return (TRUE);
 	}
 	return (FALSE);

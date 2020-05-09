@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+         #
+#    By: tony <tony@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/26 01:37:41 by bbellavi          #+#    #+#              #
-#    Updated: 2020/02/24 15:59:26 by bbellavi         ###   ########.fr        #
+#    Updated: 2020/05/09 22:51:04 by tony             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ BASE_DIR	= srcs
 STDIO_DIR	= $(BASE_DIR)/stdio
 STRING_DIR	= $(BASE_DIR)/string
 STD_DIR		= $(BASE_DIR)/std
+CTYPES_DIR	= $(BASE_DIR)/ctypes
 
 SRCS	= $(STDIO_DIR)/ft_putchar.c
 SRCS	+= $(STDIO_DIR)/ft_putstr.c
@@ -36,6 +37,11 @@ SRCS	+= $(STRING_DIR)/ft_memcpy.c
 SRCS	+= $(STRING_DIR)/ft_strtrim.c
 SRCS	+= $(STRING_DIR)/ft_memset.c
 SRCS	+= $(STD_DIR)/ft_atoi.c
+SRCS	+= $(CTYPES_DIR)/ft_isalnum.c
+SRCS	+= $(CTYPES_DIR)/ft_isalpha.c
+SRCS	+= $(CTYPES_DIR)/ft_isascii.c
+SRCS	+= $(CTYPES_DIR)/ft_isdigit.c
+SRCS	+= $(CTYPES_DIR)/ft_isprint.c
 
 OBJS	= $(SRCS:.c=.o)
 .PHONY: all re clean fclean

@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tony <tony@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 16:35:22 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/04 16:36:20 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/09 22:57:53 by tony             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "render.h"
 #include "types.h"
+#include "ft_ctypes.h"
 
 void	draw_plan(t_game *data, t_vec2 cp)
 {
@@ -58,7 +59,7 @@ void	minimap(t_game *data)
 		{
 			i.x = vi.x * SQUARE_SIZE;
 			i.y = vi.y * SQUARE_SIZE;
-			draw_rect(i, s, &data->image, (data->map.map[vi.y][vi.x] == '1') ? 0x000000 : 0xFFFFFF);
+			draw_rect(i, s, &data->image, (is_wall(data->map.map[vi.y][vi.x])) ? 0x000000 : 0xFFFFFF);
 			vi.x++;
 		}
 		vi.y++;

@@ -6,7 +6,7 @@
 /*   By: tony <tony@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 01:45:36 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/09 18:00:45 by tony             ###   ########.fr       */
+/*   Updated: 2020/05/10 00:18:01 by tony             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ void	define_map(t_map *map)
 {
 	static char *str_map[HEIGHT] = {
 		"11111111111111",
-		"10000001000001",
-		"10001001000001",
-		"10E00000010001",
-		"10001001000001",
-		"10000001000001",
+		"10000002000001",
+		"10003002000001",
+		"10E00000040001",
+		"10003002000001",
+		"10000002000001",
 		"11111111111111",
 		NULL
 	};
@@ -70,21 +70,26 @@ void	init_textures(t_game *data)
 {
 	t_texture *text = data->map.textures;
 
-	text[TEX_NORTH].path = "./assets/barrel.png";
-	text[TEX_SOUTH].path = "./assets/bluestone.png";
-	text[TEX_WEST].path = "./assets/colorstone.png";
-	text[TEX_EAST].path = "./assets/eagle.png";
-	text[TEX_NORTH].img = mlx_png_file_to_image(data->infos.mlx_ptr, text[TEX_NORTH].path, &text[TEX_NORTH].width, &text[TEX_NORTH].height);
-	text[TEX_SOUTH].img = mlx_png_file_to_image(data->infos.mlx_ptr, text[TEX_SOUTH].path, &text[TEX_SOUTH].width, &text[TEX_SOUTH].height);
-	text[TEX_WEST].img = mlx_png_file_to_image(data->infos.mlx_ptr, text[TEX_WEST].path, &text[TEX_WEST].width, &text[TEX_WEST].height);
-	text[TEX_EAST].img = mlx_png_file_to_image(data->infos.mlx_ptr, text[TEX_EAST].path, &text[TEX_EAST].width, &text[TEX_EAST].height);
-	if (text[TEX_NORTH].img != NULL && text[TEX_SOUTH].img && text[TEX_WEST].img && text[TEX_EAST].img)
+	text[0].path = "./assets/redbricks.xpm";
+	text[1].path = "./assets/bluestone.xpm";
+	text[2].path = "./assets/colorstone.xpm";
+	text[3].path = "./assets/eagle.xpm";
+	text[0].image.img_ref = mlx_xpm_file_to_image(data->infos.mlx_ptr, text[0].path, &text[0].width, &text[0].height);
+	text[1].image.img_ref = mlx_xpm_file_to_image(data->infos.mlx_ptr, text[1].path, &text[1].width, &text[1].height);
+	text[2].image.img_ref = mlx_xpm_file_to_image(data->infos.mlx_ptr, text[2].path, &text[2].width, &text[2].height);
+	text[3].image.img_ref = mlx_xpm_file_to_image(data->infos.mlx_ptr, text[3].path, &text[3].width, &text[3].height);
+
+	text[0].image.img_data_addr = (int*)mlx_get_data_addr(text[0].image.img_ref, &text[0].image.bits_per_pixel, &text[0].image.line_size, &text[0].image.endian);
+	text[1].image.img_data_addr = (int*)mlx_get_data_addr(text[1].image.img_ref, &text[1].image.bits_per_pixel, &text[1].image.line_size, &text[1].image.endian);
+	text[2].image.img_data_addr = (int*)mlx_get_data_addr(text[2].image.img_ref, &text[2].image.bits_per_pixel, &text[2].image.line_size, &text[2].image.endian);
+	text[3].image.img_data_addr = (int*)mlx_get_data_addr(text[3].image.img_ref, &text[3].image.bits_per_pixel, &text[3].image.line_size, &text[3].image.endian);
+	if (text[0].image.img_ref != NULL && text[1].image.img_ref && text[2].image.img_ref && text[3].image.img_ref)
 	{
 		printf("Sucessfuly loaded textures.\n");
-		printf("\tImage : %s of dimensions %ix%i\n", text[TEX_NORTH].path, text[TEX_NORTH].width, text[TEX_NORTH].height);
-		printf("\tImage : %s of dimensions %ix%i\n", text[TEX_SOUTH].path, text[TEX_SOUTH].width, text[TEX_SOUTH].height);
-		printf("\tImage : %s of dimensions %ix%i\n", text[TEX_WEST].path, text[TEX_WEST].width, text[TEX_WEST].height);
-		printf("\tImage : %s of dimensions %ix%i\n", text[TEX_EAST].path, text[TEX_EAST].width, text[TEX_EAST].height);
+		printf("\tImage : %s of dimensions %ix%i\n", text[0].path, text[0].width, text[0].height);
+		printf("\tImage : %s of dimensions %ix%i\n", text[1].path, text[1].width, text[1].height);
+		printf("\tImage : %s of dimensions %ix%i\n", text[2].path, text[2].width, text[2].height);
+		printf("\tImage : %s of dimensions %ix%i\n", text[3].path, text[3].width, text[3].height);
 	}
 }
 

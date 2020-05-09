@@ -6,18 +6,18 @@
 #    By: tony <tony@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/25 00:45:19 by bbellavi          #+#    #+#              #
-#    Updated: 2020/05/09 18:41:14 by tony             ###   ########.fr        #
+#    Updated: 2020/05/09 23:19:51 by tony             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 COLOR_NC			= \e[0m
 COLOR_LIGHT_GREEN	= \e[1;32m
 CC			= gcc
-CFLAGS		= -Wall -Wextra -Werror # -framework OpenGL -framework AppKit
+CFLAGS		= -Wall -Wextra -Werror -framework OpenGL -framework AppKit
 MAKE		= make -C
 MLX_DIR		= ./minilibx
 NAME		= cub3d
-MLX_NAME	= libmlx.dylib
+MLX_NAME	= libmlx.a
 LFT_NAME	= libftmini.a
 
 GRAPH_DIR	= graphics_utils
@@ -34,12 +34,14 @@ SRCS		+= $(GRAPH_DIR)/ft_vert_line.c
 SRCS		+= $(UTILS_DIR)/vectors.c
 SRCS		+= $(UTILS_DIR)/rotate.c
 SRCS		+= $(UTILS_DIR)/angle.c
+SRCS		+= $(UTILS_DIR)/is_wall.c
 SRCS		+= $(GAME_DIR)/render.c
 SRCS		+= $(GAME_DIR)/loop.c
 SRCS		+= $(GAME_DIR)/image.c
 SRCS		+= $(GAME_DIR)/rays.c
 SRCS		+= $(GAME_DIR)/minimap.c
 SRCS		+= $(GAME_DIR)/movements.c
+SRCS		+= $(GAME_DIR)/raycasting.c
 SRCS		+= $(HOOK_DIR)/keyboard_hooks.c
 HEADERS		= headers
 LFT_HEADERS	= $(LFT_DIR)/headers

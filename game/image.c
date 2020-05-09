@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   image.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tony <tony@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 12:45:46 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/04 22:59:36 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/10 00:39:33 by tony             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,14 @@
 #define BYTE_SIZE 8
 #define SLICE_WIDTH 1
 
-static void		set_color(t_game *data, int x, int y, int color)
+uint32_t	get_color(t_image *img, t_vec pos)
+{
+	int	w = img->line_size / 4;
+
+	return (img->img_data_addr[pos.x + pos.y * w]);
+}
+
+void		set_color(t_game *data, int x, int y, int color)
 {
 	const int w = data->map.resolution.x;
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tony <tony@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 20:48:48 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/04 23:10:27 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/10 00:06:07 by tony             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,15 @@
 
 void	render(t_game *data);
 
+// Image function
 void	draw_rect(t_vec pos, t_vec size, t_image *img, uint32_t color);
 void	draw_img_vert_line(int x, t_vec draw, t_game *data, uint32_t color);
 void	reset_img(t_game *data);
 void	draw_ceil_and_floor(t_game *data);
 void	draw_circle(t_vec pos, int radius, t_image *img, uint32_t color);
 void	draw_img_line(t_vec a, t_vec b, t_game *data, uint32_t color);
+void    set_color(t_game *data, int x, int y, int color);
+uint32_t	get_color(t_image *img, t_vec pos);
 
 int		is_cardinal_point(char c);
 void	set_heading(t_camera *player, char cardinal_p);
@@ -70,5 +73,6 @@ int		is_out_of_bound(t_vec2 pos, t_game *data);
 void	draw_plan(t_game *data, t_vec2 cp);
 void    minimap_raycaster(t_game *data, t_vec2 pos);
 void	minimap(t_game *data);
+void	raycasting(t_game *data);
 
 #endif
