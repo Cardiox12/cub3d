@@ -6,7 +6,7 @@
 /*   By: tony <tony@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 12:45:46 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/10 00:39:33 by tony             ###   ########.fr       */
+/*   Updated: 2020/05/11 01:30:54 by elfamosot        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ uint32_t	get_color(t_image *img, t_vec pos)
 	return (img->img_data_addr[pos.x + pos.y * w]);
 }
 
-void		set_color(t_game *data, int x, int y, int color)
+void		set_color(t_game *data, t_vec pos, int color)
 {
 	const int w = data->map.resolution.x;
 
-	if (x >= 0 && x < data->map.resolution.x && y >= 0 && y < data->map.resolution.y)
+	if (pos.x >= 0 && pos.x < data->map.resolution.x && pos.y >= 0 && pos.y < data->map.resolution.y)
 	{
-		data->image.img_data_addr[y * w + x] = color;
+		data->image.img_data_addr[pos.y * w + pos.x] = color;
 	}
 }
 
@@ -40,7 +40,7 @@ void			draw_img_line(t_vec a, t_vec b, t_game *data, uint32_t color)
 
 	while (TRUE)
 	{
-		set_color(data, a.x, a.y, color);
+		set_color(data, a, color);
 		if (a.x == b.x && a.y == b.y)
 			break;
 		e2 = err;

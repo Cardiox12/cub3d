@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tony <tony@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 01:45:36 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/10 00:18:01 by tony             ###   ########.fr       */
+/*   Updated: 2020/05/12 17:26:17 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 #define WINDOW_NAME "cub3d"
 #define WINDOW_HEIGHT 600
 #define WINDOW_WIDTH 1000
-#define FIELD_OF_VIEW 90.0f
+#define FIELD_OF_VIEW 66.0f
 #define HEIGHT 10
 #define WIDTH 10
 
@@ -29,7 +29,7 @@ void	define_map(t_map *map)
 		"11111111111111",
 		"10000002000001",
 		"10003002000001",
-		"10E00000040001",
+		"10S00000040001",
 		"10003002000001",
 		"10000002000001",
 		"11111111111111",
@@ -41,29 +41,6 @@ void	define_map(t_map *map)
 	map->ground_color = COLOR_FLOOR;
 	map->map_xsize = 14;
 	map->map_ysize = 7;
-}
-
-void	init_rays(t_camera *cam)
-{
-	const float		fov_mid = cam->field_of_view / 2;
-	const float		step = FIELD_OF_VIEW / ((RAYS_NUMBER == 1) ? 1 : RAYS_NUMBER - 1);
-	const t_vec2	dir = (t_vec2){1, 0};
-	size_t			index;
-
-	index = 0; 
-	while (index < RAYS_NUMBER)
-	{
-		cam->rays[index].pos.x = 0;
-		cam->rays[index].pos.y = 0;
-		cam->rays[index].particle.x = 0;
-		cam->rays[index].particle.y = 0;
-		cam->rays[index].dir = dir;
-		cam->rays[index].angle = 0;
-		Ray_rotate(&cam->rays[index], to_radians(step * index), CLOCKWISE);
-		index++;
-	}
-	if (RAYS_NUMBER != 1)
-		Rays_rotate(cam->rays, to_radians(fov_mid), ANTI_CLOCKWISE);
 }
 
 void	init_textures(t_game *data)
@@ -111,7 +88,7 @@ void	init_game(t_game *data)
 	data->camera.field_of_view = FIELD_OF_VIEW;
 	data->camera.debug = FALSE;
 	data->camera.plane.x = 0;
-	data->camera.plane.y = 0.66f;
+	data->camera.plane.y = data->camera.field_of_view / 100; // Hard coded plane.y is 0.66f
 }
 
 int		main(int argc, char __unused **argv)
@@ -136,7 +113,6 @@ int		main(int argc, char __unused **argv)
 		data.image.line_count = data.map.resolution.y;
 		
 		get_starting_point(&data);
-		init_rays(&data.camera);
 		
 		mlx_hook(data.infos.win_ptr, KEY_PRESS_CODE, KEY_PRESS_MASK, key_pressed, &data);
 		mlx_hook(data.infos.win_ptr, KEY_RELEASE_CODE, KEY_RELEASE_MASK, key_released, &data);

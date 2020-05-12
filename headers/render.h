@@ -6,7 +6,7 @@
 /*   By: tony <tony@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 20:48:48 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/10 00:06:07 by tony             ###   ########.fr       */
+/*   Updated: 2020/05/11 01:29:37 by elfamosot        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	reset_img(t_game *data);
 void	draw_ceil_and_floor(t_game *data);
 void	draw_circle(t_vec pos, int radius, t_image *img, uint32_t color);
 void	draw_img_line(t_vec a, t_vec b, t_game *data, uint32_t color);
-void    set_color(t_game *data, int x, int y, int color);
+void    set_color(t_game *data, t_vec pos, int color);
 uint32_t	get_color(t_image *img, t_vec pos);
 
 int		is_cardinal_point(char c);

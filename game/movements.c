@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movements.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tony <tony@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/29 20:42:29 by tony              #+#    #+#             */
-/*   Updated: 2020/05/09 22:57:37 by tony             ###   ########.fr       */
+/*   Updated: 2020/05/12 06:50:42 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,12 +82,14 @@ void	player_move_right(t_game *data)
 	}
 }
 
+
 void	player_rotate(t_game *data)
 {
-	char		dir;
+	char dir;
 
 	data->camera.camera_angle += (event_array[KEY_A]) ? -to_radians(1) : to_radians(1);
 	dir = (event_array[KEY_A]) ? ANTI_CLOCKWISE : CLOCKWISE;
+
 	data->camera.plan_front = rotate(data->camera.plan_front, to_radians(1), dir);
 	data->camera.plan_right = rotate(data->camera.plan_right, to_radians(1), dir);
 	data->camera.plane = rotate(data->camera.plane, to_radians(1), dir);
