@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 20:33:14 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/12 17:22:34 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/13 01:10:30 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ void	set_heading(t_camera *player, char cardinal_p)
 	
 	player->plan_front = (t_vec2){0.0f, -1.0f};
 	player->dir = (t_vec2){-1.0f, 0.0f};
-	player->plan_right = (t_vec2){1.0f, 0.0f};
+	// player->plan_right = (t_vec2){1.0f, 0.0f};
+	player->plan_right = (t_vec2){player->field_of_view / 100, 0.0f};
 
 	angle = 0.0f;
 	if (cardinal_p == S_SOUTH)
@@ -60,16 +61,8 @@ void	set_heading(t_camera *player, char cardinal_p)
 	else if (cardinal_p == S_EAST)
 		angle = to_radians(ANGLE_east);
 
-	printf("Rotation angle : %f\n", angle);
-	printf("Vector plan front : (%f, %f)\n", player->plan_front.x, player->plan_front.y);
-	printf("Vector plan right : (%f, %f)\n", player->plan_right.x, player->plan_right.y);
-
 	player->plan_front = rotate(player->plan_front, angle, CLOCKWISE);
 	player->plan_right = rotate(player->plan_right, angle, CLOCKWISE);
-	// player->plane = rotate(player->plane, angle + to_radians(90), CLOCKWISE); 
-
-	printf("Vector plan front : (%f, %f)\n", player->plan_front.x, player->plan_front.y);
-	printf("Vector plan right : (%f, %f)\n", player->plan_right.x, player->plan_right.y);
 	
 	Rays_rotate(player->rays, angle, CLOCKWISE);
 	init_rays(player);
