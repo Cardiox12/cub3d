@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   image.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tony <tony@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 12:45:46 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/11 01:30:54 by elfamosot        ###   ########.fr       */
+/*   Updated: 2020/05/14 12:32:05 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,8 @@
 #define BYTE_SIZE 8
 #define SLICE_WIDTH 1
 
-uint32_t	get_color(t_image *img, t_vec pos)
+uint32_t	get_color(t_image *img, t_vec pos, int w)
 {
-	int	w = img->line_size / 4;
-
 	return (img->img_data_addr[pos.x + pos.y * w]);
 }
 

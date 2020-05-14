@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 20:33:14 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/13 01:10:30 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/13 15:52:53 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ void	set_heading(t_camera *player, char cardinal_p)
 	
 	player->plan_front = (t_vec2){0.0f, -1.0f};
 	player->dir = (t_vec2){-1.0f, 0.0f};
-	// player->plan_right = (t_vec2){1.0f, 0.0f};
 	player->plan_right = (t_vec2){player->field_of_view / 100, 0.0f};
 
 	angle = 0.0f;
@@ -90,30 +89,6 @@ int		get_starting_point(t_game *data)
 		i.y++;
 	}
 	return (NOT_FOUND);
-}
-
-void	get_side(t_game *data)
-{
-	if (data->camera.ray_dir.x < 0)
-	{
-		data->camera.step.x = -1;
-		data->camera.side_dist.x = (data->camera.pos.x - data->camera.map_pos.x) * data->camera.delta_dist.x;
-	}
-	else
-	{
-		data->camera.step.x = 1;
-		data->camera.side_dist.x = (data->camera.map_pos.x + 1.0 - data->camera.pos.x) * data->camera.delta_dist.x;
-	}
-	if (data->camera.ray_dir.y < 0)
-	{
-		data->camera.step.y = -1;
-		data->camera.side_dist.y = (data->camera.pos.y - data->camera.map_pos.y) * data->camera.delta_dist.y;
-	}
-	else
-	{
-		data->camera.step.y = 1;
-		data->camera.side_dist.y = (data->camera.map_pos.y + 1.0 - data->camera.pos.y) * data->camera.delta_dist.y;
-	}
 }
 
 void	render(t_game *data)

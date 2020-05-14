@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 01:45:36 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/13 01:09:30 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/14 14:27:55 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,6 @@ void	init_game(t_game *data)
 	data->camera.pos.y = 3;
 	data->camera.field_of_view = FIELD_OF_VIEW;
 	data->camera.debug = FALSE;
-	data->camera.plane.x = 0;
-	data->camera.plane.y = data->camera.field_of_view / 100; // Hard coded plane.y is 0.66f
 }
 
 int		main(int argc, char __unused **argv)

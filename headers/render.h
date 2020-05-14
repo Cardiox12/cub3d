@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tony <tony@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 20:48:48 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/11 01:29:37 by elfamosot        ###   ########.fr       */
+/*   Updated: 2020/05/13 16:29:16 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ void	draw_ceil_and_floor(t_game *data);
 void	draw_circle(t_vec pos, int radius, t_image *img, uint32_t color);
 void	draw_img_line(t_vec a, t_vec b, t_game *data, uint32_t color);
 void    set_color(t_game *data, t_vec pos, int color);
-uint32_t	get_color(t_image *img, t_vec pos);
+// uint32_t	get_color(t_image *img, t_vec pos);
+uint32_t	get_color(t_image *img, t_vec pos, int w);
 
 int		is_cardinal_point(char c);
 void	set_heading(t_camera *player, char cardinal_p);
