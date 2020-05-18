@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 01:45:36 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/18 19:13:15 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/18 21:26:34 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,13 +89,15 @@ void	init_game(t_game *data)
 	data->camera.debug = FALSE;
 }
 
-int		main(int argc, char __unused **argv)
+int		main(int argc, char **argv)
 {
 	t_game data;
 	
 	if (argc > 1)
 	{
 		const unsigned int ret = parse(&data, argv[1]);
+	
+		return (ret);
 		// init_game(&data);
 		// define_map(&data.map);
 		// init_textures(&data);
@@ -119,4 +121,5 @@ int		main(int argc, char __unused **argv)
 		// mlx_loop_hook(data.infos.mlx_ptr, loop, &data);
 		// mlx_loop(data.infos.mlx_ptr);
 	}
+	return (0);
 }

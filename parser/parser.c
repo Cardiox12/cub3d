@@ -6,21 +6,14 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/18 17:39:44 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/18 18:42:25 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/18 23:50:21 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-/*
-	Algorithme :
-
-	- SI le nom de la map a une extension valide :
-		- POUR TOUT ligne DE fichier :
-			- SI ligne commence par identifier :
-				- get identifier type 
-				- appeler la fonction appropriee en fonction du type de l'id (tableau de pointeurs sur fonction)
-*/
+// Remove when final push
+#include <stdio.h>
 
 int		has_valid_ext(const char *path)
 {
@@ -34,10 +27,50 @@ int		has_valid_ext(const char *path)
 	return (TRUE);
 }
 
-int		parse(t_game *data, const char *path)
+void	parse_texture(t_game *data, const char *id)
 {
 	(void)data;
+	(void)id;
+}
+
+void	parse_color(t_game *data, const char *id)
+{
+	(void)data;
+	(void)id;
+}
+
+void	parse_resolution(t_game *data, const char *id)
+{
+	(void)data;
+	(void)id;
+}
+
+int		parse(t_game *data, const char *path)
+{
+	int		index;
+	char	*line;
+	int		fd;
+
+	line = NULL;
 	if (has_valid_ext(path) == FALSE)
-		return (FALSE);
+		return (ERROR);
+
+	fd = open(path, O_RDONLY);
+	if (fd < 0)
+		return (ERROR);
+
+	while (get_next_line(fd, &line) > 0)
+	{
+		index = 0;
+		while (index < ID_SIZE)
+		{
+			if (ft_strncmp(line, ids[index].id, ft_strlen(ids[index].id)) == 0)
+			{
+				parse_callbacks[ids[index].index](data, line);
+				break;
+			}
+			index++;
+		}
+	}
 	return (TRUE);
 }
