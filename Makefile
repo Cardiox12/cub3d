@@ -6,7 +6,11 @@
 #    By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/25 00:45:19 by bbellavi          #+#    #+#              #
+<<<<<<< HEAD
 #    Updated: 2020/05/18 18:36:07 by bbellavi         ###   ########.fr        #
+=======
+#    Updated: 2020/01/26 03:11:13 by bbellavi         ###   ########.fr        #
+>>>>>>> 821360eb5b55b544b9cb8870880795b6d3ad7774
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +33,7 @@ PARSE_DIR	= parser
 
 SRCS		= cub3d.c
 SRCS		+= $(GRAPH_DIR)/ft_encode_rgb.c
+<<<<<<< HEAD
 SRCS		+= $(UTILS_DIR)/vectors.c
 SRCS		+= $(UTILS_DIR)/rotate.c
 SRCS		+= $(UTILS_DIR)/angle.c
@@ -40,6 +45,13 @@ SRCS		+= $(GAME_DIR)/rays.c
 SRCS		+= $(GAME_DIR)/minimap.c
 SRCS		+= $(GAME_DIR)/movements.c
 SRCS		+= $(GAME_DIR)/raycasting.c
+=======
+SRCS		+= $(GRAPH_DIR)/ft_line.c
+SRCS		+= $(UTILS_DIR)/init_mlx_infos.c
+SRCS		+= $(UTILS_DIR)/init_textures.c
+SRCS		+= $(UTILS_DIR)/init_vec.c
+SRCS		+= $(UTILS_DIR)/init_map.c
+>>>>>>> 821360eb5b55b544b9cb8870880795b6d3ad7774
 SRCS		+= $(HOOK_DIR)/keyboard_hooks.c
 SRCS		+= $(PARSE_DIR)/parser.c
 HEADERS		= headers
