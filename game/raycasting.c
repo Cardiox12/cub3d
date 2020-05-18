@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/09 23:14:30 by tony              #+#    #+#             */
-/*   Updated: 2020/05/14 13:21:56 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/18 16:51:13 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,8 +162,6 @@ void	raycasting(t_game *data)
 		perform_dda(data);
 		get_perp_dist(data);
 		map_texture(data, x);
-		// draw = (typeof(draw)){data->camera.draw_end, data->camera.draw_start};
-		// draw_img_vert_line(x, draw, data, color);
 		x++;
 	}
 }

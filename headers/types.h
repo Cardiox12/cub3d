@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 14:33:13 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/13 00:56:57 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/18 18:40:46 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@
 # define RAYS_NUMBER 10
 # define TEX_NUMBERS 5
 
-typedef struct  s_mlx_infos
+typedef struct  s_infos
 {
     void    *mlx_ptr;
     void    *win_ptr;
     int     height;
     int     width;
     int     color;
-}               t_mlx_infos;
+}               t_infos;
 
 typedef struct	s_vec2
 {
@@ -99,6 +99,13 @@ typedef enum    e_cardinals_degree
     D_WEST = 180,
 }               t_cardinals_degree;
 
+typedef enum    e_cardinal_p
+{
+	S_NORTH		= 'N',
+	S_SOUTH		= 'S',
+	S_EAST		= 'E',
+	S_WEST		= 'W'
+}               e_cardinal_p;
 
 typedef struct	s_camera
 {
@@ -166,7 +173,7 @@ typedef struct	s_camera
 typedef struct	s_game
 {
 	t_camera	camera;
-	t_mlx_infos	infos;
+	t_infos		infos;
 	t_image		image;
 	t_map		map;
 }				t_game;
@@ -179,27 +186,10 @@ enum	e_facing
 	LEFT
 };
 
-typedef struct	s_rect
-{
-	t_game 	*game;
-	int		height;
-	int		width;
-	int		x;
-	int		y;
-	int		color;
-}				t_rect;
-
-# define TRUE 1
-# define FALSE 0
 # define CLOCKWISE 1
 # define ANTI_CLOCKWISE 0
 
-enum	e_texture_index
-{
-	TEX_NORTH,
-	TEX_SOUTH,
-	TEX_WEST,
-	TEX_EAST
-};
+# define TRUE 1
+# define FALSE 0
 
 #endif

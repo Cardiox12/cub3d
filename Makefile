@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tony <tony@student.42.fr>                  +#+  +:+       +#+         #
+#    By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/25 00:45:19 by bbellavi          #+#    #+#              #
-#    Updated: 2020/05/09 23:19:51 by tony             ###   ########.fr        #
+#    Updated: 2020/05/18 18:36:07 by bbellavi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,12 +25,10 @@ UTILS_DIR	= utils
 GAME_DIR	= game
 HOOK_DIR	= event_hooks
 LFT_DIR		= minilibft
+PARSE_DIR	= parser
+
 SRCS		= cub3d.c
 SRCS		+= $(GRAPH_DIR)/ft_encode_rgb.c
-SRCS		+= $(GRAPH_DIR)/ft_line.c
-SRCS		+= $(GRAPH_DIR)/ft_rect.c
-SRCS		+= $(GRAPH_DIR)/ft_vert_line.c
-# SRCS		+= $(UTILS_DIR)/parse_map.c
 SRCS		+= $(UTILS_DIR)/vectors.c
 SRCS		+= $(UTILS_DIR)/rotate.c
 SRCS		+= $(UTILS_DIR)/angle.c
@@ -43,6 +41,7 @@ SRCS		+= $(GAME_DIR)/minimap.c
 SRCS		+= $(GAME_DIR)/movements.c
 SRCS		+= $(GAME_DIR)/raycasting.c
 SRCS		+= $(HOOK_DIR)/keyboard_hooks.c
+SRCS		+= $(PARSE_DIR)/parser.c
 HEADERS		= headers
 LFT_HEADERS	= $(LFT_DIR)/headers
 
