@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tony <tony@student.42.fr>                  +#+  +:+       +#+         #
+#    By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/26 01:37:41 by bbellavi          #+#    #+#              #
-#    Updated: 2020/05/09 22:51:04 by tony             ###   ########.fr        #
+#    Updated: 2020/05/19 00:45:16 by bbellavi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,7 @@ SRCS	+= $(CTYPES_DIR)/ft_isalpha.c
 SRCS	+= $(CTYPES_DIR)/ft_isascii.c
 SRCS	+= $(CTYPES_DIR)/ft_isdigit.c
 SRCS	+= $(CTYPES_DIR)/ft_isprint.c
+SRCS	+= $(CTYPES_DIR)/ft_isspace.c
 
 OBJS	= $(SRCS:.c=.o)
 .PHONY: all re clean fclean

@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 01:45:36 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/18 21:26:34 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/19 01:25:51 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,8 @@ int		main(int argc, char **argv)
 	{
 		const unsigned int ret = parse(&data, argv[1]);
 	
+		if ((int)ret == ERROR)
+			printf("An error has occured\n");
 		return (ret);
 		// init_game(&data);
 		// define_map(&data.map);

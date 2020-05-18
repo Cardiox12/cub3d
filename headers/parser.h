@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 02:01:35 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/18 22:28:15 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/19 01:35:34 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 #include "graphics_utils.h"
 #include "ft_string.h"
 #include "ft_stdio.h"
-
-# define MAP_EXT ".cub"
+#include "ft_ctypes.h"
+#include "ft_std.h"
 
 typedef struct	s_id
 {
@@ -28,10 +28,10 @@ typedef struct	s_id
 }				t_id;
 
 int		parse(t_game *data, const char *path);
-// Define callbacks
-void	parse_texture(t_game *data, const char *id);
-void	parse_color(t_game *data, const char *id);
-void	parse_resolution(t_game *data, const char *id);
+
+int		parse_texture(t_game *data, const char *id, char *line);
+int		parse_color(t_game *data, const char *id, char *line);
+int		parse_resolution(t_game *data, const char *id, char *line);
 
 # define ID_SIZE 8
 # define CALLBACKS_SIZE 3
@@ -44,23 +44,34 @@ enum	callback_index
 	TEXTURE_INDEX
 };
 
+# define ID_NORTH	"NO"
+# define ID_SOUTH	"SO"
+# define ID_EAST	"EA"
+# define ID_WEST	"WE"
+# define ID_SPRITE	"S"
+# define ID_RES		"R"
+# define ID_CEIL	"C"
+# define ID_FLOOR	"F"
+
 static t_id ids[ID_SIZE] = {
-	{"NO", TEXTURE_INDEX},
-	{"SO", TEXTURE_INDEX},
-	{"EA", TEXTURE_INDEX},
-	{"WE", TEXTURE_INDEX},
-	{"S", TEXTURE_INDEX},
-	{"R", RESOLUTION_INDEX},
-	{"F", COLOR_INDEX},
-	{"C", COLOR_INDEX}
+	{ID_NORTH, TEXTURE_INDEX},
+	{ID_SOUTH, TEXTURE_INDEX},
+	{ID_EAST, TEXTURE_INDEX},
+	{ID_WEST, TEXTURE_INDEX},
+	{ID_SPRITE, TEXTURE_INDEX},
+	{ID_RES, RESOLUTION_INDEX},
+	{ID_FLOOR, COLOR_INDEX},
+	{ID_CEIL, COLOR_INDEX}
 };
 
-static void (*parse_callbacks[CALLBACKS_SIZE])(t_game*, const char*) = {
+static int (*parse_callbacks[CALLBACKS_SIZE])(t_game*, const char*, char*) = {
 	parse_color,
 	parse_resolution,
 	parse_texture
 };
 
 # define ERROR -1
+# define SUCCESS 1
+# define MAP_EXT ".cub"
 
-#   endif
+#endif

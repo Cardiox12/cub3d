@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/18 17:39:44 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/18 23:50:21 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/19 01:43:24 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,31 +27,60 @@ int		has_valid_ext(const char *path)
 	return (TRUE);
 }
 
-void	parse_texture(t_game *data, const char *id)
+int		parse_texture(t_game *data, const char *id, char *line)
 {
 	(void)data;
 	(void)id;
+	(void)line;
+	return (0);
 }
 
-void	parse_color(t_game *data, const char *id)
+int		parse_color(t_game *data, const char *id, char *line)
 {
 	(void)data;
 	(void)id;
+	(void)line;
+	return (0);
 }
 
-void	parse_resolution(t_game *data, const char *id)
+int		parse_resolution(t_game *data, const char *id, char *line)
 {
-	(void)data;
+	const size_t id_len = ft_strlen(id);
 	(void)id;
+
+	line = &line[id_len];
+	while (*line != '\0' && ft_isspace(*line) == TRUE)
+		line++;
+	if (ft_isdigit(*line))
+	{
+		data->map.resolution.x = ft_atoi(line);
+		while (*line != '\0' && ft_isdigit(*line))
+			line++;
+	}
+	else
+		return (ERROR);
+	while (*line != '\0' && ft_isspace(*line) == TRUE)
+		line++;
+	if (ft_isdigit(*line))
+	{
+		data->map.resolution.y = ft_atoi(line);
+		while (*line != '\0' && ft_isdigit(*line))
+			line++;
+	}
+	else
+		return (ERROR);
+	return (0);
 }
 
 int		parse(t_game *data, const char *path)
 {
+	int		err;
 	int		index;
 	char	*line;
 	int		fd;
 
 	line = NULL;
+	err = ERROR;
 	if (has_valid_ext(path) == FALSE)
 		return (ERROR);
 
@@ -66,11 +95,13 @@ int		parse(t_game *data, const char *path)
 		{
 			if (ft_strncmp(line, ids[index].id, ft_strlen(ids[index].id)) == 0)
 			{
-				parse_callbacks[ids[index].index](data, line);
+				err = parse_callbacks[ids[index].index](data, ids[index].id, line);
+				if (err < 0)
+					return (err);
 				break;
 			}
 			index++;
 		}
 	}
-	return (TRUE);
+	return (err);
 }

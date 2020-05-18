@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 14:33:13 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/18 18:40:46 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/19 01:42:50 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 # define RAYS_NUMBER 10
 # define TEX_NUMBERS 5
+# define PATH_MAX 1024
 
 typedef struct  s_infos
 {
@@ -60,7 +61,7 @@ typedef struct	s_image
 typedef struct	s_texture
 {
 	t_image image;
-	char	*path;
+	char	path[PATH_MAX + 1];
 	int		width;
 	int		height;
 }				t_texture;
