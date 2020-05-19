@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 14:33:13 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/19 12:25:19 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/19 18:12:52 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ typedef struct s_image
 typedef struct s_texture
 {
 	t_image image;
-	char *path;
+	char path[PATH_MAX + 1];
 	int width;
 	int height;
 } t_texture;
@@ -184,6 +184,15 @@ enum e_facing
 	UP,
 	RIGHT,
 	LEFT
+};
+
+enum	texture_index
+{
+	IDX_NORTH,
+	IDX_SOUTH,
+	IDX_WEST,
+	IDX_EAST,
+	IDX_SPRITE
 };
 
 #define CLOCKWISE 1

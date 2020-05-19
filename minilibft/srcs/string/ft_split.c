@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/24 17:53:11 by tony              #+#    #+#             */
-/*   Updated: 2020/01/30 00:18:29 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/19 18:41:54 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,6 @@ static size_t	ft_count_substr(const char *s, char c)
 			s++;
 	}
 	return (counter);
-}
-
-static size_t	ft_strlen_to_sep(const char *s, char c)
-{
-	const char *final_s = s;
-
-	while (*s && *s != c)
-		s++;
-	return (s - final_s);
 }
 
 static char		**ft_alloc_2d_array(size_t size)

@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 01:45:36 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/19 17:23:07 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/19 18:32:43 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ void	init_textures(t_game *data)
 {
 	t_texture *text = data->map.textures;
 
-	text[0].path = "./assets/redbricks.xpm";
-	text[1].path = "./assets/bluestone.xpm";
-	text[2].path = "./assets/colorstone.xpm";
-	text[3].path = "./assets/eagle.xpm";
+	// text[0].path = "./assets/redbricks.xpm";
+	// text[1].path = "./assets/bluestone.xpm";
+	// text[2].path = "./assets/colorstone.xpm";
+	// text[3].path = "./assets/eagle.xpm";
 	text[0].image.img_ref = mlx_xpm_file_to_image(data->infos.mlx_ptr, text[0].path, &text[0].width, &text[0].height);
 	text[1].image.img_ref = mlx_xpm_file_to_image(data->infos.mlx_ptr, text[1].path, &text[1].width, &text[1].height);
 	text[2].image.img_ref = mlx_xpm_file_to_image(data->infos.mlx_ptr, text[2].path, &text[2].width, &text[2].height);
@@ -70,8 +70,6 @@ void	init_textures(t_game *data)
 
 void	init_game(t_game *data)
 {
-	data->map.resolution.x = WINDOW_WIDTH;
-	data->map.resolution.y = WINDOW_HEIGHT;
 	data->infos.mlx_ptr = mlx_init();
 	data->infos.win_ptr = mlx_new_window(
 		data->infos.mlx_ptr,
@@ -79,10 +77,6 @@ void	init_game(t_game *data)
 		data->map.resolution.y,
 		WINDOW_NAME
 	);
-	data->map.ceil_color = COLOR_CEIL;
-	data->map.floor_color = COLOR_FLOOR;
-	data->camera.pos.x = 5;
-	data->camera.pos.y = 3;
 	data->camera.field_of_view = FIELD_OF_VIEW;
 	data->camera.debug = FALSE;
 }
@@ -98,7 +92,6 @@ int		main(int argc, char **argv)
 		if ((int)ret == ERROR)
 			printf("An error has occured\n");
 		return (ret);
-		// init_game(&data);
 		// define_map(&data.map);
 		// init_textures(&data);
 		
