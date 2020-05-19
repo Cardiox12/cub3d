@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 01:45:36 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/19 01:25:51 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/19 17:23:07 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ void	define_map(t_map *map)
 	};
 
 	map->map = str_map;
-	map->ceil_color = COLOR_CEIL;
-	map->ground_color = COLOR_FLOOR;
 	map->map_xsize = 14;
 	map->map_ysize = 7;
 }
@@ -82,7 +80,7 @@ void	init_game(t_game *data)
 		WINDOW_NAME
 	);
 	data->map.ceil_color = COLOR_CEIL;
-	data->map.ground_color = COLOR_FLOOR;
+	data->map.floor_color = COLOR_FLOOR;
 	data->camera.pos.x = 5;
 	data->camera.pos.y = 3;
 	data->camera.field_of_view = FIELD_OF_VIEW;

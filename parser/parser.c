@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/18 17:39:44 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/19 01:43:24 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/19 17:14:23 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,51 +25,6 @@ int		has_valid_ext(const char *path)
 	if (ft_strncmp(&path[len - ext_len], MAP_EXT, ext_len) != 0)
 		return (FALSE);
 	return (TRUE);
-}
-
-int		parse_texture(t_game *data, const char *id, char *line)
-{
-	(void)data;
-	(void)id;
-	(void)line;
-	return (0);
-}
-
-int		parse_color(t_game *data, const char *id, char *line)
-{
-	(void)data;
-	(void)id;
-	(void)line;
-	return (0);
-}
-
-int		parse_resolution(t_game *data, const char *id, char *line)
-{
-	const size_t id_len = ft_strlen(id);
-	(void)id;
-
-	line = &line[id_len];
-	while (*line != '\0' && ft_isspace(*line) == TRUE)
-		line++;
-	if (ft_isdigit(*line))
-	{
-		data->map.resolution.x = ft_atoi(line);
-		while (*line != '\0' && ft_isdigit(*line))
-			line++;
-	}
-	else
-		return (ERROR);
-	while (*line != '\0' && ft_isspace(*line) == TRUE)
-		line++;
-	if (ft_isdigit(*line))
-	{
-		data->map.resolution.y = ft_atoi(line);
-		while (*line != '\0' && ft_isdigit(*line))
-			line++;
-	}
-	else
-		return (ERROR);
-	return (0);
 }
 
 int		parse(t_game *data, const char *path)
@@ -103,5 +58,7 @@ int		parse(t_game *data, const char *path)
 			index++;
 		}
 	}
+
+	close(fd);
 	return (err);
 }

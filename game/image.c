@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 12:45:46 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/14 12:32:05 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/19 01:58:10 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void			draw_ceil_and_floor(t_game *data)
 	const t_vec size = (t_vec){data->map.resolution.x, data->map.resolution.y / 2};
 
 	draw_rect((t_vec){0, 0}, size, &data->image, data->map.ceil_color);
-	draw_rect((t_vec){0, data->map.resolution.y / 2}, size, &data->image, data->map.ground_color);
+	draw_rect((t_vec){0, data->map.resolution.y / 2}, size, &data->image, data->map.floor_color);
 }
 
 void			draw_rect(t_vec pos, t_vec size, t_image *img, uint32_t color)

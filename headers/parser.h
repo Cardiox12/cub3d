@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 02:01:35 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/19 01:35:34 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/19 12:20:08 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,12 @@ int		parse_texture(t_game *data, const char *id, char *line);
 int		parse_color(t_game *data, const char *id, char *line);
 int		parse_resolution(t_game *data, const char *id, char *line);
 
+char	*skip_spaces(const char *s);
+char	*skip_char(const char *s, unsigned char c);
+char	*skip_digits(const char *s);
+
 # define ID_SIZE 8
+# define RGB_SIZE 3
 # define CALLBACKS_SIZE 3
 
 
@@ -73,5 +78,8 @@ static int (*parse_callbacks[CALLBACKS_SIZE])(t_game*, const char*, char*) = {
 # define ERROR -1
 # define SUCCESS 1
 # define MAP_EXT ".cub"
+
+// Charset definition
+# define COMMA ','
 
 #endif
