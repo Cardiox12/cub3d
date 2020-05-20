@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/18 17:39:44 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/20 18:11:04 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/20 22:08:56 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,73 +15,67 @@
 // Remove when final push
 #include <stdio.h>
 
-int		has_valid_ext(const char *path)
-{
-	const size_t len = ft_strlen(path);
-	const size_t ext_len = ft_strlen(MAP_EXT);
-
-	if (len < 5)
-		return (FALSE);
-	if (ft_strncmp(&path[len - ext_len], MAP_EXT, ext_len) != 0)
-		return (FALSE);
-	return (TRUE);
-}
-
-void	Debug_log_game(t_game *data, const char *path)
-{
-	printf("Map path : %s\n", path);
-	printf("================================ TEXTURES : ================================\n");
-	printf("North texture : %s\n", data->map.textures[IDX_NORTH].path);
-	printf("South texture : %s\n", data->map.textures[IDX_SOUTH].path);
-	printf("West texture : %s\n", data->map.textures[IDX_WEST].path);
-	printf("East texture : %s\n", data->map.textures[IDX_EAST].path);
-	printf("Sprite texture : %s\n", data->map.textures[IDX_SPRITE].path);
-	printf("================================ RESOLUTION : ================================\n");
-	printf("Resolution : %ix%i\n", data->map.resolution.x, data->map.resolution.y);
-	printf("================================ COULEURS : ================================\n");
-	printf("Floor color : %x\n", data->map.floor_color);
-	printf("Ceil color : %x\n", data->map.ceil_color);
-}
-
 static int infos_parser(t_game *data, int fd)
 {
 	int		index;
 	int		err;
-	char	*line;
 
-	line = NULL;
-	while (get_next_line(fd, &line) > 0)
+	data->map.line = NULL;
+	while (get_next_line(fd, &data->map.line) > 0 && !is_mapline(data->map.line))
 	{
 		index = 0;
 		while (index < ID_SIZE)
 		{
-			if (ft_strncmp(line, ids[index].id, ft_strlen(ids[index].id)) == 0)
+			if (ft_strncmp(data->map.line, ids[index].id, ft_strlen(ids[index].id)) == 0)
 			{
-				err = parse_callbacks[ids[index].index](data, ids[index].id, line);
+				err = parse_callbacks[ids[index].index](data, ids[index].id, data->map.line);
 				if (err < 0)
 					return (err);
 				break;
 			}
 			index++;
 		}
+		freeline(data);
 	}
+	return (SUCCESS);
+}
+
+static int map_parser(t_game *data, int fd)
+{
+	size_t maxlen;
+	size_t index;
+
+	index = 0;
+	if (is_mapline(data->map.line))
+	{
+		maxlen = ft_strlen(data->map.line);
+		data->map.map[index++] = ft_strdup(data->map.line);
+		freeline(data);
+	}
+	while (get_next_line(fd, &data->map.line) > 0 || is_mapline(data->map.line))
+	{
+		maxlen = max(maxlen, ft_strlen(data->map.line));
+		data->map.map[index++] = ft_strdup(data->map.line);
+		freeline(data);
+	}
+	data->map.map_ysize = index;
+	data->map.map_xsize = maxlen;
+	data->map.map[index] = NULL;
 	return (SUCCESS);
 }
 
 int		parse(t_game *data, const char *path)
 {
-	int err;
+	t_vec err;
 	int	fd;
 
-	err = ERROR;
 	if (has_valid_ext(path) == FALSE)
 		return (ERROR);
-
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
 		return (ERROR);
-	err = infos_parser(data, fd);
-	Debug_log_game(data, path);
+	err.x = infos_parser(data, fd);
+	err.y = map_parser(data, fd);
 	close(fd);
-	return (err);
+	return ((err.x == ERROR || err.y == ERROR) ? ERROR : SUCCESS);
 }

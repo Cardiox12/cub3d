@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 14:33:13 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/19 18:12:52 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/20 20:25:22 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #define RAYS_NUMBER 10
 #define TEX_NUMBERS 5
 #define PATH_MAX 1024
+#define MAP_SIZE 20000
 
 typedef struct s_infos
 {
@@ -77,13 +78,14 @@ typedef struct s_textures
 
 typedef struct s_map
 {
-	char **map;
+	char *map[MAP_SIZE];
 	t_vec resolution;
 	t_texture textures[TEX_NUMBERS];
 	unsigned int floor_color;
 	unsigned int ceil_color;
 	int map_xsize;
 	int map_ysize;
+	char *line;
 } t_map;
 
 typedef struct s_list

@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 01:53:16 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/19 18:46:24 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/20 19:16:05 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,5 @@ int		parse_texture(t_game *data, const char *id, char *line)
 	texture = get_index(data, id);
 	ft_memset(texture->path, 0, PATH_MAX);
 	ft_memcpy(texture->path, line, path_len);
-	printf("Texture : %s\n", texture->path);
 	return (0);
 }

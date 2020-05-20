@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 02:01:35 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/19 18:08:55 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/20 22:08:16 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,10 @@ int		parse_resolution(t_game *data, const char *id, char *line);
 char	*skip_spaces(const char *s);
 char	*skip_char(const char *s, unsigned char c);
 char	*skip_digits(const char *s);
+int		has_valid_ext(const char *path);
+int		max(int a, int b);
+void	freeline(t_game *data);
+int		is_mapline(const char *line);
 
 # define ID_SIZE 8
 # define RGB_SIZE 3
@@ -82,5 +86,6 @@ static int (*parse_callbacks[CALLBACKS_SIZE])(t_game*, const char*, char*) = {
 // Charset definition
 # define COMMA ','
 # define SPACE ' '
+# define MAP_CHARSET "012NSEW"
 
 #endif
