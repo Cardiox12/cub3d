@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/18 17:39:44 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/20 17:54:01 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/20 18:11:04 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,22 +43,13 @@ void	Debug_log_game(t_game *data, const char *path)
 	printf("Ceil color : %x\n", data->map.ceil_color);
 }
 
-int		parse(t_game *data, const char *path)
+static int infos_parser(t_game *data, int fd)
 {
-	int		err;
 	int		index;
+	int		err;
 	char	*line;
-	int		fd;
 
 	line = NULL;
-	err = ERROR;
-	if (has_valid_ext(path) == FALSE)
-		return (ERROR);
-
-	fd = open(path, O_RDONLY);
-	if (fd < 0)
-		return (ERROR);
-
 	while (get_next_line(fd, &line) > 0)
 	{
 		index = 0;
@@ -74,6 +65,22 @@ int		parse(t_game *data, const char *path)
 			index++;
 		}
 	}
+	return (SUCCESS);
+}
+
+int		parse(t_game *data, const char *path)
+{
+	int err;
+	int	fd;
+
+	err = ERROR;
+	if (has_valid_ext(path) == FALSE)
+		return (ERROR);
+
+	fd = open(path, O_RDONLY);
+	if (fd < 0)
+		return (ERROR);
+	err = infos_parser(data, fd);
 	Debug_log_game(data, path);
 	close(fd);
 	return (err);
