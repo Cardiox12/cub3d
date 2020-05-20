@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 01:45:36 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/19 18:32:43 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/20 17:57:33 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ int		main(int argc, char **argv)
 	
 		if ((int)ret == ERROR)
 			printf("An error has occured\n");
+
 		return (ret);
 		// define_map(&data.map);
 		// init_textures(&data);

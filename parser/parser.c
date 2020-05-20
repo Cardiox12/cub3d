@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/18 17:39:44 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/19 17:14:23 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/20 17:54:01 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,22 @@ int		has_valid_ext(const char *path)
 	if (ft_strncmp(&path[len - ext_len], MAP_EXT, ext_len) != 0)
 		return (FALSE);
 	return (TRUE);
+}
+
+void	Debug_log_game(t_game *data, const char *path)
+{
+	printf("Map path : %s\n", path);
+	printf("================================ TEXTURES : ================================\n");
+	printf("North texture : %s\n", data->map.textures[IDX_NORTH].path);
+	printf("South texture : %s\n", data->map.textures[IDX_SOUTH].path);
+	printf("West texture : %s\n", data->map.textures[IDX_WEST].path);
+	printf("East texture : %s\n", data->map.textures[IDX_EAST].path);
+	printf("Sprite texture : %s\n", data->map.textures[IDX_SPRITE].path);
+	printf("================================ RESOLUTION : ================================\n");
+	printf("Resolution : %ix%i\n", data->map.resolution.x, data->map.resolution.y);
+	printf("================================ COULEURS : ================================\n");
+	printf("Floor color : %x\n", data->map.floor_color);
+	printf("Ceil color : %x\n", data->map.ceil_color);
 }
 
 int		parse(t_game *data, const char *path)
@@ -58,7 +74,7 @@ int		parse(t_game *data, const char *path)
 			index++;
 		}
 	}
-
+	Debug_log_game(data, path);
 	close(fd);
 	return (err);
 }
