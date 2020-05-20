@@ -6,7 +6,7 @@
 #    By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/26 01:37:41 by bbellavi          #+#    #+#              #
-#    Updated: 2020/05/20 20:48:29 by bbellavi         ###   ########.fr        #
+#    Updated: 2020/05/20 23:38:44 by bbellavi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ SRCS	+= $(STRING_DIR)/ft_strjoin.c
 SRCS	+= $(STRING_DIR)/ft_strlen.c
 SRCS	+= $(STRING_DIR)/ft_strlen_to_sep.c
 SRCS	+= $(STRING_DIR)/ft_strdup.c
+SRCS	+= $(STRING_DIR)/ft_realloc.c
 SRCS	+= $(STRING_DIR)/ft_strndup.c
 SRCS	+= $(STRING_DIR)/ft_strncmp.c
 SRCS	+= $(STRING_DIR)/ft_split.c

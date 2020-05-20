@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/18 17:39:44 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/20 22:08:56 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/20 23:49:26 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ int		parse(t_game *data, const char *path)
 		return (ERROR);
 	err.x = infos_parser(data, fd);
 	err.y = map_parser(data, fd);
+	map_processor(data);
 	close(fd);
 	return ((err.x == ERROR || err.y == ERROR) ? ERROR : SUCCESS);
 }

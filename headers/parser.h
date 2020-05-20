@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 02:01:35 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/20 22:08:16 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/21 00:13:51 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int		has_valid_ext(const char *path);
 int		max(int a, int b);
 void	freeline(t_game *data);
 int		is_mapline(const char *line);
+void	map_processor(t_game *data);
 
 # define ID_SIZE 8
 # define RGB_SIZE 3
@@ -87,5 +88,7 @@ static int (*parse_callbacks[CALLBACKS_SIZE])(t_game*, const char*, char*) = {
 # define COMMA ','
 # define SPACE ' '
 # define MAP_CHARSET "012NSEW"
+# define MAP_CHARSET_EXTEND "012NSEW "
+# define EMPTY '0'
 
 #endif
