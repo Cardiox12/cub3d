@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 22:39:22 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/21 07:18:44 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/21 21:33:36 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,45 +35,50 @@ void	map_processor(t_game *data)
 	}
 }
 
+static void	free_objects(t_game *data, char **map, t_stack **stack)
+{
+	String_array_free(map, data->map.map_ysize);
+	Stack_free(stack);
+	free(*stack);
+	free(map);
+}
+
 int		map_is_valid(t_game *data)
 {
-	const int	dx[DELTA_SIZE] = {0, 1, 0, -1};
-	const int	dy[DELTA_SIZE] = {-1, 0, 1, 0};
-	int			index;
-	t_stack		*stack;
-	t_vec		n;
+	t_vec	n;
+	t_vec	pos;
+	t_stack	*stack;
+	int		index;
+	char	**map;
 
 	stack = NULL;
+	map  = String_array_copy(data->map.map, data->map.map_ysize);
 	get_starting_point(data);
-
-	if (data->map.map[(int)data->camera.pos.y][(int)data->camera.pos.x] == TARGET_COLOR)
-		return (FALSE);
-	if (data->map.map[(int)data->camera.pos.y][(int)data->camera.pos.x] != 'N')
-		return (FALSE);
-
 	Stack_push(&stack, to_vec(data->camera.pos));
-
 	while (Stack_height(stack) != 0)
 	{
-		t_vec pos = Stack_pop(&stack);
-
-		data->map.map[pos.y][pos.x] = REPLACE_COLOR;
-
+		pos = Stack_pop(&stack);
+		map[pos.y][pos.x] = REPLACE_COLOR;
 		index = 0;
 		while (index < DELTA_SIZE)
 		{
-			n = (t_vec){pos.x + dx[index], pos.y + dy[index]};
+			n = (t_vec){
+				pos.x + (int[DELTA_SIZE]){0, 1, 0, -1}[index],
+				pos.y + (int[DELTA_SIZE]){-1, 0, 1, 0}[index]
+			};
 			if (n.x >= 0 && n.x < data->map.map_xsize && n.y >= 0 && n.y < data->map.map_ysize)
 			{
-				if (data->map.map[n.y][n.x] == TARGET_COLOR)
+				if (ft_strchr(TARGET_COLORS, map[n.y][n.x]) != NULL)
 					Stack_push(&stack, n);
 			}
 			else
 			{
+				free_objects(data, map, &stack);
 				return (FALSE);
 			}
 			index++;
 		}
 	}
+	free_objects(data, map, &stack);
 	return (TRUE);
 }

@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 01:45:36 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/21 07:25:03 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/21 17:32:19 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ int		main(int argc, char **argv)
 		// return (ret);
 		// define_map(&data.map);
 		init_game(&data);
-		// init_textures(&data);
+		init_textures(&data);
 		
 		data.image.img_ref = mlx_new_image(
 			data.infos.mlx_ptr,
@@ -138,11 +138,11 @@ int		main(int argc, char **argv)
 		data.image.line_count = data.map.resolution.y;
 		
 		get_starting_point(&data);
-		// mlx_hook(data.infos.win_ptr, KEY_PRESS_CODE, KEY_PRESS_MASK, key_pressed, &data);
-		// mlx_hook(data.infos.win_ptr, KEY_RELEASE_CODE, KEY_RELEASE_MASK, key_released, &data);
+		mlx_hook(data.infos.win_ptr, KEY_PRESS_CODE, KEY_PRESS_MASK, key_pressed, &data);
+		mlx_hook(data.infos.win_ptr, KEY_RELEASE_CODE, KEY_RELEASE_MASK, key_released, &data);
 
-		// mlx_loop_hook(data.infos.mlx_ptr, loop, &data);
-		// mlx_loop(data.infos.mlx_ptr);
+		mlx_loop_hook(data.infos.mlx_ptr, loop, &data);
+		mlx_loop(data.infos.mlx_ptr);
 	}
 	return (0);
 }

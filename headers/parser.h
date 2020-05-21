@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 02:01:35 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/21 07:07:33 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/21 21:11:52 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,10 @@ t_stack *Stack_push(t_stack **root, t_vec pos);
 t_vec	Stack_pop(t_stack **root);
 t_vec	Stack_peek(t_stack *root);
 int 	Stack_height(t_stack *root);
+void	Stack_free(t_stack **root);
+
+void 	String_array_free(char **strs, int size);
+char	**String_array_copy(char **strs, int size);
 
 # define ID_SIZE 8
 # define RGB_SIZE 3
@@ -106,6 +110,7 @@ static int (*parse_callbacks[CALLBACKS_SIZE])(t_game*, const char*, char*) = {
 # define EMPTY '0'
 # define REPLACE_COLOR 'x'
 # define TARGET_COLOR '0'
+# define TARGET_COLORS "02NSEW"
 # define DELTA_SIZE 4
 
 #endif

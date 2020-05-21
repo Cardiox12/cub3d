@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 14:33:13 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/20 20:25:22 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/21 20:38:33 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #define TEX_NUMBERS 5
 #define PATH_MAX 1024
 #define MAP_SIZE 20000
+# define DELTA_SIZE 4
 
 typedef struct s_infos
 {
