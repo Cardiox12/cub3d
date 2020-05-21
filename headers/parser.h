@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 02:01:35 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/21 00:13:51 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/21 07:07:33 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #   define FT_PARSER_H
 
 #include <fcntl.h>
+#include <limits.h>
 #include "types.h"
 #include "graphics_utils.h"
 #include "ft_string.h"
@@ -26,6 +27,12 @@ typedef struct	s_id
 	char		*id;
 	int			index;
 }				t_id;
+
+typedef struct	s_stack
+{
+	struct s_stack	*next;
+	t_vec			pos;
+}				t_stack;
 
 int		parse(t_game *data, const char *path);
 
@@ -41,6 +48,13 @@ int		max(int a, int b);
 void	freeline(t_game *data);
 int		is_mapline(const char *line);
 void	map_processor(t_game *data);
+int		map_is_valid(t_game *data);
+
+t_stack	*Stack_new_node(t_vec pos);
+t_stack *Stack_push(t_stack **root, t_vec pos);
+t_vec	Stack_pop(t_stack **root);
+t_vec	Stack_peek(t_stack *root);
+int 	Stack_height(t_stack *root);
 
 # define ID_SIZE 8
 # define RGB_SIZE 3
@@ -90,5 +104,8 @@ static int (*parse_callbacks[CALLBACKS_SIZE])(t_game*, const char*, char*) = {
 # define MAP_CHARSET "012NSEW"
 # define MAP_CHARSET_EXTEND "012NSEW "
 # define EMPTY '0'
+# define REPLACE_COLOR 'x'
+# define TARGET_COLOR '0'
+# define DELTA_SIZE 4
 
 #endif
