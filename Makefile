@@ -6,7 +6,7 @@
 #    By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/25 00:45:19 by bbellavi          #+#    #+#              #
-#    Updated: 2020/05/21 20:03:28 by bbellavi         ###   ########.fr        #
+#    Updated: 2020/05/22 22:05:15 by bbellavi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,7 @@ SRCS		+= $(PARSE_DIR)/parse_utils_1.c
 SRCS		+= $(PARSE_DIR)/parse_utils_2.c
 SRCS		+= $(PARSE_DIR)/parse_utils_3.c
 SRCS		+= $(PARSE_DIR)/parse_utils_4.c
+SRCS		+= $(PARSE_DIR)/errors.c
 SRCS		+= $(PARSE_DIR)/map_processor.c
 SRCS		+= $(PARSE_DIR)/color_parser.c
 SRCS		+= $(PARSE_DIR)/texture_parser.c

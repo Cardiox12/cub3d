@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/18 17:39:44 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/21 21:44:14 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/22 23:30:07 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,29 @@
 // Remove when final push
 #include <stdio.h>
 
+void		Debug_print_bits(unsigned int val)
+{
+	int index;
+
+	index = sizeof(val) * 8;
+	while (index >= 0)
+	{
+		--index;
+		if (val & (1U << index))
+			printf("1");
+		else
+			printf("0");
+	}
+	printf("\n");
+}
+
 static int infos_parser(t_game *data, int fd)
 {
-	int		index;
-	int		err;
+	unsigned int	err;
+	int				index;
 
 	data->map.line = NULL;
+	err = 0;
 	while (get_next_line(fd, &data->map.line) > 0 && !is_mapline(data->map.line))
 	{
 		index = 0;
@@ -28,16 +45,15 @@ static int infos_parser(t_game *data, int fd)
 		{
 			if (ft_strncmp(data->map.line, ids[index].id, ft_strlen(ids[index].id)) == 0)
 			{
-				err = parse_callbacks[ids[index].index](data, ids[index].id, data->map.line);
-				if (err < 0)
-					return (err);
+				err |= parse_callbacks[ids[index].index](data, ids[index].id, data->map.line);
+				data->map.specs_number++;
 				break;
 			}
 			index++;
 		}
 		freeline(data);
 	}
-	return (SUCCESS);
+	return ((err) ? err : RET_NO_ERROR);
 }
 
 static int map_parser(t_game *data, int fd)
@@ -61,24 +77,26 @@ static int map_parser(t_game *data, int fd)
 	data->map.map_ysize = index;
 	data->map.map_xsize = maxlen;
 	data->map.map[index] = NULL;
-	return (SUCCESS);
+	return (RET_NO_ERROR);
 }
 
 int		parse(t_game *data, const char *path)
 {
-	t_vec err;
+	unsigned int errors;
 	int	fd;
 
+	errors = 0;
 	if (has_valid_ext(path) == FALSE)
 		return (ERROR);
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
 		return (ERROR);
-	err.x = infos_parser(data, fd);
-	err.y = map_parser(data, fd);
+	errors |= infos_parser(data, fd);
+	errors |= map_parser(data, fd);
 	map_processor(data);
-	const int is_valid = map_is_valid(data);
-	printf((is_valid) ? "Map is closed!\n" : "Map isn't closed properly!\n");
+	errors |= map_is_valid(data);
 	close(fd);
-	return ((err.x == ERROR || err.y == ERROR) ? ERROR : SUCCESS);
+	if (errors)
+		print_errors(errors, TRUE);
+	return (errors);
 }

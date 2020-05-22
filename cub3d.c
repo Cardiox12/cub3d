@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 01:45:36 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/22 14:39:11 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/22 23:30:26 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,24 +22,6 @@
 #define FIELD_OF_VIEW 66.0f
 #define HEIGHT 10
 #define WIDTH 10
-
-void	define_map(t_map *map)
-{
-	// static char *str_map[HEIGHT] = {
-	// 	"11111111111111",
-	// 	"10000002000001",
-	// 	"10003002000001",
-	// 	"10N00000040001",
-	// 	"10003002000001",
-	// 	"10000002000001",
-	// 	"11111111111111",
-	// 	NULL
-	// };
-
-	// map->map = str_map;
-	map->map_xsize = 14;
-	map->map_ysize = 7;
-}
 
 void	init_textures(t_game *data)
 {
@@ -81,6 +63,7 @@ void	init_game(t_game *data)
 	);
 	data->camera.field_of_view = FIELD_OF_VIEW;
 	data->camera.debug = FALSE;
+	data->map.specs_number = 0;
 }
 
 void	Debug_log_game(t_game *data, const char *path)
@@ -110,10 +93,12 @@ int		main(int argc, char **argv)
 	
 	if (argc > 1)
 	{
-		const unsigned int ret = parse(&data, argv[1]);
+		const int ret = parse(&data, argv[1]);
 	
-		if ((int)ret == ERROR)
-			printf("An error has occured\n");
+		if (ret)
+		{
+			exit(0);
+		}
 		// else
 		// 	Debug_log_game(&data, argv[1]);
 		

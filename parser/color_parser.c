@@ -6,13 +6,11 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 01:51:53 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/19 17:22:57 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/22 18:30:50 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
-
-#include <stdio.h>
 
 int		parse_color(t_game *data, const char *id, char *line)
 {	
@@ -34,7 +32,7 @@ int		parse_color(t_game *data, const char *id, char *line)
 		colors[index] = ft_atoi(line);
 		// ERROR: value out of range
 		if (colors[index] > 255)
-			return (ERROR);
+			return (CODE_ERR_COLOR_OUT_OF_RANGE);
 		line = skip_digits(line);
 		line = skip_spaces(line);
 		line = skip_char(line, COMMA);
@@ -43,7 +41,7 @@ int		parse_color(t_game *data, const char *id, char *line)
 	}
 	// ERROR: inconsistent number of value, must be 3 value representing RGB
 	if (*line != '\0' || index != RGB_SIZE)
-		return (ERROR);
+		return (CODE_ERR_COLOR_MISSING);
 	*color = ft_encode_rgb(colors[0], colors[1], colors[2]);
-	return (SUCCESS);
+	return (RET_NO_ERROR);
 }

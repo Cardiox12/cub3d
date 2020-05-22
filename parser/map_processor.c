@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 22:39:22 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/22 15:07:33 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/22 23:24:55 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,8 @@ int		map_is_valid(t_game *data)
 	while (Stack_height(stack) != 0)
 	{
 		if (flood_fill(data, &stack, map) == FALSE)
-			return (FALSE);
+			return (CODE_ERR_MAP_CLOSE_ERROR);
 	}
 	free_objects(data, map, &stack);
-	return (TRUE);
+	return (RET_NO_ERROR);
 }

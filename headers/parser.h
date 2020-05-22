@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 02:01:35 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/21 21:11:52 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/22 23:25:43 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,12 @@ typedef struct	s_stack
 	t_vec			pos;
 }				t_stack;
 
+typedef struct	s_errors
+{
+	unsigned int	mask;
+	char			*strerror;
+}				t_errors;
+
 int		parse(t_game *data, const char *path);
 
 int		parse_texture(t_game *data, const char *id, char *line);
@@ -60,9 +66,12 @@ void	Stack_free(t_stack **root);
 void 	String_array_free(char **strs, int size);
 char	**String_array_copy(char **strs, int size);
 
+void	print_errors(unsigned int errors, int listall);
+
 # define ID_SIZE 8
 # define RGB_SIZE 3
 # define CALLBACKS_SIZE 3
+# define ERR_ARRAY_SIZE 8
 
 
 enum	callback_index
@@ -98,8 +107,8 @@ static int (*parse_callbacks[CALLBACKS_SIZE])(t_game*, const char*, char*) = {
 	parse_texture
 };
 
-# define ERROR -1
-# define SUCCESS 1
+# define RET_ERROR 1
+# define RET_NO_ERROR 0
 # define MAP_EXT ".cub"
 
 // Charset definition
@@ -112,5 +121,28 @@ static int (*parse_callbacks[CALLBACKS_SIZE])(t_game*, const char*, char*) = {
 # define TARGET_COLOR '0'
 # define TARGET_COLORS "02NSEW"
 # define DELTA_SIZE 4
+
+enum	e_err_code
+{
+	CODE_ERR_MAP_CLOSE_ERROR	= (1U),
+	CODE_ERR_MAP_CONFIG_ERROR	= (1U << 1),
+	CODE_ERR_COLOR_OUT_OF_RANGE = (1U << 2),
+	CODE_ERR_COLOR_MISSING		= (1U << 3),
+	CODE_ERR_COLOR_BAD_FORMAT	= (1U << 4),
+	CODE_ERR_TEXTURE_BAD_INDENT = (1U << 5),
+	CODE_ERR_RESOLUTION_MISSING	= (1U << 6),
+	CODE_ERR_CONF_OPEN_ERROR	= (1U << 7)
+};
+
+static const t_errors errors_array[ERR_ARRAY_SIZE] = {
+	{CODE_ERR_MAP_CLOSE_ERROR, "Map isn't closed properly."},
+	{CODE_ERR_MAP_CONFIG_ERROR, "Map contains incorrect characters."},
+	{CODE_ERR_COLOR_OUT_OF_RANGE, "Color out of range, should be [0 ; 255]."},
+	{CODE_ERR_COLOR_MISSING, "Missing color."},
+	{CODE_ERR_COLOR_BAD_FORMAT, "Color not well formatted."},
+	{CODE_ERR_TEXTURE_BAD_INDENT, "Texture bad indented."},
+	{CODE_ERR_RESOLUTION_MISSING, "Resolution is missing one parameter."},
+	{CODE_ERR_CONF_OPEN_ERROR, "Error while opening configuration file."}
+};
 
 #endif
