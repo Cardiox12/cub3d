@@ -6,13 +6,13 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/22 15:45:25 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/23 00:14:15 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/23 00:35:08 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-void	Errors_print(unsigned int errors, int listall)
+int		Errors_print(unsigned int errors, int listall)
 {
 	int index;
 
@@ -24,8 +24,9 @@ void	Errors_print(unsigned int errors, int listall)
 			ft_putstr(errors_array[index].strerror);
 			ft_putchar('\n');
 			if (!listall)
-				return;
+				return errors_array[index].mask;
 		}
 		index++;
 	}
+	return (errors_array[index].mask);
 }

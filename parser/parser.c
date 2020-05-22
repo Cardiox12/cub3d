@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/18 17:39:44 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/23 00:14:01 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/23 00:35:47 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,10 +87,7 @@ int		parse(t_game *data, const char *path)
 
 	errors = 0;
 	if (has_valid_ext(path) == FALSE)
-	{
-		Errors_print(CODE_ERR_BAD_FILE_EXT, FALSE);
-		return (CODE_ERR_BAD_FILE_EXT);
-	}
+		return (Errors_print(CODE_ERR_BAD_FILE_EXT, FALSE));
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
 	{

@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 02:01:35 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/23 00:14:19 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/23 00:35:23 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	Stack_free(t_stack **root);
 void 	String_array_free(char **strs, int size);
 char	**String_array_copy(char **strs, int size);
 
-void	Errors_print(unsigned int errors, int listall);
+int		Errors_print(unsigned int errors, int listall);
 
 # define ID_SIZE 8
 # define RGB_SIZE 3
