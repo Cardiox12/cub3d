@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 14:33:13 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/22 22:23:54 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/22 23:50:25 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,5 +203,7 @@ enum	texture_index
 
 #define TRUE 1
 #define FALSE 0
+
+# define EXE_NAME "cub3d"
 
 #endif

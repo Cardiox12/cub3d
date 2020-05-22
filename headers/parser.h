@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 02:01:35 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/22 23:25:43 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/23 00:14:19 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 #include <fcntl.h>
 #include <limits.h>
+#include <stdio.h>
 #include "types.h"
 #include "graphics_utils.h"
 #include "ft_string.h"
@@ -66,12 +67,13 @@ void	Stack_free(t_stack **root);
 void 	String_array_free(char **strs, int size);
 char	**String_array_copy(char **strs, int size);
 
-void	print_errors(unsigned int errors, int listall);
+void	Errors_print(unsigned int errors, int listall);
 
 # define ID_SIZE 8
 # define RGB_SIZE 3
 # define CALLBACKS_SIZE 3
-# define ERR_ARRAY_SIZE 8
+# define ERR_ARRAY_SIZE 9
+
 
 
 enum	callback_index
@@ -131,18 +133,20 @@ enum	e_err_code
 	CODE_ERR_COLOR_BAD_FORMAT	= (1U << 4),
 	CODE_ERR_TEXTURE_BAD_INDENT = (1U << 5),
 	CODE_ERR_RESOLUTION_MISSING	= (1U << 6),
-	CODE_ERR_CONF_OPEN_ERROR	= (1U << 7)
+	CODE_ERR_CONF_OPEN_ERROR	= (1U << 7),
+	CODE_ERR_BAD_FILE_EXT		= (1U << 8)
 };
 
 static const t_errors errors_array[ERR_ARRAY_SIZE] = {
-	{CODE_ERR_MAP_CLOSE_ERROR, "Map isn't closed properly."},
-	{CODE_ERR_MAP_CONFIG_ERROR, "Map contains incorrect characters."},
-	{CODE_ERR_COLOR_OUT_OF_RANGE, "Color out of range, should be [0 ; 255]."},
-	{CODE_ERR_COLOR_MISSING, "Missing color."},
-	{CODE_ERR_COLOR_BAD_FORMAT, "Color not well formatted."},
-	{CODE_ERR_TEXTURE_BAD_INDENT, "Texture bad indented."},
-	{CODE_ERR_RESOLUTION_MISSING, "Resolution is missing one parameter."},
-	{CODE_ERR_CONF_OPEN_ERROR, "Error while opening configuration file."}
+	{CODE_ERR_MAP_CLOSE_ERROR, "Map isn't closed properly"},
+	{CODE_ERR_MAP_CONFIG_ERROR, "Map contains incorrect characters"},
+	{CODE_ERR_COLOR_OUT_OF_RANGE, "Color out of range, should be [0 ; 255]"},
+	{CODE_ERR_COLOR_MISSING, "Missing color"},
+	{CODE_ERR_COLOR_BAD_FORMAT, "Color not well formatted"},
+	{CODE_ERR_TEXTURE_BAD_INDENT, "Texture bad indented"},
+	{CODE_ERR_RESOLUTION_MISSING, "Resolution is missing one parameter"},
+	{CODE_ERR_CONF_OPEN_ERROR, "Error while opening configuration file"},
+	{CODE_ERR_BAD_FILE_EXT, "File extension not valid, .cub expected"}
 };
 
 #endif
