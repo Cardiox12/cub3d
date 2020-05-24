@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/18 17:39:44 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/23 00:35:47 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/25 00:55:49 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,9 @@ static int infos_parser(t_game *data, int fd)
 		}
 		freeline(data);
 	}
-	return ((err) ? err : RET_NO_ERROR);
+	if (data->map.specs_number != SPECS_NUMBER)
+		err |= CODE_ERR_INCONSISTENT_SPECS;
+	return (err);
 }
 
 static int map_parser(t_game *data, int fd)
@@ -86,15 +88,20 @@ int		parse(t_game *data, const char *path)
 	int	fd;
 
 	errors = 0;
+	data->map.specs_number = 0;
 	if (has_valid_ext(path) == FALSE)
 		return (Errors_print(CODE_ERR_BAD_FILE_EXT, FALSE));
-	fd = open(path, O_RDONLY);
-	if (fd < 0)
+	if ((fd = open(path, O_RDONLY)) < 0)
 	{
 		perror(EXE_NAME);
-		return (ERROR);
+		return (RET_ERROR);
 	}
 	errors |= infos_parser(data, fd);
+	if (errors & CODE_ERR_INCONSISTENT_SPECS)
+	{
+		close(fd);
+		return (Errors_print(errors, TRUE));
+	}
 	errors |= map_parser(data, fd);
 	map_processor(data);
 	errors |= map_is_valid(data);

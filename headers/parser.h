@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 02:01:35 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/23 00:35:23 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/25 00:15:49 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,8 @@ int		Errors_print(unsigned int errors, int listall);
 # define ID_SIZE 8
 # define RGB_SIZE 3
 # define CALLBACKS_SIZE 3
-# define ERR_ARRAY_SIZE 9
-
+# define ERR_ARRAY_SIZE 11
+# define SPECS_NUMBER 8
 
 
 enum	callback_index
@@ -126,15 +126,17 @@ static int (*parse_callbacks[CALLBACKS_SIZE])(t_game*, const char*, char*) = {
 
 enum	e_err_code
 {
-	CODE_ERR_MAP_CLOSE_ERROR	= (1U),
-	CODE_ERR_MAP_CONFIG_ERROR	= (1U << 1),
-	CODE_ERR_COLOR_OUT_OF_RANGE = (1U << 2),
-	CODE_ERR_COLOR_MISSING		= (1U << 3),
-	CODE_ERR_COLOR_BAD_FORMAT	= (1U << 4),
-	CODE_ERR_TEXTURE_BAD_INDENT = (1U << 5),
-	CODE_ERR_RESOLUTION_MISSING	= (1U << 6),
-	CODE_ERR_CONF_OPEN_ERROR	= (1U << 7),
-	CODE_ERR_BAD_FILE_EXT		= (1U << 8)
+	CODE_ERR_MAP_CLOSE_ERROR		= (1U),
+	CODE_ERR_MAP_CONFIG_ERROR		= (1U << 1),
+	CODE_ERR_COLOR_OUT_OF_RANGE 	= (1U << 2),
+	CODE_ERR_COLOR_MISSING			= (1U << 3),
+	CODE_ERR_COLOR_BAD_FORMAT		= (1U << 4),
+	CODE_ERR_TEXTURE_BAD_INDENT 	= (1U << 5),
+	CODE_ERR_RESOLUTION_MISSING		= (1U << 6),
+	CODE_ERR_CONF_OPEN_ERROR		= (1U << 7),
+	CODE_ERR_BAD_FILE_EXT			= (1U << 8),
+	CODE_ERR_INCONSISTENT_SPECS 	= (1U << 9),
+	CODE_ERR_BAD_CHARS_IN_COLORS	= (1U << 10)
 };
 
 static const t_errors errors_array[ERR_ARRAY_SIZE] = {
@@ -146,7 +148,9 @@ static const t_errors errors_array[ERR_ARRAY_SIZE] = {
 	{CODE_ERR_TEXTURE_BAD_INDENT, "Texture bad indented"},
 	{CODE_ERR_RESOLUTION_MISSING, "Resolution is missing one parameter"},
 	{CODE_ERR_CONF_OPEN_ERROR, "Error while opening configuration file"},
-	{CODE_ERR_BAD_FILE_EXT, "File extension not valid, .cub expected"}
+	{CODE_ERR_BAD_FILE_EXT, "File extension not valid, .cub expected"},
+	{CODE_ERR_INCONSISTENT_SPECS, "Inconsistent number of specifiers"},
+	{CODE_ERR_BAD_CHARS_IN_COLORS, "Bad characters in color field"}
 };
 
 #endif

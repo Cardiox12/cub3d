@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 01:51:53 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/22 23:35:18 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/25 00:53:16 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,30 +21,37 @@ static char *skip(char *line)
 	return (line);
 }
 
+static void get_color_ptr(t_game *data, const char *id, unsigned int **color)
+{
+	if (ft_strncmp(id, ID_CEIL, 1) == 0)
+		*color = &data->map.ceil_color;
+	else
+		*color = &data->map.floor_color;
+}
+
 int		parse_color(t_game *data, const char *id, char *line)
 {	
 	const size_t	id_len = ft_strlen(id);
-	unsigned int	colors[RGB_SIZE];
 	unsigned int	*color;
+	int				colors[RGB_SIZE];
 	int				index;
 
 	index = 0;
 	line = &line[id_len];
+	get_color_ptr(data, id, &color);
 	ft_memset(colors, 0, sizeof(int) * RGB_SIZE);
-	if (ft_strncmp(id, ID_CEIL, 1) == 0)
-		color = &data->map.ceil_color;
-	else
-		color = &data->map.floor_color;
 	line = skip_spaces(line);
 	while (*line != '\0' && ft_isdigit(*line) && index < RGB_SIZE)
 	{
 		colors[index] = ft_atoi(line);
-		if (colors[index] > 255)
+		if (colors[index] > 255 || colors[index] < 0)
 			return (CODE_ERR_COLOR_OUT_OF_RANGE);
-			line = skip(line);
+		line = skip(line);
 		index++;
 	}
-	if (*line != '\0' || index != RGB_SIZE)
+	if (*line != '\0')
+		return (CODE_ERR_BAD_CHARS_IN_COLORS);
+	if (index != RGB_SIZE)
 		return (CODE_ERR_COLOR_MISSING);
 	*color = ft_encode_rgb(colors[0], colors[1], colors[2]);
 	return (RET_NO_ERROR);
