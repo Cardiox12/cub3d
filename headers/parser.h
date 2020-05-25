@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 02:01:35 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/25 00:15:49 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/25 02:29:56 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ static int (*parse_callbacks[CALLBACKS_SIZE])(t_game*, const char*, char*) = {
 # define MAP_EXT ".cub"
 
 // Charset definition
+# define ERROR_BASE_MSG "Error\n"
 # define COMMA ','
 # define SPACE ' '
 # define MAP_CHARSET "012NSEW"
