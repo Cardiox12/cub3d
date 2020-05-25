@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 01:45:36 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/25 06:18:21 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/25 06:49:48 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ int		main(int argc, char **argv)
 	
 		if (ret)
 		{
+			while (1);
 			exit(0);
 		}
 	

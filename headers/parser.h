@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 02:01:35 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/25 06:40:29 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/25 06:55:53 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int		Errors_print(unsigned int errors, int listall);
 # define ID_SIZE 8
 # define RGB_SIZE 3
 # define CALLBACKS_SIZE 3
-# define ERR_ARRAY_SIZE 13
+# define ERR_ARRAY_SIZE 14
 # define SPECS_NUMBER 8
 
 
@@ -138,8 +138,9 @@ enum	e_err_code
 	CODE_ERR_BAD_FILE_EXT			= (1U << 8),
 	CODE_ERR_INCONSISTENT_SPECS 	= (1U << 9),
 	CODE_ERR_BAD_CHARS_IN_COLORS	= (1U << 10),
-	CODE_ERR_DUPLICATE_SPECS		= (1U << 12),
-	CODE_ERR_TEXTURE_PATH_MISSING	= (1U << 13)
+	CODE_ERR_DUPLICATE_SPECS		= (1U << 11),
+	CODE_ERR_TEXTURE_PATH_MISSING	= (1U << 12),
+	CODE_ERR_BAD_SPEC				= (1U << 13),
 };
 
 static const t_errors errors_array[ERR_ARRAY_SIZE] = {
@@ -155,7 +156,8 @@ static const t_errors errors_array[ERR_ARRAY_SIZE] = {
 	{CODE_ERR_INCONSISTENT_SPECS, "Inconsistent number of specifiers"},
 	{CODE_ERR_BAD_CHARS_IN_COLORS, "Bad characters in color field"},
 	{CODE_ERR_DUPLICATE_SPECS, "Duplicate specs"},
-	{CODE_ERR_TEXTURE_PATH_MISSING, "Texture path is missing"}
+	{CODE_ERR_TEXTURE_PATH_MISSING, "Texture path is missing"},
+	{CODE_ERR_BAD_SPEC, "Bad specifier"}
 };
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/18 17:39:44 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/25 06:40:57 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/25 06:56:12 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ static int infos_parser(t_game *data, int fd)
 				data->map.specs_number++;
 				break;
 			}
+			else if (*skip_spaces(data->map.line) != '\0')
+				err |= CODE_ERR_BAD_SPEC;
 			index++;
 		}
 		freeline(data);
