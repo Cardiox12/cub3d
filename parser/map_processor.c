@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 22:39:22 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/22 23:24:55 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/25 07:10:34 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	map_processor(t_game *data)
 		while (i.x < data->map.map_xsize)
 		{
 			if (data->map.map[i.y][i.x] == SPACE || data->map.map[i.y][i.x] == '\0')
-				data->map.map[i.y][i.x] = EMPTY;
+				data->map.map[i.y][i.x] = PREPROCESS_REPLACE_COLOR;
 			i.x++;
 		}
 		i.y++;

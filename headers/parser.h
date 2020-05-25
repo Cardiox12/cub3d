@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 02:01:35 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/25 06:55:53 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/25 07:25:03 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void	freeline(t_game *data);
 int		is_mapline(const char *line);
 void	map_processor(t_game *data);
 int		map_is_valid(t_game *data);
+int		is_spec(const char *id);
 
 t_stack	*Stack_new_node(t_vec pos);
 t_stack *Stack_push(t_stack **root, t_vec pos);
@@ -122,7 +123,8 @@ static int (*parse_callbacks[CALLBACKS_SIZE])(t_game*, const char*, char*) = {
 # define EMPTY '0'
 # define REPLACE_COLOR 'x'
 # define TARGET_COLOR '0'
-# define TARGET_COLORS "02NSEW"
+# define PREPROCESS_REPLACE_COLOR '9'
+# define TARGET_COLORS "02NSEW9"
 # define DELTA_SIZE 4
 
 enum	e_err_code

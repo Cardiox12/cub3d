@@ -5,9 +5,8 @@ WE	./assets/colorstone.xpm
 EA	./assets/colorstone.xpm
 S	./assets/colorstone.xpm
 NO	./assets/colorstone.xpm
-U toto
 F 139, 90, 14
-C 135, 206, 10
+C 135, 206, 135
 
         1111111111111111111111111
         1000000000110000000000001
