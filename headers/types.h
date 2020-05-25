@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 14:33:13 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/25 04:41:32 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/25 17:06:02 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,11 @@ typedef struct	s_minmap
 	unsigned int size;
 	unsigned int square_size;
 }				t_minimap;
+
+// typedef struct	s_sprite
+// {
+
+// }				t_sprite;
 
 typedef struct s_map
 {

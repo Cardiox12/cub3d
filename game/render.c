@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 20:33:14 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/24 15:42:22 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/25 17:08:31 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ void	set_heading(t_camera *player, char cardinal_p)
 	else if (cardinal_p == S_EAST)
 		angle = to_radians(ANGLE_east);
 
-	player->plan_front = rotate(player->plan_front, angle, CLOCKWISE);
-	player->plan_right = rotate(player->plan_right, angle, CLOCKWISE);
+	player->plan_front = rotate(player->plan_front, angle + to_radians(1), CLOCKWISE);
+	player->plan_right = rotate(player->plan_right, angle + to_radians(1), CLOCKWISE);
 	
 	Rays_rotate(player->rays, angle, CLOCKWISE);
 	init_rays(player);
