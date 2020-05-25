@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 02:01:35 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/25 02:29:56 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/25 05:54:37 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
 
 typedef struct	s_id
 {
-	char		*id;
-	int			index;
+	char			*id;
+	int				index;
 }				t_id;
 
 typedef struct	s_stack
@@ -51,7 +51,6 @@ char	*skip_spaces(const char *s);
 char	*skip_char(const char *s, unsigned char c);
 char	*skip_digits(const char *s);
 int		has_valid_ext(const char *path);
-int		max(int a, int b);
 void	freeline(t_game *data);
 int		is_mapline(const char *line);
 void	map_processor(t_game *data);

@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 14:33:13 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/24 19:01:17 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/25 04:41:32 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,14 +67,20 @@ typedef struct s_texture
 	int height;
 } t_texture;
 
-typedef struct s_textures
+typedef struct	s_textures
 {
 	t_texture north;
 	t_texture south;
 	t_texture west;
 	t_texture east;
 	t_texture sprite;
-} t_textures;
+}				t_textures;
+
+typedef struct	s_minmap
+{
+	unsigned int size;
+	unsigned int square_size;
+}				t_minimap;
 
 typedef struct s_map
 {
@@ -87,6 +93,7 @@ typedef struct s_map
 	int map_ysize;
 	char *line;
 	unsigned int specs_number;
+	unsigned int square_size;
 } t_map;
 
 typedef struct s_list
@@ -179,6 +186,7 @@ typedef struct s_game
 	t_infos infos;
 	t_image image;
 	t_map map;
+	t_minimap minimap;
 } t_game;
 
 enum e_facing
@@ -198,11 +206,13 @@ enum	texture_index
 	IDX_SPRITE
 };
 
-#define CLOCKWISE 1
-#define ANTI_CLOCKWISE 0
+# define CLOCKWISE 1
+# define ANTI_CLOCKWISE 0
 
-#define TRUE 1
-#define FALSE 0
+# define TRUE 1
+# define FALSE 0
+
+# define MINIMAP_RATIO 30
 
 # define EXE_NAME "cub3d"
 

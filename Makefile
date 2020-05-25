@@ -6,7 +6,7 @@
 #    By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/25 00:45:19 by bbellavi          #+#    #+#              #
-#    Updated: 2020/05/22 22:05:15 by bbellavi         ###   ########.fr        #
+#    Updated: 2020/05/25 03:40:11 by bbellavi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ SRCS		+= $(UTILS_DIR)/vectors.c
 SRCS		+= $(UTILS_DIR)/rotate.c
 SRCS		+= $(UTILS_DIR)/angle.c
 SRCS		+= $(UTILS_DIR)/is_wall.c
+SRCS		+= $(UTILS_DIR)/utils1.c
 SRCS		+= $(GAME_DIR)/render.c
 SRCS		+= $(GAME_DIR)/loop.c
 SRCS		+= $(GAME_DIR)/image.c

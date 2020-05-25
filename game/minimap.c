@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 16:35:22 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/11 12:27:14 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/25 05:59:39 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,15 +50,15 @@ void	minimap(t_game *data)
 	t_vec	s;
 
 	vi.y = 0;
-	s = (typeof(s)){SQUARE_SIZE, SQUARE_SIZE};
-	cp = (typeof(cp)){data->camera.pos.x * SQUARE_SIZE, data->camera.pos.y * SQUARE_SIZE};
+	s = (typeof(s)){data->minimap.square_size, data->minimap.square_size};
+	cp = (typeof(cp)){data->camera.pos.x * data->minimap.square_size, data->camera.pos.y * data->minimap.square_size};
 	while (vi.y < data->map.map_ysize)
 	{
 		vi.x = 0;
 		while (vi.x < data->map.map_xsize)
 		{
-			i.x = vi.x * SQUARE_SIZE;
-			i.y = vi.y * SQUARE_SIZE;
+			i.x = vi.x * data->minimap.square_size;
+			i.y = vi.y * data->minimap.square_size;
 			draw_rect(i, s, &data->image, (is_wall(data->map.map[vi.y][vi.x])) ? 0x000000 : 0xFFFFFF);
 			vi.x++;
 		}

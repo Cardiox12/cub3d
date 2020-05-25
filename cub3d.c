@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 01:45:36 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/22 23:38:17 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/25 06:00:06 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,11 @@ void	init_textures(t_game *data)
 
 void	init_game(t_game *data)
 {
+	unsigned int minres;
+	unsigned int minsize;
+
+	minres = min(data->map.resolution.x, data->map.resolution.y);
+	minsize = min(data->map.map_xsize, data->map.map_ysize);
 	data->infos.mlx_ptr = mlx_init();
 	data->infos.win_ptr = mlx_new_window(
 		data->infos.mlx_ptr,
@@ -64,6 +69,8 @@ void	init_game(t_game *data)
 	data->camera.field_of_view = FIELD_OF_VIEW;
 	data->camera.debug = FALSE;
 	data->map.specs_number = 0;
+	data->minimap.size = minres * ((float)MINIMAP_RATIO / 100);
+	data->minimap.square_size = data->minimap.size / minsize;
 }
 
 void	Debug_log_game(t_game *data, const char *path)

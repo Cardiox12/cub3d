@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 03:18:15 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/18 19:17:13 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/25 03:44:48 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,8 @@ float	get_angle2(t_vec2 a, t_vec2 b);
 float	to_radians(float degrees);
 float	to_degrees(float radians);
 int     is_wall(int c);
+
+int		max(int a, int b);
+int		min(int a, int b);
 
 #endif

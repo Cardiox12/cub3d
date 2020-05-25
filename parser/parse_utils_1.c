@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 02:08:44 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/21 00:19:52 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/25 03:40:50 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,4 @@ int		has_valid_ext(const char *path)
 	if (ft_strncmp(&path[len - ext_len], MAP_EXT, ext_len) != 0)
 		return (FALSE);
 	return (TRUE);
-}
-
-int		max(int a, int b)
-{
-	return ((a > b) ? a : b);
 }
