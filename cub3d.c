@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 01:45:36 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/25 06:00:06 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/25 06:18:21 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,11 @@ void	init_textures(t_game *data)
 
 	if (text[0].image.img_ref != NULL && text[1].image.img_ref && text[2].image.img_ref && text[3].image.img_ref)
 	{
-		// printf("Sucessfuly loaded textures.\n");
-		// printf("\tImage : %s of dimensions %ix%i\n", text[0].path, text[0].width, text[0].height);
-		// printf("\tImage : %s of dimensions %ix%i\n", text[1].path, text[1].width, text[1].height);
-		// printf("\tImage : %s of dimensions %ix%i\n", text[2].path, text[2].width, text[2].height);
-		// printf("\tImage : %s of dimensions %ix%i\n", text[3].path, text[3].width, text[3].height);
+		printf("Sucessfuly loaded textures.\n");
+		printf("\tImage : %s of dimensions %ix%i\n", text[0].path, text[0].width, text[0].height);
+		printf("\tImage : %s of dimensions %ix%i\n", text[1].path, text[1].width, text[1].height);
+		printf("\tImage : %s of dimensions %ix%i\n", text[2].path, text[2].width, text[2].height);
+		printf("\tImage : %s of dimensions %ix%i\n", text[3].path, text[3].width, text[3].height);
 	}
 	else
 	{
@@ -106,10 +106,7 @@ int		main(int argc, char **argv)
 		{
 			exit(0);
 		}
-		// else
-		// 	Debug_log_game(&data, argv[1]);
-		
-		// return (ret);
+	
 		// define_map(&data.map);
 		init_game(&data);
 		init_textures(&data);

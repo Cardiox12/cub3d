@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 02:01:35 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/25 05:54:37 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/25 06:40:29 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct	s_id
 {
 	char			*id;
 	int				index;
+	unsigned int	flag;
 }				t_id;
 
 typedef struct	s_stack
@@ -71,7 +72,7 @@ int		Errors_print(unsigned int errors, int listall);
 # define ID_SIZE 8
 # define RGB_SIZE 3
 # define CALLBACKS_SIZE 3
-# define ERR_ARRAY_SIZE 11
+# define ERR_ARRAY_SIZE 13
 # define SPECS_NUMBER 8
 
 
@@ -92,14 +93,14 @@ enum	callback_index
 # define ID_FLOOR	"F"
 
 static t_id ids[ID_SIZE] = {
-	{ID_NORTH, TEXTURE_INDEX},
-	{ID_SOUTH, TEXTURE_INDEX},
-	{ID_EAST, TEXTURE_INDEX},
-	{ID_WEST, TEXTURE_INDEX},
-	{ID_SPRITE, TEXTURE_INDEX},
-	{ID_RES, RESOLUTION_INDEX},
-	{ID_FLOOR, COLOR_INDEX},
-	{ID_CEIL, COLOR_INDEX}
+	{ID_NORTH, TEXTURE_INDEX, 1},
+	{ID_SOUTH, TEXTURE_INDEX, 1U << 1},
+	{ID_EAST, TEXTURE_INDEX, 1U << 2},
+	{ID_WEST, TEXTURE_INDEX, 1U << 3},
+	{ID_SPRITE, TEXTURE_INDEX, 1U << 4},
+	{ID_RES, RESOLUTION_INDEX, 1U << 5},
+	{ID_FLOOR, COLOR_INDEX, 1U << 6},
+	{ID_CEIL, COLOR_INDEX, 1U << 7}
 };
 
 static int (*parse_callbacks[CALLBACKS_SIZE])(t_game*, const char*, char*) = {
@@ -136,7 +137,9 @@ enum	e_err_code
 	CODE_ERR_CONF_OPEN_ERROR		= (1U << 7),
 	CODE_ERR_BAD_FILE_EXT			= (1U << 8),
 	CODE_ERR_INCONSISTENT_SPECS 	= (1U << 9),
-	CODE_ERR_BAD_CHARS_IN_COLORS	= (1U << 10)
+	CODE_ERR_BAD_CHARS_IN_COLORS	= (1U << 10),
+	CODE_ERR_DUPLICATE_SPECS		= (1U << 12),
+	CODE_ERR_TEXTURE_PATH_MISSING	= (1U << 13)
 };
 
 static const t_errors errors_array[ERR_ARRAY_SIZE] = {
@@ -150,7 +153,9 @@ static const t_errors errors_array[ERR_ARRAY_SIZE] = {
 	{CODE_ERR_CONF_OPEN_ERROR, "Error while opening configuration file"},
 	{CODE_ERR_BAD_FILE_EXT, "File extension not valid, .cub expected"},
 	{CODE_ERR_INCONSISTENT_SPECS, "Inconsistent number of specifiers"},
-	{CODE_ERR_BAD_CHARS_IN_COLORS, "Bad characters in color field"}
+	{CODE_ERR_BAD_CHARS_IN_COLORS, "Bad characters in color field"},
+	{CODE_ERR_DUPLICATE_SPECS, "Duplicate specs"},
+	{CODE_ERR_TEXTURE_PATH_MISSING, "Texture path is missing"}
 };
 
 #endif

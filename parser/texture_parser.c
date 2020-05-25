@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 01:53:16 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/20 19:16:05 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/25 06:40:29 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,12 @@ int		parse_texture(t_game *data, const char *id, char *line)
 
 	line = skip_spaces(&line[id_len]);
 	if (line == '\0')
-		return (ERROR);
+		return (CODE_ERR_TEXTURE_PATH_MISSING);
 	path_len = ft_strlen_to_sep(line, SPACE);
 	if (path_len == 0)
-		return (ERROR);
+		return (CODE_ERR_TEXTURE_PATH_MISSING);
 	texture = get_index(data, id);
 	ft_memset(texture->path, 0, PATH_MAX);
 	ft_memcpy(texture->path, line, path_len);
-	return (0);
+	return (RET_NO_ERROR);
 }

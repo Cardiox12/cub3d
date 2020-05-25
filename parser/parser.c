@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/18 17:39:44 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/25 00:57:17 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/25 06:40:57 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,11 @@ void		Debug_print_bits(unsigned int val)
 static int infos_parser(t_game *data, int fd)
 {
 	unsigned int	err;
+	unsigned int	specs;
 	int				index;
 
 	data->map.line = NULL;
+	specs = 0;
 	err = 0;
 	while (get_next_line(fd, &data->map.line) > 0 && !is_mapline(data->map.line))
 	{
@@ -46,6 +48,9 @@ static int infos_parser(t_game *data, int fd)
 			if (ft_strncmp(data->map.line, ids[index].id, ft_strlen(ids[index].id)) == 0)
 			{
 				err |= parse_callbacks[ids[index].index](data, ids[index].id, data->map.line);
+				if (specs & ids[index].flag)
+					err |= CODE_ERR_DUPLICATE_SPECS;
+				specs |= ids[index].flag;
 				data->map.specs_number++;
 				break;
 			}
