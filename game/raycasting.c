@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/09 23:14:30 by tony              #+#    #+#             */
-/*   Updated: 2020/05/20 21:42:31 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/26 21:17:21 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,109 @@
 // MARK: To remove
 #include <stdio.h>
 
+void sort_sprites(int *order, double *dist, int amount)
+{
+	sort_int(order, amount);
+	sort_double(dist, amount);
+}
+
+void	cast_sprites(t_game *data)
+{
+	t_vec2	sprite;
+	t_vec2	transform;
+	t_vec	draw_start;
+	t_vec	draw_end;
+	t_vec	sprite_res;
+	const double	inv_det = 1.0 / (data->camera.plan_right.x * data->camera.plan_front.y - data->camera.plan_front.x * data->camera.plan_right.y);
+	int		sprite_screen_x;
+	int		i;
+	t_vec	stripe;
+	t_vec	tex;
+	const t_vec	tex_res = (t_vec){data->map.textures[IDX_SPRITE].width, data->map.textures[IDX_SPRITE].height};
+
+	i = 0;
+	while (i < data->map.sprites.cursor)
+	{
+		data->camera.sprite_order[i] = i;
+		data->camera.sprite_distance[i] = (pow(data->camera.pos.x - data->map.sprites.sprites[i].pos.x, 2) + pow(data->camera.pos.y - data->map.sprites.sprites[i].pos.y, 2));
+		i++;
+	}
+	sort_sprites(data->camera.sprite_order, data->camera.sprite_distance, data->map.sprites.cursor);
+	i = 0;
+	while (i < data->map.sprites.cursor)
+	{
+		sprite = (t_vec2){
+			data->map.sprites.sprites[data->camera.sprite_order[i]].pos.x - data->camera.pos.x,
+			data->map.sprites.sprites[data->camera.sprite_order[i]].pos.y - data->camera.pos.y,
+		};
+
+		transform = (typeof(transform)){
+			inv_det * (data->camera.plan_front.y * sprite.x - data->camera.plan_front.x * sprite.y),
+			inv_det * (-data->camera.plan_right.y * sprite.x + data->camera.plan_right.x * sprite.y)
+		};
+
+		sprite_screen_x = (int)((data->map.resolution.x / 2) * (1 + transform.x / transform.y));
+		// SpriteHeight
+		sprite_res.y = abs((int)(data->map.resolution.y / transform.y));
+
+		draw_start.y = -sprite_res.y / 2 + data->map.resolution.y / 2;
+
+		if (draw_start.y < 0)
+			draw_start.y = 0;
+
+		draw_end.y = sprite_res.y / 2 + data->map.resolution.y / 2;
+
+		if (draw_end.y >= data->map.resolution.y)
+			draw_end.y = data->map.resolution.y - 1;
+
+		// SpriteWidth
+		sprite_res.x = abs((int)(data->map.resolution.y / transform.y));
+
+		draw_start.x = -sprite_res.x / 2 + sprite_screen_x;
+
+		if (draw_start.x < 0)
+			draw_start.x = 0;
+
+		draw_end.x = sprite_res.x / 2 + sprite_screen_x;
+
+		if (draw_end.x >= data->map.resolution.x)
+			draw_end.x = data->map.resolution.x - 1;
+
+		stripe.x = draw_start.x;
+		while (stripe.x < draw_end.x)
+		{
+			tex.x = (int)(256 * (stripe.x - (-sprite_res.x / 2 + sprite_screen_x)) * tex_res.x / sprite_res.x) / 256;
+
+			if (transform.y > 0 && stripe.x > 0 && stripe.x < data->map.resolution.x && transform.y < data->camera.ZBuffer[stripe.x])
+			{
+				stripe.y = draw_start.y;
+				while (stripe.y < draw_end.y)
+				{
+					// d = (y) * 256 - h * 128 + spriteHeight * 128;
+					int d = (stripe.y) * 256 - data->map.resolution.y * 128 + sprite_res.y * 128;
+					tex.y = ((d * tex_res.y) / sprite_res.y) / 256;
+
+					uint32_t color = get_color(&data->map.textures[IDX_SPRITE].image, tex, tex_res.x);
+					if ((color & 0x00FFFFFF) != 0)
+						set_color(data, stripe, color);
+					stripe.y++;
+				}
+			}
+			stripe.x++;
+		}
+		i++;
+	}
+}
+
 void	map_texture(t_game *data, int x)
 {
 	const int h = data->map.resolution.y;
 	uint32_t    color;
 	t_texture   *texture;
-	int         text_num;
 	int         y;
 
 	// Texture choosing
-	text_num = data->map.map[data->camera.map_pos.y][data->camera.map_pos.x] - '0' - 1;
-	texture = &data->map.textures[text_num];
+	texture = &data->map.textures[IDX_NORTH];
     
 	// Calculate value of wallX, wallX is the exact position of where the wall was hit
 	if (data->camera.side == 0)
@@ -37,29 +129,27 @@ void	map_texture(t_game *data, int x)
 	
 	// Calculating x coordinate of the texture
 	data->camera.tex.x = (int)(data->camera.wallX * (double)texture->width);
-    
+	
 	if (data->camera.side == 0 && data->camera.ray_dir.x > 0)
 		data->camera.tex.x = texture->width - data->camera.tex.x - 1;
 	if (data->camera.side == 1 && data->camera.ray_dir.y < 0)
 		data->camera.tex.x = texture->width - data->camera.tex.x - 1;
 
-    // How much to increase the texture coordinate per screen pixel
-    data->camera.tex_step = 1.0 * texture->height / data->camera.line_height;
-    // Starting texture coordinate
-    data->camera.tex_pos = (data->camera.draw_start - h / 2 + data->camera.line_height / 2) * data->camera.tex_step;
-    y = data->camera.draw_start;
-    while (y < data->camera.draw_end)
-    {
-        data->camera.tex.y = (int)data->camera.tex_pos & (texture->height - 1);
-        data->camera.tex_pos += data->camera.tex_step;
-        color = get_color(&texture->image, data->camera.tex, texture->height);
-		// color = texture->image.img_data_addr[texture->height * data->camera.tex.y + data->camera.tex.x];
-        
-        if (data->camera.side == 1)
-            color = (color >> 1) & 8355711;
-        set_color(data, (t_vec){x, y}, color);
-        y++;
-    }
+	// How much to increase the texture coordinate per screen pixel
+	data->camera.tex_step = 1.0 * texture->height / data->camera.line_height;
+	// Starting texture coordinate
+	data->camera.tex_pos = (data->camera.draw_start - h / 2 + data->camera.line_height / 2) * data->camera.tex_step;
+	y = data->camera.draw_start;
+	while (y < data->camera.draw_end)
+	{
+		data->camera.tex.y = (int)data->camera.tex_pos & (texture->height - 1);
+		data->camera.tex_pos += data->camera.tex_step;
+		color = get_color(&texture->image, data->camera.tex, texture->height);
+		if (data->camera.side == 1)
+			color = (color >> 1) & 8355711;
+		set_color(data, (t_vec){x, y}, color);
+		y++;
+	}
 }
 
 void	get_side(t_game *data)
@@ -149,12 +239,9 @@ static void    init_raycast_variables(t_game *data, int x)
 
 void	raycasting(t_game *data)
 {
-	uint32_t	color;
-	// t_vec		draw;
 	int			x;
 
 	x = 0;
-	color = 0;
 	while (x < data->map.resolution.x)
 	{
 		init_raycast_variables(data, x);
@@ -162,6 +249,8 @@ void	raycasting(t_game *data)
 		perform_dda(data);
 		get_perp_dist(data);
 		map_texture(data, x);
+		data->camera.ZBuffer[x] = data->camera.perp_wall_dist;
 		x++;
 	}
+	cast_sprites(data);
 }

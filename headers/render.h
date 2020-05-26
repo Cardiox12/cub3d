@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 20:48:48 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/25 03:33:36 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/25 17:37:58 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,9 @@ void	draw_plan(t_game *data, t_vec2 cp);
 void    minimap_raycaster(t_game *data, t_vec2 pos);
 void	minimap(t_game *data);
 void	raycasting(t_game *data);
+
+// Init
+void	init_textures(t_game *data);
+void	init_game(t_game *data);
 
 #endif

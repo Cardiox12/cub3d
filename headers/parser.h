@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 02:01:35 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/25 07:25:03 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/25 17:57:53 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ void 	String_array_free(char **strs, int size);
 char	**String_array_copy(char **strs, int size);
 
 int		Errors_print(unsigned int errors, int listall);
+void	parse_sprites(t_game *data);
 
 # define ID_SIZE 8
 # define RGB_SIZE 3
@@ -126,6 +127,7 @@ static int (*parse_callbacks[CALLBACKS_SIZE])(t_game*, const char*, char*) = {
 # define PREPROCESS_REPLACE_COLOR '9'
 # define TARGET_COLORS "02NSEW9"
 # define DELTA_SIZE 4
+# define SPRITE_CHAR '2'
 
 enum	e_err_code
 {

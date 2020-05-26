@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 14:33:13 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/25 17:06:02 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/25 18:06:09 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,41 +15,50 @@
 
 #include <stddef.h>
 
-#define RAYS_NUMBER 10
-#define TEX_NUMBERS 5
-#define PATH_MAX 1024
-#define MAP_SIZE 20000
+# define CLOCKWISE 1
+# define ANTI_CLOCKWISE 0
+# define TRUE 1
+# define FALSE 0
+# define MINIMAP_RATIO 30
+# define EXE_NAME "cub3d"
+# define WINDOW_NAME "cub3d"
+# define FIELD_OF_VIEW 66.0f
+# define RAYS_NUMBER	10
+# define TEX_NUMBERS	5
+# define SPRITE_NUMBERS 1000
+# define PATH_MAX		1024
+# define MAP_SIZE		20000
 
-typedef struct s_infos
+typedef struct	s_infos
 {
-	void *mlx_ptr;
-	void *win_ptr;
-	int height;
-	int width;
-	int color;
-} t_infos;
+	void	*mlx_ptr;
+	void	*win_ptr;
+	int		height;
+	int		width;
+	int		color;
+}				t_infos;
 
-typedef struct s_vec2
+typedef struct	s_vec2
 {
 	float x;
 	float y;
-} t_vec2;
+}				t_vec2;
 
-typedef struct s_vec
+typedef struct	s_vec
 {
 	int x;
 	int y;
-} t_vec;
+}				t_vec;
 
-typedef struct s_ray
+typedef struct	s_ray
 {
 	t_vec2 pos;
 	t_vec2 dir;
 	t_vec2 particle;
 	float angle;
-} t_ray;
+}				t_ray;
 
-typedef struct s_image
+typedef struct	s_image
 {
 	void *img_ref;
 	int *img_data_addr;
@@ -57,15 +66,15 @@ typedef struct s_image
 	int line_size;
 	int endian;
 	int line_count;
-} t_image;
+}				t_image;
 
-typedef struct s_texture
+typedef struct	s_texture
 {
 	t_image image;
 	char path[PATH_MAX + 1];
 	int width;
 	int height;
-} t_texture;
+}				t_texture;
 
 typedef struct	s_textures
 {
@@ -82,30 +91,32 @@ typedef struct	s_minmap
 	unsigned int square_size;
 }				t_minimap;
 
-// typedef struct	s_sprite
-// {
-
-// }				t_sprite;
-
-typedef struct s_map
+typedef struct	s_sprite
 {
-	char *map[MAP_SIZE];
-	t_vec resolution;
-	t_texture textures[TEX_NUMBERS];
-	unsigned int floor_color;
-	unsigned int ceil_color;
-	int map_xsize;
-	int map_ysize;
-	char *line;
-	unsigned int specs_number;
-	unsigned int square_size;
-} t_map;
+	t_vec2	pos;
+	int		texture;
+}				t_sprite;
 
-typedef struct s_list
+typedef struct	s_sprites
 {
-	void *ptr;
-	struct s_list *next;
-} t_list;
+	t_sprite	sprites[SPRITE_NUMBERS];
+	int			cursor;
+}				t_sprites;
+
+typedef struct	s_map
+{
+	char			*map[MAP_SIZE];
+	t_vec			resolution;
+	t_texture		textures[TEX_NUMBERS];
+	t_sprites		sprites;
+	unsigned int 	floor_color;
+	unsigned int 	ceil_color;
+	int				map_xsize;
+	int				map_ysize;
+	char			*line;
+	unsigned int 	specs_number;
+	unsigned int 	square_size;
+}				t_map;
 
 typedef enum e_cardinals_degree
 {
@@ -131,6 +142,9 @@ typedef struct s_camera
 	char debug;
 	float wallX;
 
+	double	*ZBuffer;
+	int		*sprite_order;
+	double	*sprite_distance;
 	// Texture coordinates
 	t_vec tex;
 	double tex_step;
@@ -210,15 +224,5 @@ enum	texture_index
 	IDX_EAST,
 	IDX_SPRITE
 };
-
-# define CLOCKWISE 1
-# define ANTI_CLOCKWISE 0
-
-# define TRUE 1
-# define FALSE 0
-
-# define MINIMAP_RATIO 30
-
-# define EXE_NAME "cub3d"
 
 #endif

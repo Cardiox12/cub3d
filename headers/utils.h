@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 03:18:15 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/25 03:44:48 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/25 22:32:57 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,8 @@ int     is_wall(int c);
 
 int		max(int a, int b);
 int		min(int a, int b);
+
+void	sort_int(int *arr, int size);
+void	sort_double(double *arr, int size);
 
 #endif
