@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/09 23:14:30 by tony              #+#    #+#             */
-/*   Updated: 2020/05/27 06:21:12 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/28 00:12:47 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,54 @@
 
 // MARK: To remove
 #include <stdio.h>
+
+int vector_angle(t_vec2 vec)
+{
+	int ret;
+
+	if (vec.x == 0)
+	{
+		if (vec.y > 0)
+			return (90);
+		if (vec.y == 0)
+			return (0);
+		else
+			return (270);
+	}
+	else if (vec.y == 0)
+		return (vec.x >= 0) ? 0 : 180;
+	ret = to_degrees(atanf(vec.y / vec.x));
+	if (vec.x < 0 && vec.y < 0)
+		ret = 180 + ret;
+	else if (vec.x < 0)
+		ret = 180 + ret;
+	else if (vec.y < 0)
+		ret = 270 + (90 + ret);
+	return ret;
+}
+
+static int	texture_choser(t_game *data)
+{
+	const int angle = vector_angle(data->camera.ray_dir);
+	
+	if (data->camera.side == 1 && (angle >= 0 && angle < 180))
+	{
+		return (IDX_NORTH);
+	}
+	if (data->camera.side == 1 && (angle >= 180 && angle <= 360))
+	{
+		return (IDX_SOUTH);
+	}
+	if (data->camera.side == 0 && (angle > 90 && angle < 270))
+	{
+		return (IDX_EAST);
+	}
+	if (data->camera.side == 0 && ((angle >= 270 && angle <= 360) || (angle >= 0 && angle <= 90)))
+	{
+		return (IDX_WEST);
+	}
+	return (0);
+}
 
 int		sort_sprites(int *order, double *dist, int amount)
 {
@@ -134,7 +182,8 @@ void	map_texture(t_game *data, int x)
 	int         y;
 
 	// Texture choosing
-	texture = &data->map.textures[IDX_NORTH];
+	texture = &data->map.textures[texture_choser(data)];
+	// texture = &data->map.textures[IDX_NORTH];
     
 	// Calculate value of wallX, wallX is the exact position of where the wall was hit
 	if (data->camera.side == 0)
