@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/09 23:14:30 by tony              #+#    #+#             */
-/*   Updated: 2020/05/28 00:12:47 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/28 01:29:36 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,52 +16,19 @@
 // MARK: To remove
 #include <stdio.h>
 
-int vector_angle(t_vec2 vec)
-{
-	int ret;
-
-	if (vec.x == 0)
-	{
-		if (vec.y > 0)
-			return (90);
-		if (vec.y == 0)
-			return (0);
-		else
-			return (270);
-	}
-	else if (vec.y == 0)
-		return (vec.x >= 0) ? 0 : 180;
-	ret = to_degrees(atanf(vec.y / vec.x));
-	if (vec.x < 0 && vec.y < 0)
-		ret = 180 + ret;
-	else if (vec.x < 0)
-		ret = 180 + ret;
-	else if (vec.y < 0)
-		ret = 270 + (90 + ret);
-	return ret;
-}
-
 static int	texture_choser(t_game *data)
 {
 	const int angle = vector_angle(data->camera.ray_dir);
 	
 	if (data->camera.side == 1 && (angle >= 0 && angle < 180))
-	{
 		return (IDX_NORTH);
-	}
 	if (data->camera.side == 1 && (angle >= 180 && angle <= 360))
-	{
 		return (IDX_SOUTH);
-	}
 	if (data->camera.side == 0 && (angle > 90 && angle < 270))
-	{
 		return (IDX_EAST);
-	}
 	if (data->camera.side == 0 && ((angle >= 270 && angle <= 360) || (angle >= 0 && angle <= 90)))
-	{
 		return (IDX_WEST);
-	}
-	return (0);
+	return (IDX_NORTH);
 }
 
 int		sort_sprites(int *order, double *dist, int amount)
