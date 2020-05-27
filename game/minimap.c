@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 16:35:22 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/25 05:59:39 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/27 06:13:44 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	minimap(t_game *data)
 		{
 			i.x = vi.x * data->minimap.square_size;
 			i.y = vi.y * data->minimap.square_size;
-			draw_rect(i, s, &data->image, (is_wall(data->map.map[vi.y][vi.x])) ? 0x000000 : 0xFFFFFF);
+			draw_rect(i, s, &data->image, (is_wall(data->map.map[vi.y][vi.x])) ? 0x000000 : 0xd2d2d2);
 			vi.x++;
 		}
 		vi.y++;

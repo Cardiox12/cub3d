@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/09 23:14:30 by tony              #+#    #+#             */
-/*   Updated: 2020/05/27 02:10:23 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/27 06:05:06 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@ void	cast_sprites(t_game *data)
 	while (i < data->map.sprites.cursor)
 	{
 		sprite = (t_vec2){
-			data->map.sprites.sprites[data->camera.sprite_order[i]].pos.x - data->camera.pos.x,
-			data->map.sprites.sprites[data->camera.sprite_order[i]].pos.y - data->camera.pos.y,
+			data->map.sprites.sprites[data->camera.sprite_order[i]].pos.x + 0.5 - data->camera.pos.x,
+			data->map.sprites.sprites[data->camera.sprite_order[i]].pos.y + 0.5 - data->camera.pos.y,
 		};
 
 		// printf("Sprite : (%f, %f)\n", sprite.x, sprite.y);
