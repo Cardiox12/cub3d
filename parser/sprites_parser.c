@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/25 17:42:04 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/25 17:58:43 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/27 01:37:17 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	parse_sprites(t_game *data)
 			{
 				index = data->map.sprites.cursor;
 				data->map.sprites.sprites[index] = (t_sprite){to_vec2(i),
-				IDX_SPRITE};
+				IDX_SPRITE, 1, 1, 64};
 				data->map.sprites.cursor++;
 			}
 			i.x++;

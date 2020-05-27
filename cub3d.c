@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 01:45:36 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/26 19:49:14 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/27 00:11:44 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,9 @@ void	Debug_log_game(t_game *data, const char *path)
 	{
 		printf("Sprite :\n");
 		printf("\tPos : (%f, %f)\n", data->map.sprites.sprites[i].pos.x, data->map.sprites.sprites[i].pos.y);
+		printf("\tUdiv : %i\n", data->map.sprites.sprites[i].u_div);
+		printf("\tVdiv : %i\n", data->map.sprites.sprites[i].v_div);
+		printf("\tVmove : %f\n", data->map.sprites.sprites[i].v_move);
 	}
 }
 
@@ -61,6 +64,7 @@ int		main(int argc, char **argv)
 		init_textures(&data);
 		parse_sprites(&data);
 
+		Debug_log_game(&data, argv[1]);
 		data.camera.ZBuffer = malloc(sizeof(double) * data.map.resolution.x);
 		data.camera.sprite_order = malloc(sizeof(int) * data.map.sprites.cursor);
 		data.camera.sprite_distance = malloc(sizeof(double) * data.map.sprites.cursor);

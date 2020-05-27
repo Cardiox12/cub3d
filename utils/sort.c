@@ -1,59 +1,59 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort2.c                                            :+:      :+:    :+:   */
+/*   sort.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/05/25 22:29:07 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/26 21:16:07 by bbellavi         ###   ########.fr       */
+/*   Created: 2020/05/25 22:25:42 by bbellavi          #+#    #+#             */
+/*   Updated: 2020/05/27 02:09:48 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
-static void	swap(double *a, double *b)
+static void	swap(t_pair *a, t_pair *b)
 {
-	double tmp;
+	t_pair tmp;
 
 	tmp = *a;
 	*a = *b;
 	*b = tmp;
 }
 
-static int	partition(double *arr, int low, int high)
+static int	partition(t_pair *pairs, int low, int high)
 {
 	t_vec	i;
 	int		pivot;
 
-	pivot = arr[high];
+	pivot = pairs[high].val;
 	i.x = (low - 1);
 	i.y = low;
 	while (i.y <= high - 1)
 	{
-		if (arr[i.y] > pivot)
+		if (pairs[i.y].val > pivot)
 		{
 			i.x++;
-			swap(&arr[i.x], &arr[i.y]);
+			swap(&pairs[i.x], &pairs[i.y]);
 		}
 		i.y++;
 	}
-	swap(&arr[i.x + 1], &arr[high]);
+	swap(&pairs[i.x + 1], &pairs[high]);
 	return (i.x + 1);
 }
 
-static void	quicksort(double *arr, int low, int high)
+static void	quicksort(t_pair *pairs, int low, int high)
 {
 	if (low < high)
 	{
-		int pi = partition(arr, low, high);
+		int pi = partition(pairs, low, high);
 
-		quicksort(arr, low, pi - 1);
-		quicksort(arr, pi + 1, high);
+		quicksort(pairs, low, pi - 1);
+		quicksort(pairs, pi + 1, high);
 	}
 }
 
-void	sort_double(double *arr, int size)
+void	sort_pairs(t_pair *pairs, int size)
 {
-	quicksort(arr, 0, size - 1);
+	quicksort(pairs, 0, size - 1);
 }

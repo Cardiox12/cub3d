@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/09 23:14:30 by tony              #+#    #+#             */
-/*   Updated: 2020/05/26 21:17:21 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/27 02:10:23 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,31 @@
 // MARK: To remove
 #include <stdio.h>
 
-void sort_sprites(int *order, double *dist, int amount)
+int		sort_sprites(int *order, double *dist, int amount)
 {
-	sort_int(order, amount);
-	sort_double(dist, amount);
+	t_pair *pairs;
+	int i;
+
+	i = 0;
+	pairs = malloc(sizeof(t_pair) * amount);
+	if (pairs == NULL)
+		return (RET_ERROR);
+	while (i < amount)
+	{
+		pairs[i].val = dist[i];
+		pairs[i].index = order[i];
+		i++;
+	}
+	sort_pairs(pairs, amount);
+	i = 0;
+	while (i < amount)
+	{
+		dist[i] = pairs[i].val;
+		order[i] = pairs[i].index;
+		i++;
+	}
+	free(pairs);
+	return (RET_NO_ERROR);
 }
 
 void	cast_sprites(t_game *data)
@@ -35,6 +56,7 @@ void	cast_sprites(t_game *data)
 	t_vec	stripe;
 	t_vec	tex;
 	const t_vec	tex_res = (t_vec){data->map.textures[IDX_SPRITE].width, data->map.textures[IDX_SPRITE].height};
+	int		v_move_screen;
 
 	i = 0;
 	while (i < data->map.sprites.cursor)
@@ -52,35 +74,32 @@ void	cast_sprites(t_game *data)
 			data->map.sprites.sprites[data->camera.sprite_order[i]].pos.y - data->camera.pos.y,
 		};
 
+		// printf("Sprite : (%f, %f)\n", sprite.x, sprite.y);
+
 		transform = (typeof(transform)){
 			inv_det * (data->camera.plan_front.y * sprite.x - data->camera.plan_front.x * sprite.y),
 			inv_det * (-data->camera.plan_right.y * sprite.x + data->camera.plan_right.x * sprite.y)
 		};
 
+		v_move_screen = data->map.sprites.sprites[data->camera.sprite_order[i]].v_move / transform.y;
+
 		sprite_screen_x = (int)((data->map.resolution.x / 2) * (1 + transform.x / transform.y));
 		// SpriteHeight
-		sprite_res.y = abs((int)(data->map.resolution.y / transform.y));
+		sprite_res.y = abs((int)(data->map.resolution.y / transform.y)) / data->map.sprites.sprites[data->camera.sprite_order[i]].v_div;
 
-		draw_start.y = -sprite_res.y / 2 + data->map.resolution.y / 2;
-
+		draw_start.y = -sprite_res.y / 2 + data->map.resolution.y / 2 + v_move_screen;
 		if (draw_start.y < 0)
 			draw_start.y = 0;
-
-		draw_end.y = sprite_res.y / 2 + data->map.resolution.y / 2;
-
+		draw_end.y = sprite_res.y / 2 + data->map.resolution.y / 2 + v_move_screen;
 		if (draw_end.y >= data->map.resolution.y)
 			draw_end.y = data->map.resolution.y - 1;
 
 		// SpriteWidth
-		sprite_res.x = abs((int)(data->map.resolution.y / transform.y));
-
+		sprite_res.x = abs((int)(data->map.resolution.y / transform.y)) / data->map.sprites.sprites[data->camera.sprite_order[i]].u_div;
 		draw_start.x = -sprite_res.x / 2 + sprite_screen_x;
-
 		if (draw_start.x < 0)
 			draw_start.x = 0;
-
 		draw_end.x = sprite_res.x / 2 + sprite_screen_x;
-
 		if (draw_end.x >= data->map.resolution.x)
 			draw_end.x = data->map.resolution.x - 1;
 
@@ -94,8 +113,7 @@ void	cast_sprites(t_game *data)
 				stripe.y = draw_start.y;
 				while (stripe.y < draw_end.y)
 				{
-					// d = (y) * 256 - h * 128 + spriteHeight * 128;
-					int d = (stripe.y) * 256 - data->map.resolution.y * 128 + sprite_res.y * 128;
+					int d = (stripe.y - v_move_screen) * 256 - data->map.resolution.y * 128 + sprite_res.y * 128;
 					tex.y = ((d * tex_res.y) / sprite_res.y) / 256;
 
 					uint32_t color = get_color(&data->map.textures[IDX_SPRITE].image, tex, tex_res.x);

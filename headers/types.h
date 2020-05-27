@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 14:33:13 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/25 18:06:09 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/27 02:01:18 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,12 @@ typedef struct	s_infos
 	int		width;
 	int		color;
 }				t_infos;
+
+typedef struct	s_pair
+{
+	double	val;
+	int		index;
+}				t_pair;
 
 typedef struct	s_vec2
 {
@@ -95,6 +101,9 @@ typedef struct	s_sprite
 {
 	t_vec2	pos;
 	int		texture;
+	int		u_div;
+	int		v_div;
+	float	v_move;
 }				t_sprite;
 
 typedef struct	s_sprites
