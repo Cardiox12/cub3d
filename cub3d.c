@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 01:45:36 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/27 00:11:44 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/28 01:32:26 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,6 @@ void	Debug_log_game(t_game *data, const char *path)
 	{
 		printf("Sprite :\n");
 		printf("\tPos : (%f, %f)\n", data->map.sprites.sprites[i].pos.x, data->map.sprites.sprites[i].pos.y);
-		printf("\tUdiv : %i\n", data->map.sprites.sprites[i].u_div);
-		printf("\tVdiv : %i\n", data->map.sprites.sprites[i].v_div);
-		printf("\tVmove : %f\n", data->map.sprites.sprites[i].v_move);
 	}
 }
 
