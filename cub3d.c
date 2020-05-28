@@ -16,6 +16,7 @@
 #include "render.h"
 #include "colors.h"
 #include "render.h"
+#include <errno.h>
 
 void	Debug_log_game(t_game *data, const char *path)
 {
@@ -51,7 +52,6 @@ int		main(int argc, char **argv)
 	if (argc > 1)
 	{
 		int errors = parse(&data, argv[1]);
-	
 		if (errors)
 		{
 			exit(0);
@@ -65,6 +65,9 @@ int		main(int argc, char **argv)
 		data.camera.ZBuffer = malloc(sizeof(double) * data.map.resolution.x);
 		data.camera.sprite_order = malloc(sizeof(int) * data.map.sprites.cursor);
 		data.camera.sprite_distance = malloc(sizeof(double) * data.map.sprites.cursor);
+
+		if (data.camera.ZBuffer == NULL || data.camera.sprite_distance == NULL || data.camera.sprite_order == NULL)
+			exit(0);
 		
 		data.image.img_ref = mlx_new_image(
 			data.infos.mlx_ptr,
@@ -76,7 +79,6 @@ int		main(int argc, char **argv)
 			&data.image.line_size,
 			&data.image.endian);
 		data.image.line_count = data.map.resolution.y;
-		
 		get_starting_point(&data);
 		mlx_hook(data.infos.win_ptr, KEY_PRESS_CODE, KEY_PRESS_MASK, key_pressed, &data);
 		mlx_hook(data.infos.win_ptr, KEY_RELEASE_CODE, KEY_RELEASE_MASK, key_released, &data);

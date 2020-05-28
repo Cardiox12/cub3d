@@ -14,6 +14,7 @@
 #define FT_TYPES_H
 
 #include <stddef.h>
+#include <limits.h>
 
 # define CLOCKWISE 1
 # define ANTI_CLOCKWISE 0
@@ -26,7 +27,6 @@
 # define RAYS_NUMBER	10
 # define TEX_NUMBERS	5
 # define SPRITE_NUMBERS 1000
-# define PATH_MAX		1024
 # define MAP_SIZE		20000
 # define SPRITE '2'
 

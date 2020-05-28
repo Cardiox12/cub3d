@@ -39,7 +39,7 @@ int		parse_texture(t_game *data, const char *id, char *line)
 	t_texture		*texture;
 
 	line = skip_spaces(&line[id_len]);
-	if (line == '\0')
+	if (*line == '\0')
 		return (CODE_ERR_TEXTURE_PATH_MISSING);
 	path_len = ft_strlen_to_sep(line, SPACE);
 	if (path_len == 0)

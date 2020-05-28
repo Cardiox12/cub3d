@@ -13,7 +13,7 @@
 COLOR_NC			= \e[0m
 COLOR_LIGHT_GREEN	= \e[1;32m
 CC			= gcc
-CFLAGS		= -Wall -Wextra -Werror -framework OpenGL -framework AppKit
+CFLAGS		= -Wall -Wextra -Werror -lm
 MAKE		= make -C
 MLX_DIR		= ./minilibx
 NAME		= cub3d
@@ -65,9 +65,9 @@ $(NAME): $(SRCS)
 	@$(MAKE) $(LFT_DIR)
 	@cp $(MLX_DIR)/$(MLX_NAME) .
 	@cp $(LFT_DIR)/$(LFT_NAME) .
-	clear
+	# clear
 	@printf "$(COLOR_LIGHT_GREEN)COMPILING CUB3D$(COLOR_NC)\n"
-	@$(CC) -g -o $(NAME) $(SRCS) $(LFT_NAME) $(MLX_NAME) $(CFLAGS) -I $(MLX_DIR) -I $(HEADERS) -I $(LFT_HEADERS)
+	@$(CC) -g -o $(NAME) $(SRCS) $(CFLAGS) -I $(MLX_DIR) -I $(HEADERS) -I $(LFT_HEADERS) -lmlx -L. -lftmini -L. -lXext -lX11
 
 clean: fclean
 

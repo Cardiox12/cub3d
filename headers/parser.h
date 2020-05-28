@@ -94,7 +94,7 @@ enum	callback_index
 # define ID_CEIL	"C"
 # define ID_FLOOR	"F"
 
-static t_id ids[ID_SIZE] = {
+static const t_id ids[ID_SIZE] = {
 	{ID_NORTH, TEXTURE_INDEX, 1},
 	{ID_SOUTH, TEXTURE_INDEX, 1U << 1},
 	{ID_EAST, TEXTURE_INDEX, 1U << 2},
@@ -105,7 +105,9 @@ static t_id ids[ID_SIZE] = {
 	{ID_CEIL, COLOR_INDEX, 1U << 7}
 };
 
-static int (*parse_callbacks[CALLBACKS_SIZE])(t_game*, const char*, char*) = {
+typedef int (*callbacks)(t_game*, const char*, char*);
+
+static const callbacks parse_callbacks[CALLBACKS_SIZE] = {
 	parse_color,
 	parse_resolution,
 	parse_texture
