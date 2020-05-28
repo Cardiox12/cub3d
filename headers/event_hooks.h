@@ -18,16 +18,25 @@
 #include "render.h"
 #include "mlx.h"
 
+/*
+    W 119
+    S 115
+    A 97
+    D 100
+    gauche 65361
+    droite 65363
+*/
+
 # define STEP (1.0f / 700.0f)
-# define KEY_UP 126
-# define KEY_DOWN 125
-# define KEY_RIGHT 124
-# define KEY_LEFT 123
-# define KEY_ESC 53
-# define KEY_W 13
-# define KEY_A 0
-# define KEY_S 1
-# define KEY_D 2
+
+# define KEY_RIGHT 65363
+# define KEY_LEFT 65361
+# define KEY_ESC 65307
+
+# define KEY_W 119
+# define KEY_A 97
+# define KEY_S 115
+# define KEY_D 100
 # define KEY_SHIFT 257
 
 # define KEY_PRESS_CODE 02
@@ -40,7 +49,7 @@
 # define MOTION_NOTIFY_MASK (1L << 13)
 # define STRUCTURE_NOTIFY_MASK (1L << 17)
 
-# define EVENT_MAX_SIZE 1024
+# define EVENT_MAX_SIZE 70000
 char	event_array[EVENT_MAX_SIZE];
 
 
