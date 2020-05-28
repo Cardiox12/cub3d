@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 01:45:36 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/28 01:33:44 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/28 01:36:29 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ int		main(int argc, char **argv)
 	
 	if (argc > 1)
 	{
-		const int ret = parse(&data, argv[1]);
+		int errors = parse(&data, argv[1]);
 	
-		if (ret)
+		if (errors)
 		{
 			exit(0);
 		}

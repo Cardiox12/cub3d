@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/29 20:42:29 by tony              #+#    #+#             */
-/*   Updated: 2020/05/27 15:05:45 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/28 02:13:23 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,19 +86,19 @@ void	player_rotate(t_game *data)
 {
 	char dir;
 
-	if (event_array[KEY_A])
+	if (event_array[KEY_LEFT])
 	{
 		if (data->camera.camera_angle == 0)
 			data->camera.camera_angle = 359;
 		else
 			data->camera.camera_angle = abs((int)(data->camera.camera_angle - 1)) % 360;
+		dir = ANTI_CLOCKWISE;
 	}
 	else
+	{
+		dir = CLOCKWISE;
 		data->camera.camera_angle = abs((int)(data->camera.camera_angle + 1)) % 360;
-	dir = (event_array[KEY_A]) ? ANTI_CLOCKWISE : CLOCKWISE;
-
-	// printf("Angle : %f\n", data->camera.camera_angle);
-
+	}
 	data->camera.plan_front = rotate(data->camera.plan_front, to_radians(1), dir);
 	data->camera.plan_right = rotate(data->camera.plan_right, to_radians(1), dir);
 	Rays_rotate(data->camera.rays, to_radians(1), dir);

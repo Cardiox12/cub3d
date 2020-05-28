@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keyboard_hooks.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tony <tony@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 00:44:00 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/04/24 15:13:28 by tony             ###   ########.fr       */
+/*   Updated: 2020/05/28 02:10:40 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int		key_pressed(int keycode, t_game *data)
 		mlx_destroy_image(
 			data->infos.mlx_ptr,
 			data->image.img_ref
-			);
+		);
 		exit(0);
 	}
 	event_array[keycode] = TRUE;
