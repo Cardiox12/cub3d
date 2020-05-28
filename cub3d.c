@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 01:45:36 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/28 01:36:29 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/28 03:53:10 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ int		main(int argc, char **argv)
 		get_starting_point(&data);
 		mlx_hook(data.infos.win_ptr, KEY_PRESS_CODE, KEY_PRESS_MASK, key_pressed, &data);
 		mlx_hook(data.infos.win_ptr, KEY_RELEASE_CODE, KEY_RELEASE_MASK, key_released, &data);
+		mlx_hook(data.infos.win_ptr, STRUCTURE_NOTIFY_CODE, STRUCTURE_NOTIFY_MASK, exit_hook, &data);
+		mlx_hook(data.infos.win_ptr, MOTION_NOTIFY_CODE, 0, motion_hook, &data);
 
 		mlx_loop_hook(data.infos.mlx_ptr, loop, &data);
 		mlx_loop(data.infos.mlx_ptr);

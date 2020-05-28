@@ -6,7 +6,7 @@
 #    By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/25 00:45:19 by bbellavi          #+#    #+#              #
-#    Updated: 2020/05/27 02:13:04 by bbellavi         ###   ########.fr        #
+#    Updated: 2020/05/28 03:52:02 by bbellavi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,7 @@ SRCS		+= $(GAME_DIR)/rays.c
 SRCS		+= $(GAME_DIR)/minimap.c
 SRCS		+= $(GAME_DIR)/movements.c
 SRCS		+= $(GAME_DIR)/raycasting.c
-SRCS		+= $(HOOK_DIR)/keyboard_hooks.c
+SRCS		+= $(HOOK_DIR)/event_hooks.c
 SRCS		+= $(PARSE_DIR)/parser.c
 SRCS		+= $(PARSE_DIR)/sprites_parser.c
 SRCS		+= $(PARSE_DIR)/parse_utils_1.c
