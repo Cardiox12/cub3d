@@ -16,7 +16,6 @@
 
 int		key_pressed(int keycode, t_game *data)
 {
-	printf("%i\n", keycode);
 	if (keycode == KEY_ESC)
 	{
 		mlx_destroy_image(

@@ -37,7 +37,7 @@ void	Debug_log_game(t_game *data, const char *path)
 	printf("Map width : %i\n", data->map.map_xsize);
 	for (int i =  0 ; data->map.map[i] != NULL ; i++)
 		printf("%s\n", data->map.map[i]);
-
+	
 	for (int i = 0 ; i < data->map.sprites.cursor ; i++)
 	{
 		printf("Sprite :\n");

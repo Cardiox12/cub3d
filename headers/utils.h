@@ -44,6 +44,7 @@ int     is_wall(int c);
 
 int		max(int a, int b);
 int		min(int a, int b);
+void    check_screen_size(data);
 
 void	sort_pairs(t_pair *pairs, int size);
 

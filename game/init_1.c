@@ -51,6 +51,7 @@ void	init_game(t_game *data)
 	minres = min(data->map.resolution.x, data->map.resolution.y);
 	minsize = min(data->map.map_xsize, data->map.map_ysize);
 	data->infos.mlx_ptr = mlx_init();
+	check_screen_size(data);
 	data->infos.win_ptr = mlx_new_window(
 		data->infos.mlx_ptr,
 		data->map.resolution.x,
