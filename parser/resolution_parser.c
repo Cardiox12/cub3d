@@ -18,6 +18,8 @@ int		parse_resolution(t_game *data, const char *id, char *line)
 
 	line = &line[id_len];
 	line = skip_spaces(line);
+	if (*line == '\0')
+		return (CODE_ERR_RES_MISSING_PARAM);
 	if (ft_isdigit(*line))
 	{
 		data->map.resolution.x = ft_atoi(line);
@@ -25,8 +27,10 @@ int		parse_resolution(t_game *data, const char *id, char *line)
 			line++;
 	}
 	else
-		return (ERROR);
+		return (CODE_ERR_BAD_CHARS_IN_RES_FIELD);
 	line = skip_spaces(line);
+	if (*line == '\0')
+		return (CODE_ERR_RES_MISSING_PARAM);
 	if (ft_isdigit(*line))
 	{
 		data->map.resolution.y = ft_atoi(line);
@@ -34,6 +38,8 @@ int		parse_resolution(t_game *data, const char *id, char *line)
 			line++;
 	}
 	else
-		return (ERROR);
+		return (CODE_ERR_BAD_CHARS_IN_RES_FIELD);
+	if (*line != '\0')
+		return (CODE_ERR_BAD_CHARS_IN_RES_FIELD);
 	return (0);
 }

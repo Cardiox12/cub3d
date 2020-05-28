@@ -74,7 +74,7 @@ void	parse_sprites(t_game *data);
 # define ID_SIZE 8
 # define RGB_SIZE 3
 # define CALLBACKS_SIZE 3
-# define ERR_ARRAY_SIZE 14
+# define ERR_ARRAY_SIZE 16
 # define SPECS_NUMBER 8
 
 
@@ -147,6 +147,8 @@ enum	e_err_code
 	CODE_ERR_DUPLICATE_SPECS		= (1U << 11),
 	CODE_ERR_TEXTURE_PATH_MISSING	= (1U << 12),
 	CODE_ERR_BAD_SPEC				= (1U << 13),
+	CODE_ERR_RES_MISSING_PARAM		= (1U << 14),
+	CODE_ERR_BAD_CHARS_IN_RES_FIELD = (1U << 15)
 };
 
 static const t_errors errors_array[ERR_ARRAY_SIZE] = {
@@ -163,7 +165,9 @@ static const t_errors errors_array[ERR_ARRAY_SIZE] = {
 	{CODE_ERR_BAD_CHARS_IN_COLORS, "Bad characters in color field"},
 	{CODE_ERR_DUPLICATE_SPECS, "Duplicate specs"},
 	{CODE_ERR_TEXTURE_PATH_MISSING, "Texture path is missing"},
-	{CODE_ERR_BAD_SPEC, "Bad specifier"}
+	{CODE_ERR_BAD_SPEC, "Bad specifier"},
+	{CODE_ERR_RES_MISSING_PARAM, "Resolution missing height"},
+	{CODE_ERR_BAD_CHARS_IN_RES_FIELD, "Bad characters in resolution field"}
 };
 
 #endif

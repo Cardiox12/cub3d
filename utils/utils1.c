@@ -23,7 +23,7 @@ int		min(int a, int b)
 	return ((a < b) ? a : b);
 }
 
-void	screen_resize(t_game *data)
+void	check_screen_size(t_game *data)
 {
 	t_vec res;
 
