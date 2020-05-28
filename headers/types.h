@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 14:33:13 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/27 02:01:18 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/05/28 02:27:59 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # define SPRITE_NUMBERS 1000
 # define PATH_MAX		1024
 # define MAP_SIZE		20000
+# define SPRITE '2'
 
 typedef struct	s_infos
 {
