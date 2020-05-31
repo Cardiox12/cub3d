@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/31 04:05:50 by user42            #+#    #+#             */
-/*   Updated: 2020/05/31 04:52:38 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/06/01 00:13:49 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,23 +37,20 @@ t_bitmap	create_bitmap(t_vec res)
 	return (bitmap);
 }
 
-#include <stdio.h>
-
 int		export_to_bmp(const char *filename, t_game *data)
 {
-	const int		fd = open(filename, O_CREAT | O_WRONLY | O_TRUNC | O_APPEND, 0777);
+	const int		fd = open(filename, O_CREAT | O_WRONLY | O_TRUNC | O_APPEND, S_IRWXU);
 	const t_bitmap	bmp = create_bitmap(data->map.resolution);
 	t_vec			i;
-	int				bytes;
 
 	if (fd < 0)
 		return (1);
-	bytes = write(fd, &bmp, sizeof(bmp));
+	write(fd, &bmp, sizeof(bmp));
 	i.y = 0;
 	while (i.y < data->map.resolution.y)
 	{
 		i.x = (data->map.resolution.y - i.y - 1) * data->map.resolution.x;
-		bytes = write(fd, &data->image.img_data_addr[i.x], sizeof(unsigned int) * data->map.resolution.x);
+		write(fd, &data->image.img_data_addr[i.x], sizeof(unsigned int) * data->map.resolution.x);
 		i.y++;
 	}
 	return (0);
