@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 02:01:35 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/31 04:25:33 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/06/01 02:41:01 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ char	**String_array_copy(char **strs, int size);
 
 int		Errors_print(unsigned int errors, int listall);
 void	parse_sprites(t_game *data);
+void	cmd_parse(t_game *data, const char *cmd);
 
 # define ID_SIZE 8
 # define RGB_SIZE 3
@@ -118,6 +119,7 @@ static const callbacks parse_callbacks[CALLBACKS_SIZE] = {
 # define MAP_EXT ".cub"
 
 // Charset definition
+# define CMD_SAVE "--save"
 # define ERROR_BASE_MSG "Error\n"
 # define COMMA ','
 # define SPACE ' '

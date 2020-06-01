@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 14:33:13 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/28 02:27:59 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/06/01 02:18:08 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,11 +211,12 @@ typedef struct s_camera
 
 typedef struct s_game
 {
-	t_camera camera;
-	t_infos infos;
-	t_image image;
-	t_map map;
-	t_minimap minimap;
+	char		save;
+	t_camera	camera;
+	t_infos		infos;
+	t_image		image;
+	t_map		map;
+	t_minimap	minimap;
 } t_game;
 
 enum e_facing

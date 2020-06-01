@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 00:44:00 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/31 04:50:19 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/06/01 02:45:22 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ int		key_pressed(int keycode, t_game *data)
 {
 	if (keycode == KEY_ESC)
 	{
-		export_to_bmp("save.bmp", data);
+		if (data->save)
+			export_to_bmp(SAVE_NAME, data);
 		mlx_destroy_image(
 			data->infos.mlx_ptr,
 			data->image.img_ref
@@ -39,7 +40,8 @@ int		key_released(int keycode, t_game *data)
 
 int		exit_hook(t_game *data)
 {
-	export_to_bmp("save.bmp", data);
+	if (data->save)
+		export_to_bmp(SAVE_NAME, data);
 	mlx_destroy_image(
 		data->infos.mlx_ptr,
 		data->image.img_ref

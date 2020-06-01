@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/31 04:07:30 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/31 23:57:20 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/06/01 02:44:55 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,7 @@ typedef struct	s_bitmap
 # define BMP_FILES_HEADER_SIZE 14
 # define BITS_PER_PIXEL 8
 # define MAGIC_VALUE 0x4d42
-# define BMP_EXT ".bmp"
-# define XPM_EXT ".xpm"
+# define SAVE_NAME "save.bmp"
 
 int		export_to_bmp(const char *filename, t_game *data);
 

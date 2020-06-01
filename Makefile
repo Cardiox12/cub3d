@@ -6,7 +6,7 @@
 #    By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/25 00:45:19 by bbellavi          #+#    #+#              #
-#    Updated: 2020/05/31 04:43:10 by bbellavi         ###   ########.fr        #
+#    Updated: 2020/06/01 02:39:41 by bbellavi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,6 +56,7 @@ SRCS		+= $(PARSE_DIR)/map_processor.c
 SRCS		+= $(PARSE_DIR)/color_parser.c
 SRCS		+= $(PARSE_DIR)/texture_parser.c
 SRCS		+= $(PARSE_DIR)/resolution_parser.c
+SRCS		+= $(PARSE_DIR)/cmd_parser.c
 SRCS		+= $(BMP_DIR)/export.c
 HEADERS		= headers
 LFT_HEADERS	= $(LFT_DIR)/headers
