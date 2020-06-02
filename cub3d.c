@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 01:45:36 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/06/01 02:47:02 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/06/02 22:01:29 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,13 @@ void	Debug_log_game(t_game *data, const char *path)
 	}
 }
 
+
+static void	errexit(unsigned int errors, int listall)
+{
+	Errors_print(errors, listall);
+	exit(1);
+}
+
 int		main(int argc, char **argv)
 {
 	t_game data;
@@ -59,17 +66,13 @@ int		main(int argc, char **argv)
 		if (argc > 2)
 			cmd_parse(&data, argv[2]);
 			
-		init_game(&data);
-		init_textures(&data);
+		if ((errors = init_game(&data)))
+			errexit(errors, TRUE);
+		if ((errors = init_textures(&data)))
+			errexit(errors, TRUE);
 		parse_sprites(&data);
-
-		// Debug_log_game(&data, argv[1]);
-		data.camera.ZBuffer = malloc(sizeof(double) * data.map.resolution.x);
-		data.camera.sprite_order = malloc(sizeof(int) * data.map.sprites.cursor);
-		data.camera.sprite_distance = malloc(sizeof(double) * data.map.sprites.cursor);
-
-		if (data.camera.ZBuffer == NULL || data.camera.sprite_distance == NULL || data.camera.sprite_order == NULL)
-			exit(0);
+		if ((errors = init_sprite_variables(&data)))
+			errexit(errors, TRUE);
 		
 		data.image.img_ref = mlx_new_image(
 			data.infos.mlx_ptr,
