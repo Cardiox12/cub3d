@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 20:48:48 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/06/02 21:18:17 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/06/03 00:50:37 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ int		is_cardinal_point(char c);
 void	set_heading(t_camera *player, char cardinal_p);
 void	get_side(t_game *data);
 int		get_starting_point(t_game *data);
-
 
 // Raycaster 2d
 void    Ray_extend(t_ray *ray);

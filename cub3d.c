@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 01:45:36 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/06/02 22:04:34 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/06/03 00:54:20 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,16 +74,8 @@ int		main(int argc, char **argv)
 		if ((errors = init_sprite_variables(&data)))
 			errexit(errors, TRUE);
 		
-		data.image.img_ref = mlx_new_image(
-			data.infos.mlx_ptr,
-			data.map.resolution.x,
-			data.map.resolution.y);
-		data.image.img_data_addr = (int*)mlx_get_data_addr(
-			data.image.img_ref,
-			&data.image.bits_per_pixel,
-			&data.image.line_size,
-			&data.image.endian);
-		data.image.line_count = data.map.resolution.y;
+		if ((errors = init_game_image(&data)))
+			errexit(errors, TRUE);
 		get_starting_point(&data);
 		mlx_hook(data.infos.win_ptr, KEY_PRESS_CODE, KEY_PRESS_MASK, key_pressed, &data);
 		mlx_hook(data.infos.win_ptr, KEY_RELEASE_CODE, KEY_RELEASE_MASK, key_released, &data);
