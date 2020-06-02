@@ -6,12 +6,17 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/29 20:42:29 by tony              #+#    #+#             */
-/*   Updated: 2020/05/28 02:13:23 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/06/03 00:36:03 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "event_hooks.h"
 #include "types.h"
+
+int		is_sprite(t_vec2 pos, t_game *data)
+{
+	return (data->map.map[(int)pos.y][(int)pos.x] == '2');
+}
 
 int		is_out_of_bound(t_vec2 pos, t_game *data)
 {
@@ -20,7 +25,7 @@ int		is_out_of_bound(t_vec2 pos, t_game *data)
 	
 	if (x >= 0 && x < data->map.map_xsize && y >= 0 && y < data->map.map_ysize)
 	{
-		if (is_wall(data->map.map[y][x]))
+		if (is_wall(data->map.map[y][x]) || is_sprite(pos, data))
 			return (TRUE);
 	}
 	return (FALSE);

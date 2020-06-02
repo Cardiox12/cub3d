@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 12:45:46 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/06/02 21:41:56 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/06/02 23:35:22 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,7 @@
 
 uint32_t	get_color(t_image *img, t_vec pos, int w)
 {
-	uint32_t color;
-
-	color = 0xffffff;
-	if (pos.x >= 0 && pos.x < w && pos.y >= 0)
-	{
-		color = img->img_data_addr[pos.x + pos.y * w];
-	}
-	return (color);
+	return (img->img_data_addr[pos.x + pos.y * w]);
 }
 
 void		set_color(t_game *data, t_vec pos, int color)

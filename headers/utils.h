@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 03:18:15 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/28 01:28:59 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/06/03 00:14:28 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ t_vec	to_vec(t_vec2 a);
 t_vec2	to_vec2(t_vec a);
 t_vec2	div_vec2(t_vec2 a, int scalar);
 t_vec	div_vec(t_vec a, int scalar);
-int		dist_vec(t_vec a, t_vec b);
-int		dist_vec2(t_vec2 a, t_vec2 b);
+double	dist_vec(t_vec a, t_vec b);
+double	dist_vec2(t_vec2 a, t_vec2 b);
 float	dot_vec(t_vec a, t_vec b);
 float	dot_vec2(t_vec2 a, t_vec2 b);
 float	get_angle(t_vec a, t_vec b);

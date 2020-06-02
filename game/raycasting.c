@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/09 23:14:30 by tony              #+#    #+#             */
-/*   Updated: 2020/05/28 01:29:36 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/06/02 23:29:36 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,9 +129,12 @@ void	cast_sprites(t_game *data)
 					int d = (stripe.y - v_move_screen) * 256 - data->map.resolution.y * 128 + sprite_res.y * 128;
 					tex.y = ((d * tex_res.y) / sprite_res.y) / 256;
 
-					uint32_t color = get_color(&data->map.textures[IDX_SPRITE].image, tex, tex_res.x);
-					if ((color & 0x00FFFFFF) != 0)
-						set_color(data, stripe, color);
+					if (tex.x >= 0 && tex.x < tex_res.x && tex.y >= 0 && tex.y < tex_res.y)
+					{
+						uint32_t color = get_color(&data->map.textures[IDX_SPRITE].image, tex, tex_res.x);
+						if ((color & 0x00FFFFFF) != 0)
+							set_color(data, stripe, color);
+					}
 					stripe.y++;
 				}
 			}
