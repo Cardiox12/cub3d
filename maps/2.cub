@@ -1,9 +1,9 @@
 R 1000 600
 
 SO	./assets/colorstone.xpm
-WE	./assets/wood.xpm
+WE	./assets/eagle.xpm
 EA	./assets/eagle.xpm
-NO	./assets/redbricks.xpm
+NO	./assets/colorstone.xpm
 S	./assets/hitler.xpm
 F	139, 90, 14
 C	135, 206, 135
