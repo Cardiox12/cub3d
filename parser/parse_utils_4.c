@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/21 19:45:40 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/21 20:30:32 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/06/03 16:58:22 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,16 @@ char	**String_array_copy(char **strs, int size)
 	}
 	copy[index] = NULL;
 	return (copy);
+}
+
+int	is_empty_line(t_game *data)
+{
+	char *line;
+	
+	line = skip_spaces(data->map.line);
+	if (*line != '\0')
+		return (CODE_ERR_NON_EMPTY_LINE_AT_EOF);
+	free(data->map.line);
+	data->map.line = NULL;
+	return (RET_NO_ERROR);
 }

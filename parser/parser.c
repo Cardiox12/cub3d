@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/18 17:39:44 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/06/03 14:38:12 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/06/03 16:49:03 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,27 +65,34 @@ static int infos_parser(t_game *data, int fd)
 	return (err);
 }
 
+static int get_line(t_game *data, int index)
+{
+	size_t maxlen;
+
+	maxlen = ft_strlen(data->map.line);
+	data->map.map[index] = ft_strdup(data->map.line);
+	freeline(data);
+	return (maxlen);
+}
+
 static int map_parser(t_game *data, int fd)
 {
 	size_t maxlen;
 	size_t index;
 
 	index = 0;
+	maxlen = 0;
 	if (is_mapline(data->map.line))
-	{
-		maxlen = ft_strlen(data->map.line);
-		data->map.map[index++] = ft_strdup(data->map.line);
-		freeline(data);
-	}
-	while (get_next_line(fd, &data->map.line) > 0 || is_mapline(data->map.line))
-	{
-		maxlen = max(maxlen, ft_strlen(data->map.line));
-		data->map.map[index++] = ft_strdup(data->map.line);
-		freeline(data);
-	}
+		maxlen = max(maxlen, get_line(data, index++));
+	while (get_next_line(fd, &data->map.line) > 0 && is_mapline(data->map.line))
+		maxlen = max(maxlen, get_line(data, index++));
+	if (is_mapline(data->map.line))
+		maxlen = max(maxlen, get_line(data, index++));
 	data->map.map_ysize = index;
 	data->map.map_xsize = maxlen;
 	data->map.map[index] = NULL;
+	if (check_eof(data, fd))
+		return (CODE_ERR_NON_EMPTY_LINE_AT_EOF);
 	return (RET_NO_ERROR);
 }
 

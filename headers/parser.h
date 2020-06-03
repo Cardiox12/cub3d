@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 02:01:35 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/06/03 14:37:21 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/06/03 16:58:44 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ char	**String_array_copy(char **strs, int size);
 int		Errors_print(unsigned int errors, int listall);
 void	parse_sprites(t_game *data);
 int		cmd_parse(t_game *data, const char *cmd);
+int		is_empty_line(t_game *data);
+int		check_eof(t_game *data, int fd);
 
 # define ID_SIZE 8
 # define RGB_SIZE 3

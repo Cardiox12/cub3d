@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 22:39:22 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/06/03 14:50:23 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/06/03 16:59:30 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,5 +91,25 @@ int		map_is_valid(t_game *data)
 			return (CODE_ERR_MAP_CLOSE_ERROR);
 	}
 	free_objects(data, map, &stack);
+	return (RET_NO_ERROR);
+}
+
+int	check_eof(t_game *data, int fd)
+{
+	if (data->map.line != NULL)
+	{
+		if (is_empty_line(data))
+			return (CODE_ERR_NON_EMPTY_LINE_AT_EOF);
+	}
+	while (get_next_line(fd, &data->map.line) > 0)
+	{
+		if (is_empty_line(data))
+			return (CODE_ERR_NON_EMPTY_LINE_AT_EOF);
+	}
+	if (data->map.line != NULL)
+	{
+		if (is_empty_line(data))
+			return (CODE_ERR_NON_EMPTY_LINE_AT_EOF);
+	}
 	return (RET_NO_ERROR);
 }
