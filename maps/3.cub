@@ -1,6 +1,14 @@
-R 848 480
-NO textures/wall_1.xpm
-SO textures/wall_2.xpm
-S textures/sprite_1.xpm
-F 184,113,39
-C 51,198,227
+R 800 600
+SO	./assets/colorstone.xpm
+WE	./assets/wood.xpm
+EA	./assets/eagle.xpm
+NO	./assets/redbricks.xpm
+S	./assets/pillar.xpm
+
+F	139, 90, 14
+C	135, 206, 135
+
+111
+101
+1S1
+111

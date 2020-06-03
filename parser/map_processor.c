@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 22:39:22 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/25 07:10:34 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/06/03 05:02:38 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,8 @@ int		map_is_valid(t_game *data)
 
 	stack = NULL;
 	map  = String_array_copy(data->map.map, data->map.map_ysize);
-	get_starting_point(data);
+	if (get_starting_point(data) == NOT_FOUND)
+		return (CODE_ERR_NO_START_PNT_PROVIDED);
 	Stack_push(&stack, to_vec(data->camera.pos));
 	while (Stack_height(stack) != 0)
 	{
