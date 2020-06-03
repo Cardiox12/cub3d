@@ -5,7 +5,7 @@ EA	./assets/eagle.xpm
 NO	./assets/redbricks.xpm
 S	./assets/pillar.xpm
 F	139, 90, 14
-C	135, 206,
+C	135, 206,200
 
 
     111
@@ -15,3 +15,4 @@ C	135, 206,
 11000000011
   1100011
     111
+	

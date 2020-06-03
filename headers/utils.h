@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 03:18:15 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/06/03 00:14:28 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/06/03 21:41:05 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 # define FT_UTILS_H
 
 #include <math.h>
+#include <stdlib.h>
 #include "types.h"
+#include "mlx.h"
 
 // Vectors functions
 t_vec2	rotate(t_vec2 u, double theta, char clockwise);
@@ -47,5 +49,6 @@ int		min(int a, int b);
 void    check_screen_size(t_game *data);
 
 void	sort_pairs(t_pair *pairs, int size);
+void	free_game(t_game *data);
 
 #endif

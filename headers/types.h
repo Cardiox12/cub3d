@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 14:33:13 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/06/01 02:18:08 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/06/03 21:24:14 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +144,7 @@ typedef enum e_cardinal_p
 	S_WEST = 'W'
 } e_cardinal_p;
 
-typedef struct s_camera
+typedef struct	s_camera
 {
 	int side;
 	int hit;
@@ -207,7 +207,7 @@ typedef struct s_camera
 	int draw_start;
 	int draw_end;
 	int line_height;
-} t_camera;
+}				t_camera;
 
 typedef struct s_game
 {

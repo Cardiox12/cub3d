@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/18 17:39:44 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/06/03 16:49:03 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/06/03 23:38:51 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,11 +88,11 @@ static int map_parser(t_game *data, int fd)
 		maxlen = max(maxlen, get_line(data, index++));
 	if (is_mapline(data->map.line))
 		maxlen = max(maxlen, get_line(data, index++));
+	else if (contains_mapchar(data->map.line))
+		get_line(data, index++);
 	data->map.map_ysize = index;
 	data->map.map_xsize = maxlen;
 	data->map.map[index] = NULL;
-	if (check_eof(data, fd))
-		return (CODE_ERR_NON_EMPTY_LINE_AT_EOF);
 	return (RET_NO_ERROR);
 }
 
@@ -114,13 +114,13 @@ int		parse(t_game *data, const char *path)
 	if (errors & CODE_ERR_INCONSISTENT_SPECS)
 	{
 		close(fd);
-		return (Errors_print(errors, TRUE));
+		return (errors);
 	}
 	errors |= map_parser(data, fd);
-	errors |= map_processor(data);
+	if ((errors |= map_processor(data)))
+		return (errors);
+	errors |= check_eof(data, fd);
 	errors |= map_is_valid(data);
 	close(fd);
-	if (errors)
-		Errors_print(errors, TRUE);
 	return (errors);
 }

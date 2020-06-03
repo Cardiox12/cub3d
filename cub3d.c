@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 01:45:36 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/06/03 17:01:24 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/06/03 21:42:48 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,9 @@ void	Debug_log_game(t_game *data, const char *path)
 	}
 }
 
-static void	errexit(unsigned int errors, int listall)
+static void	errexit(t_game *data, unsigned int errors, int listall)
 {
+	free_game(data);
 	Errors_print(errors, listall);
 	exit(1);
 }
@@ -55,26 +56,25 @@ static int init(int argc, char **argv, t_game *data)
 {
 	int errors;
 	
+	ft_memset(data, 0, sizeof(t_game));
 	data->save = FALSE;
 	errors = parse(data, argv[1]);
 	if (errors)
-	{
-		exit(0);
-	}
+		errexit(data, errors, TRUE);
 	if (argc > 2)
 	{
 		if ((errors = cmd_parse(data, argv[2])))
-			errexit(errors, TRUE);
+			errexit(data, errors, TRUE);
 	}
 	if ((errors = init_game(data)))
-		errexit(errors, TRUE);
+		errexit(data, errors, TRUE);
 	if ((errors = init_textures(data)))
-		errexit(errors, TRUE);
+		errexit(data, errors, TRUE);
 	parse_sprites(data);
 	if ((errors = init_sprite_variables(data)))
-		errexit(errors, TRUE);
+		errexit(data, errors, TRUE);
 	if ((errors = init_game_image(data)))
-		errexit(errors, TRUE);
+		errexit(data, errors, TRUE);
 	get_starting_point(data);
 	return (RET_NO_ERROR);
 }

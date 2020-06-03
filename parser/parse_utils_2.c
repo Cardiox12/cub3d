@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 22:02:13 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/06/03 16:19:42 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/06/03 23:35:17 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int		is_mapline(const char *line)
 	return (TRUE);
 }
 
+
 int		is_spec(const char *id)
 {
 	int idlen;
@@ -50,6 +51,19 @@ int		is_spec(const char *id)
 		if (ft_strncmp(ids[index].id, id, idlen) == 0)
 			return (TRUE);
 		index++;
+	}
+	return (FALSE);
+}
+
+int		contains_mapchar(const char *line)
+{
+	if (line == NULL)
+		return (FALSE);
+	while (*line != '\0')
+	{
+		if (ft_strchr(MAP_CHARSET_EXTEND, *line))
+			return (TRUE);
+		line++;
 	}
 	return (FALSE);
 }
