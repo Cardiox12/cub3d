@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 02:01:35 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/06/03 04:21:42 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/06/03 14:37:21 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ char	*skip_digits(const char *s);
 int		has_valid_ext(const char *path);
 void	freeline(t_game *data);
 int		is_mapline(const char *line);
-void	map_processor(t_game *data);
+int		map_processor(t_game *data);
 int		map_is_valid(t_game *data);
 int		is_spec(const char *id);
 

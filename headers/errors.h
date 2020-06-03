@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 13:48:41 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/06/03 05:02:30 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/06/03 14:36:01 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # define NOT_FOUND -1
 # define RET_ERROR 1
 # define RET_NO_ERROR 0
-# define ERR_ARRAY_SIZE 22
+# define ERR_ARRAY_SIZE 23
 
 typedef struct	s_errors
 {
@@ -48,7 +48,8 @@ enum	e_err_code
 	CODE_ERR_WIN_FAILED_TO_INIT		= (1U << 18),
 	CODE_ERR_LOADING_TEXTURE		= (1U << 19),
 	CODE_ERR_INVALID_OPT			= (1U << 20),
-	CODE_ERR_NO_START_PNT_PROVIDED	= (1U << 21)
+	CODE_ERR_NO_START_PNT_PROVIDED	= (1U << 21),
+	CODE_ERR_BAD_CHAR_IN_MAP		= (1U << 22)
 };
 
 static const t_errors errors_array[ERR_ARRAY_SIZE] = {
@@ -73,7 +74,8 @@ static const t_errors errors_array[ERR_ARRAY_SIZE] = {
 	{CODE_ERR_WIN_FAILED_TO_INIT, "Window failed to init"},
 	{CODE_ERR_LOADING_TEXTURE, "Error loading texture"},
 	{CODE_ERR_INVALID_OPT, "Invalid option"},
-	{CODE_ERR_NO_START_PNT_PROVIDED, "No starting point provided"}
+	{CODE_ERR_NO_START_PNT_PROVIDED, "No starting point provided"},
+	{CODE_ERR_BAD_CHAR_IN_MAP, "Bad character in map"}
 };
 
 #endif

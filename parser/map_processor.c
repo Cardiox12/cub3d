@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 22:39:22 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/06/03 05:02:38 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/06/03 14:50:23 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	free_objects(t_game *data, char **map, t_stack **stack)
 	free(map);
 }
 
-void	map_processor(t_game *data)
+int			map_processor(t_game *data)
 {
 	size_t	curlen;
 	t_vec	i;
@@ -34,15 +34,18 @@ void	map_processor(t_game *data)
 		i.x = 0;
 		while (i.x < data->map.map_xsize)
 		{
+			if (ft_strchr(MAP_CHARSET_EXTEND, data->map.map[i.y][i.x]) == NULL)
+				return (CODE_ERR_BAD_CHAR_IN_MAP);
 			if (data->map.map[i.y][i.x] == SPACE || data->map.map[i.y][i.x] == '\0')
 				data->map.map[i.y][i.x] = PREPROCESS_REPLACE_COLOR;
 			i.x++;
 		}
 		i.y++;
 	}
+	return (RET_NO_ERROR);
 }
 
-int		flood_fill(t_game *data, t_stack **stack, char **map)
+int			flood_fill(t_game *data, t_stack **stack, char **map)
 {
 	t_vec	pos;
 	t_vec	n;
