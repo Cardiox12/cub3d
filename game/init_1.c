@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/25 17:35:27 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/06/03 00:47:43 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/06/03 04:26:10 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,17 @@ int	init_game(t_game *data)
 	check_screen_size(data);
 	minres = min(data->map.resolution.x, data->map.resolution.y);
 	minsize = min(data->map.map_xsize, data->map.map_ysize);
-	data->infos.win_ptr = mlx_new_window(
-		data->infos.mlx_ptr,
-		data->map.resolution.x,
-		data->map.resolution.y,
-		WINDOW_NAME
-	);
-	if (data->infos.win_ptr == NULL)
-		return (CODE_ERR_WIN_FAILED_TO_INIT);
+	if (data->save == FALSE)
+	{
+		data->infos.win_ptr = mlx_new_window(
+			data->infos.mlx_ptr,
+			data->map.resolution.x,
+			data->map.resolution.y,
+			WINDOW_NAME
+		);
+		if (data->infos.win_ptr == NULL)
+			return (CODE_ERR_WIN_FAILED_TO_INIT);
+	}
 	data->camera.field_of_view = FIELD_OF_VIEW;
 	data->camera.debug = FALSE;
 	data->map.specs_number = 0;

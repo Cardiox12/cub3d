@@ -6,13 +6,14 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 20:33:14 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/27 07:12:46 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/06/03 04:32:40 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "render.h"
 #include <stdio.h>
 #include "errors.h"
+#include "bitmap.h"
 
 void	init_rays(t_camera *player)
 {
@@ -96,4 +97,10 @@ void	render(t_game *data)
 	draw_ceil_and_floor(data);
 	raycasting(data);
 	minimap(data);
+	if (data->save)
+	{
+		printf("Resolution : %ix%i\n", data->map.resolution.x, data->map.resolution.y);
+		export_to_bmp(SAVE_NAME, data);
+		exit(0);
+	}
 }

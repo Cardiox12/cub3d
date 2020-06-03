@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 00:51:02 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/28 03:54:48 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/06/03 04:35:11 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,6 @@
 #include "types.h"
 #include "render.h"
 #include "mlx.h"
-
-/*
-    W 119
-    S 115
-    A 97
-    D 100
-    gauche 65361
-    droite 65363
-*/
 
 # define STEP (1.0f / 700.0f)
 
