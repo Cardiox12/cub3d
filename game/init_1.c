@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/25 17:35:27 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/06/03 04:26:10 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/06/04 03:56:34 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ int	init_game(t_game *data)
 	check_screen_size(data);
 	minres = min(data->map.resolution.x, data->map.resolution.y);
 	minsize = min(data->map.map_xsize, data->map.map_ysize);
+	if (init_textures(data))
+		return (CODE_ERR_LOADING_TEXTURE);
 	if (data->save == FALSE)
 	{
 		data->infos.win_ptr = mlx_new_window(
