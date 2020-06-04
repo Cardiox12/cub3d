@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 20:33:14 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/06/03 04:32:40 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/06/04 05:05:48 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,25 +71,29 @@ void	set_heading(t_camera *player, char cardinal_p)
 int		get_starting_point(t_game *data)
 {
 	t_vec i;
+	char	visited;
 
 	i = (typeof(i)){0, 0};
+	visited = FALSE;
 	while (i.y < data->map.map_ysize)
 	{
 		while (i.x < data->map.map_xsize)
 		{
-			if (is_cardinal_point(data->map.map[i.y][i.x]))
+			if (is_cardinal_point(data->map.map[i.y][i.x]) && !visited)
 			{
 				set_heading(&data->camera, data->map.map[i.y][i.x]);
 				data->camera.pos.x = (float)i.x + 0.5;
 				data->camera.pos.y = (float)i.y + 0.5;
-				return (FOUND);
+				visited = TRUE;
 			}
+			else if (is_cardinal_point(data->map.map[i.y][i.x]) && visited == TRUE)
+				return (CODE_ERR_TOO_MANY_START_POINT);
 			i.x++;
 		}
 		i.x = 0;
 		i.y++;
 	}
-	return (NOT_FOUND);
+	return ((visited) ? FOUND : CODE_ERR_NO_START_PNT_PROVIDED);
 }
 
 void	render(t_game *data)

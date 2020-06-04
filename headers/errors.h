@@ -6,18 +6,18 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 13:48:41 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/06/04 04:05:55 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/06/04 04:57:55 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_ERRORS_H
 # define FT_ERRORS_H
 
-# define FOUND 1
+# define FOUND 0
 # define NOT_FOUND -1
 # define RET_ERROR 1
 # define RET_NO_ERROR 0
-# define ERR_ARRAY_SIZE 25
+# define ERR_ARRAY_SIZE 26
 
 typedef struct	s_errors
 {
@@ -51,7 +51,8 @@ enum	e_err_code
 	CODE_ERR_NO_START_PNT_PROVIDED	= (1U << 21),
 	CODE_ERR_BAD_CHAR_IN_MAP		= (1U << 22),
 	CODE_ERR_NON_EMPTY_LINE_AT_EOF	= (1U << 23),
-	CODE_ERR_RESOLUTION_ZERO		= (1U << 24)
+	CODE_ERR_RESOLUTION_ZERO		= (1U << 24),
+	CODE_ERR_TOO_MANY_START_POINT	= (1U << 25)
 };
 
 static const t_errors errors_array[ERR_ARRAY_SIZE] = {
@@ -79,7 +80,8 @@ static const t_errors errors_array[ERR_ARRAY_SIZE] = {
 	{CODE_ERR_NO_START_PNT_PROVIDED, "No starting point provided"},
 	{CODE_ERR_BAD_CHAR_IN_MAP, "Bad character in map"},
 	{CODE_ERR_NON_EMPTY_LINE_AT_EOF, "Invalid characters after map definition"},
-	{CODE_ERR_RESOLUTION_ZERO, "Resolution cannot be zero"}
+	{CODE_ERR_RESOLUTION_ZERO, "Resolution cannot be zero"},
+	{CODE_ERR_TOO_MANY_START_POINT, "Too many starting point"}
 };
 
 #endif

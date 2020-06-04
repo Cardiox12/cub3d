@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/25 17:35:27 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/06/04 03:56:34 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/06/04 05:08:15 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ int	init_game(t_game *data)
 	data->map.specs_number = 0;
 	data->minimap.size = minres * ((float)MINIMAP_RATIO / 100);
 	data->minimap.square_size = data->minimap.size / minsize;
-	get_starting_point(data);
 	return (RET_NO_ERROR);
 }
 
