@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 01:45:36 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/06/04 05:08:40 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/06/04 05:13:35 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,6 @@ static int init(int argc, char **argv, t_game *data)
 		if ((errors = cmd_parse(data, argv[2])))
 			errexit(data, errors, TRUE);
 	}
-	if ((errors = get_starting_point(data)))
-		errexit(data, errors, TRUE);
 	if ((errors = init_game(data)))
 		errexit(data, errors, TRUE);
 	parse_sprites(data);

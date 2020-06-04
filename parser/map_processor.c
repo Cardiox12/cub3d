@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 22:39:22 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/06/03 22:56:08 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/06/04 05:13:38 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,13 +77,14 @@ int			flood_fill(t_game *data, t_stack **stack, char **map)
 
 int		map_is_valid(t_game *data)
 {
-	t_stack	*stack;
-	char	**map;
+	t_stack			*stack;
+	char			**map;
+	unsigned int	errors;
 
 	stack = NULL;
 	map  = String_array_copy(data->map.map, data->map.map_ysize);
-	if (get_starting_point(data) == NOT_FOUND)
-		return (CODE_ERR_NO_START_PNT_PROVIDED);
+	if ((errors = get_starting_point(data)))
+		return (errors);
 	Stack_push(&stack, to_vec(data->camera.pos));
 	while (Stack_height(stack) != 0)
 	{
