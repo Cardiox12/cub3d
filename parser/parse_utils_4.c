@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/21 19:45:40 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/06/03 16:58:22 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/06/04 21:33:49 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void 	String_array_free(char **strs, int size)
 	index = 0;
 	while (index < size)
 		free(strs[index++]);
+	free(strs);
 }
 
 char	**String_array_copy(char **strs, int size)
@@ -43,7 +44,10 @@ char	**String_array_copy(char **strs, int size)
 		if (tmp == NULL)
 		{
 			if (index != 0)
+			{
 				String_array_free(copy, index);
+				free(copy);
+			}
 			free(copy);
 			return (NULL);
 		}

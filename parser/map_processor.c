@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 22:39:22 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/06/04 05:13:38 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/06/04 21:29:31 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ static void	free_objects(t_game *data, char **map, t_stack **stack)
 {
 	String_array_free(map, data->map.map_ysize);
 	Stack_free(stack);
-	free(*stack);
-	free(map);
 }
 
 int			map_processor(t_game *data)
@@ -84,7 +82,10 @@ int		map_is_valid(t_game *data)
 	stack = NULL;
 	map  = String_array_copy(data->map.map, data->map.map_ysize);
 	if ((errors = get_starting_point(data)))
+	{
+		String_array_free(map, data->map.map_ysize);
 		return (errors);
+	}
 	Stack_push(&stack, to_vec(data->camera.pos));
 	while (Stack_height(stack) != 0)
 	{
