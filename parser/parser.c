@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/18 17:39:44 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/06/04 00:33:01 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/06/04 14:56:20 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,10 +106,7 @@ int		parse(t_game *data, const char *path)
 	if (has_valid_ext(path) == FALSE)
 		return (Errors_print(CODE_ERR_BAD_FILE_EXT, FALSE));
 	if ((fd = open(path, O_RDONLY)) < 0)
-	{
-		perror(EXE_NAME);
-		return (RET_ERROR);
-	}
+		Error_std(EXE_NAME);
 	errors |= infos_parser(data, fd);
 	if (errors & CODE_ERR_INCONSISTENT_SPECS)
 	{

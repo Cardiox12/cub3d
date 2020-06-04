@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/22 15:45:25 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/25 02:35:19 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/06/04 14:55:53 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,11 @@ int		Errors_print(unsigned int errors, int listall)
 		index++;
 	}
 	return (errors_array[index].mask);
+}
+
+int		Error_std(const char *exe)
+{
+	ft_putstr(ERROR_BASE_MSG);
+	perror(exe);
+	exit(1);
 }
