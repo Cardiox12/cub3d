@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 01:52:30 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/19 02:22:08 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/06/04 04:05:38 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,7 @@ int		parse_resolution(t_game *data, const char *id, char *line)
 		return (CODE_ERR_BAD_CHARS_IN_RES_FIELD);
 	if (*line != '\0')
 		return (CODE_ERR_BAD_CHARS_IN_RES_FIELD);
-	return (0);
+	if (data->map.resolution.x == 0 || data->map.resolution.y == 0)
+		return (CODE_ERR_RESOLUTION_ZERO);
+	return (RET_NO_ERROR);
 }

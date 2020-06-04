@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 13:48:41 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/06/03 16:04:58 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/06/04 04:05:55 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # define NOT_FOUND -1
 # define RET_ERROR 1
 # define RET_NO_ERROR 0
-# define ERR_ARRAY_SIZE 24
+# define ERR_ARRAY_SIZE 25
 
 typedef struct	s_errors
 {
@@ -50,7 +50,8 @@ enum	e_err_code
 	CODE_ERR_INVALID_OPT			= (1U << 20),
 	CODE_ERR_NO_START_PNT_PROVIDED	= (1U << 21),
 	CODE_ERR_BAD_CHAR_IN_MAP		= (1U << 22),
-	CODE_ERR_NON_EMPTY_LINE_AT_EOF	= (1U << 23)
+	CODE_ERR_NON_EMPTY_LINE_AT_EOF	= (1U << 23),
+	CODE_ERR_RESOLUTION_ZERO		= (1U << 24)
 };
 
 static const t_errors errors_array[ERR_ARRAY_SIZE] = {
@@ -77,7 +78,8 @@ static const t_errors errors_array[ERR_ARRAY_SIZE] = {
 	{CODE_ERR_INVALID_OPT, "Invalid option"},
 	{CODE_ERR_NO_START_PNT_PROVIDED, "No starting point provided"},
 	{CODE_ERR_BAD_CHAR_IN_MAP, "Bad character in map"},
-	{CODE_ERR_NON_EMPTY_LINE_AT_EOF, "Invalid characters after map definition"}
+	{CODE_ERR_NON_EMPTY_LINE_AT_EOF, "Invalid characters after map definition"},
+	{CODE_ERR_RESOLUTION_ZERO, "Resolution cannot be zero"}
 };
 
 #endif

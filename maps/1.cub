@@ -1,4 +1,4 @@
-R 800 600
+R 800 0
 SO	./assets/colorstone.xpm
 WE	./assets/wood.xpm
 EA	./assets/eagle.xpm
