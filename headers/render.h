@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 20:48:48 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/06/05 21:30:51 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/06/05 21:50:55 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ void		set_heading(t_camera *player, char cardinal_p);
 void		get_side(t_game *data);
 int			get_starting_point(t_game *data);
 
-void		ray_extend(t_ray *ray);
 void		ray_update(t_ray *ray, t_vec2 pos);
 void		ray_rotate(t_ray *ray, double theta, char clockwise);
 void		rays_update(t_ray *rays, t_vec2 pos);
