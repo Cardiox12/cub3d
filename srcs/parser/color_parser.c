@@ -6,13 +6,13 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 01:51:53 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/25 00:53:16 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/06/05 22:02:47 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-static char *skip(char *line)
+static char	*skip(char *line)
 {
 	line = skip_digits(line);
 	line = skip_spaces(line);
@@ -21,7 +21,7 @@ static char *skip(char *line)
 	return (line);
 }
 
-static void get_color_ptr(t_game *data, const char *id, unsigned int **color)
+static void	get_color_ptr(t_game *data, const char *id, unsigned int **color)
 {
 	if (ft_strncmp(id, ID_CEIL, 1) == 0)
 		*color = &data->map.ceil_color;
@@ -29,8 +29,8 @@ static void get_color_ptr(t_game *data, const char *id, unsigned int **color)
 		*color = &data->map.floor_color;
 }
 
-int		parse_color(t_game *data, const char *id, char *line)
-{	
+int			parse_color(t_game *data, const char *id, char *line)
+{
 	const size_t	id_len = ft_strlen(id);
 	unsigned int	*color;
 	int				colors[RGB_SIZE];
