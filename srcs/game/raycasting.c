@@ -6,97 +6,12 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/09 23:14:30 by tony              #+#    #+#             */
-/*   Updated: 2020/06/05 21:10:51 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/06/05 21:22:08 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "types.h"
 #include "render.h"
-
-// MARK: To remove
-#include <stdio.h>
-
-static int	texture_choser(t_game *data)
-{
-	const int angle = vector_angle(data->camera.ray_dir);
-	
-	if (data->camera.side == 1 && (angle >= 0 && angle < 180))
-		return (IDX_NORTH);
-	if (data->camera.side == 1 && (angle >= 180 && angle <= 360))
-		return (IDX_SOUTH);
-	if (data->camera.side == 0 && (angle > 90 && angle < 270))
-		return (IDX_EAST);
-	if (data->camera.side == 0 && ((angle >= 270 && angle <= 360) || (angle >= 0 && angle <= 90)))
-		return (IDX_WEST);
-	return (IDX_NORTH);
-}
-
-void	map_texture(t_game *data, int x)
-{
-	const int h = data->map.resolution.y;
-	uint32_t    color;
-	t_texture   *texture;
-	int         y;
-
-	// Texture choosing
-	texture = &data->map.textures[texture_choser(data)];
-	// texture = &data->map.textures[IDX_NORTH];
-    
-	// Calculate value of wall_x, wall_x is the exact position of where the wall was hit
-	if (data->camera.side == 0)
-		data->camera.wall_x = data->camera.pos.y + data->camera.perp_wall_dist * data->camera.ray_dir.y;
-	else
-		data->camera.wall_x = data->camera.pos.x + data->camera.perp_wall_dist * data->camera.ray_dir.x;
-	data->camera.wall_x -= floor(data->camera.wall_x);
-	
-	// Calculating x coordinate of the texture
-	data->camera.tex.x = (int)(data->camera.wall_x * (double)texture->width);
-	
-	if (data->camera.side == 0 && data->camera.ray_dir.x > 0)
-		data->camera.tex.x = texture->width - data->camera.tex.x - 1;
-	if (data->camera.side == 1 && data->camera.ray_dir.y < 0)
-		data->camera.tex.x = texture->width - data->camera.tex.x - 1;
-
-	// How much to increase the texture coordinate per screen pixel
-	data->camera.tex_step = 1.0 * texture->height / data->camera.line_height;
-	// Starting texture coordinate
-	data->camera.tex_pos = (data->camera.draw_start - h / 2 + data->camera.line_height / 2) * data->camera.tex_step;
-	y = data->camera.draw_start;
-	while (y < data->camera.draw_end)
-	{
-		data->camera.tex.y = (int)data->camera.tex_pos & (texture->height - 1);
-		data->camera.tex_pos += data->camera.tex_step;
-		color = get_color(&texture->image, data->camera.tex, texture->height);
-		if (data->camera.side == 1)
-			color = (color >> 1) & 8355711;
-		set_color(data, (t_vec){x, y}, color);
-		y++;
-	}
-}
-
-void	get_side(t_game *data)
-{
-	if (data->camera.ray_dir.x < 0)
-	{
-		data->camera.step.x = -1;
-		data->camera.side_dist.x = (data->camera.pos.x - data->camera.map_pos.x) * data->camera.delta_dist.x;
-	}
-	else
-	{
-		data->camera.step.x = 1;
-		data->camera.side_dist.x = (data->camera.map_pos.x + 1.0 - data->camera.pos.x) * data->camera.delta_dist.x;
-	}
-	if (data->camera.ray_dir.y < 0)
-	{
-		data->camera.step.y = -1;
-		data->camera.side_dist.y = (data->camera.pos.y - data->camera.map_pos.y) * data->camera.delta_dist.y;
-	}
-	else
-	{
-		data->camera.step.y = 1;
-		data->camera.side_dist.y = (data->camera.map_pos.y + 1.0 - data->camera.pos.y) * data->camera.delta_dist.y;
-	}
-}
 
 static void    perform_dda(t_game *data)
 {
@@ -153,7 +68,7 @@ static void    init_raycast_variables(t_game *data, int x)
 
 void	raycasting(t_game *data)
 {
-	int			x;
+	int x;
 
 	x = 0;
 	while (x < data->map.resolution.x)
