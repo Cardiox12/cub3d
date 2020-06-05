@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/25 17:35:27 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/06/05 16:33:18 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/06/05 17:18:51 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,25 @@
 
 int	init_textures(t_game *data)
 {
-	t_texture	*text = data->map.textures;
+	t_texture	*text;
 	int			index;
 
 	index = 0;
+	text = data->map.textures;
 	while (index < TEX_NUMBERS)
 	{
 		text[index].image.img_ref = mlx_xpm_file_to_image(
 			data->infos.mlx_ptr,
 			text[index].path,
 			&text[index].width,
-			&text[index].height
-		);
+			&text[index].height);
 		if (text[index].image.img_ref == NULL)
 			return (CODE_ERR_LOADING_TEXTURE);
 		text[index].image.img_data_addr = (int*)mlx_get_data_addr(
 			text[index].image.img_ref,
 			&text[index].image.bits_per_pixel,
 			&text[index].image.line_size,
-			&text[0].image.endian
-		);
+			&text[0].image.endian);
 		index++;
 	}
 	return (RET_NO_ERROR);
@@ -54,12 +53,10 @@ int	init_game(t_game *data)
 		return (CODE_ERR_LOADING_TEXTURE);
 	if (data->save == FALSE)
 	{
-		data->infos.win_ptr = mlx_new_window(
-			data->infos.mlx_ptr,
+		data->infos.win_ptr = mlx_new_window(data->infos.mlx_ptr,
 			data->map.resolution.x,
 			data->map.resolution.y,
-			WINDOW_NAME
-		);
+			WINDOW_NAME);
 		if (data->infos.win_ptr == NULL)
 			return (CODE_ERR_WIN_FAILED_TO_INIT);
 	}
@@ -96,7 +93,8 @@ int	init_sprite_variables(t_game *data)
 	data->camera.sprite_order = malloc(sizeof(int) * data->map.sprites.cursor);
 	if (data->camera.sprite_order == NULL)
 		return (RET_ERROR);
-	data->camera.sprite_distance = malloc(sizeof(double) * data->map.sprites.cursor);
+	data->camera.sprite_distance = malloc(
+		sizeof(double) * data->map.sprites.cursor);
 	if (data->camera.sprite_order == NULL)
 		return (RET_ERROR);
 	return (RET_NO_ERROR);
