@@ -6,7 +6,7 @@
 #    By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/25 00:45:19 by bbellavi          #+#    #+#              #
-#    Updated: 2020/06/05 17:13:37 by bbellavi         ###   ########.fr        #
+#    Updated: 2020/06/05 17:43:05 by bbellavi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,7 +57,8 @@ SRCS		+= $(GAME_DIR)/image1.c
 SRCS		+= $(GAME_DIR)/image2.c
 SRCS		+= $(GAME_DIR)/rays.c
 SRCS		+= $(GAME_DIR)/minimap.c
-SRCS		+= $(GAME_DIR)/movements.c
+SRCS		+= $(GAME_DIR)/movements1.c
+SRCS		+= $(GAME_DIR)/movements2.c
 SRCS		+= $(GAME_DIR)/raycasting.c
 SRCS		+= $(HOOK_DIR)/event_hooks.c
 SRCS		+= $(VEC_DIR)/vec_rotate.c
