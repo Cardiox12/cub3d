@@ -6,15 +6,15 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/05 05:19:26 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/06/05 05:38:52 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/06/05 16:49:04 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef VECTORS_H
-# define VECTOR_H
+#ifndef FT_VECTORS_H
+# define FT_VECTORS_H
 
-#include <math.h>
-#include "types.h"
+# include <math.h>
+# include "types.h"
 
 # define CLOCKWISE 1
 # define ANTI_CLOCKWISE 0
