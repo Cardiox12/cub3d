@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/29 20:42:29 by tony              #+#    #+#             */
-/*   Updated: 2020/06/03 00:36:03 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/06/05 15:45:18 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	player_rotate(t_game *data)
 {
 	char dir;
 
-	if (event_array[KEY_LEFT])
+	if (g_event_array[KEY_LEFT])
 	{
 		if (data->camera.camera_angle == 0)
 			data->camera.camera_angle = 359;

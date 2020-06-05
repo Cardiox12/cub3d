@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 00:44:00 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/06/03 04:54:56 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/06/05 15:45:18 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,14 @@ int		key_pressed(int keycode, t_game *data)
 {
 	if (keycode == KEY_ESC)
 		quit(data);
-	event_array[keycode] = TRUE;
+	g_event_array[keycode] = TRUE;
 	return (0);
 }
 
 int		key_released(int keycode, t_game *data)
 {
 	(void)data;
-	event_array[keycode] = FALSE;
+	g_event_array[keycode] = FALSE;
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 14:23:36 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/06/04 00:36:49 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/06/05 15:45:18 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,17 @@
 
 void	check_event(t_game *data)
 {
-	if (event_array[KEY_S])
+	if (g_event_array[KEY_S])
 		player_move_down(data);
-	if (event_array[KEY_W])
+	if (g_event_array[KEY_W])
 		player_move_up(data);
-	if (event_array[KEY_A])
+	if (g_event_array[KEY_A])
 		player_move_left(data);
-	if (event_array[KEY_D])
+	if (g_event_array[KEY_D])
 		player_move_right(data);
-	if (event_array[KEY_LEFT] || event_array[KEY_RIGHT])
+	if (g_event_array[KEY_LEFT] || g_event_array[KEY_RIGHT])
 		player_rotate(data);
-	if (event_array[KEY_SHIFT])
+	if (g_event_array[KEY_SHIFT])
 		data->camera.debug = (data->camera.debug) ? FALSE : TRUE;
 }
 
