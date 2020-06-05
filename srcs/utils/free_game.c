@@ -6,13 +6,13 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/03 21:20:00 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/06/05 16:33:18 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/06/05 23:00:47 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
-static void free_map(t_game *data)
+static void	free_map(t_game *data)
 {
 	int index;
 
@@ -25,7 +25,7 @@ static void free_map(t_game *data)
 	}
 }
 
-static void free_textures(t_game *data)
+static void	free_textures(t_game *data)
 {
 	int index;
 
@@ -36,14 +36,13 @@ static void free_textures(t_game *data)
 		{
 			mlx_destroy_image(
 				data->infos.mlx_ptr,
-				data->map.textures[index].image.img_ref
-			);
+				data->map.textures[index].image.img_ref);
 		}
 		index++;
 	}
 }
 
-void	free_game(t_game *data)
+void		free_game(t_game *data)
 {
 	if (data->camera.zbuffer != NULL)
 		free(data->camera.zbuffer);
@@ -55,15 +54,13 @@ void	free_game(t_game *data)
 	{
 		mlx_destroy_window(
 			data->infos.mlx_ptr,
-			data->infos.win_ptr
-		);
+			data->infos.win_ptr);
 	}
 	if (data->image.img_ref != NULL)
 	{
 		mlx_destroy_image(
 			data->infos.mlx_ptr,
-			data->image.img_ref
-		);
+			data->image.img_ref);
 	}
 	free_map(data);
 	free_textures(data);
