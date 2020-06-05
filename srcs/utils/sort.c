@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/25 22:25:42 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/27 02:09:48 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/06/05 23:03:47 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,16 +44,17 @@ static int	partition(t_pair *pairs, int low, int high)
 
 static void	quicksort(t_pair *pairs, int low, int high)
 {
+	int pi;
+
 	if (low < high)
 	{
-		int pi = partition(pairs, low, high);
-
+		pi = partition(pairs, low, high);
 		quicksort(pairs, low, pi - 1);
 		quicksort(pairs, pi + 1, high);
 	}
 }
 
-void	sort_pairs(t_pair *pairs, int size)
+void		sort_pairs(t_pair *pairs, int size)
 {
 	quicksort(pairs, 0, size - 1);
 }

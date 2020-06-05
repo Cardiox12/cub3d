@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 13:48:41 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/06/05 15:12:34 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/06/05 22:51:32 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static const t_errors g_errors_array[ERR_ARRAY_SIZE] = {
 	{CODE_ERR_DUPLICATE_SPECS, "Duplicate specs"},
 	{CODE_ERR_TEXTURE_PATH_MISSING, "Texture path is missing"},
 	{CODE_ERR_BAD_SPEC, "Bad specifier"},
-	{CODE_ERR_RES_MISSING_PARAM, "Resolution missing height"},
+	{CODE_ERR_RES_MISSING_PARAM, "Resolution missing param"},
 	{CODE_ERR_BAD_CHARS_IN_RES_FIELD, "Bad characters in resolution field"},
 	{CODE_ERR_MLX_FAILED_TO_INIT, "Mlx failed to init"},
 	{CODE_ERR_IMG_FAILED_TO_INIT, "Image failed to init"},
