@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 22:39:22 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/06/04 21:29:31 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/06/05 16:03:46 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static void	free_objects(t_game *data, char **map, t_stack **stack)
 {
-	String_array_free(map, data->map.map_ysize);
-	Stack_free(stack);
+	string_array_free(map, data->map.map_ysize);
+	stack_free(stack);
 }
 
 int			map_processor(t_game *data)
@@ -49,7 +49,7 @@ int			flood_fill(t_game *data, t_stack **stack, char **map)
 	t_vec	n;
 	int		index;
 
-	pos = Stack_pop(stack);
+	pos = stack_pop(stack);
 	map[pos.y][pos.x] = REPLACE_COLOR;
 	index = 0;
 	while (index < DELTA_SIZE)
@@ -61,7 +61,7 @@ int			flood_fill(t_game *data, t_stack **stack, char **map)
 		if (n.x >= 0 && n.x < data->map.map_xsize && n.y >= 0 && n.y < data->map.map_ysize)
 		{
 			if (ft_strchr(TARGET_COLORS, map[n.y][n.x]) != NULL)
-				Stack_push(stack, n);
+				stack_push(stack, n);
 		}
 		else
 		{
@@ -80,14 +80,14 @@ int		map_is_valid(t_game *data)
 	unsigned int	errors;
 
 	stack = NULL;
-	map  = String_array_copy(data->map.map, data->map.map_ysize);
+	map  = string_array_copy(data->map.map, data->map.map_ysize);
 	if ((errors = get_starting_point(data)))
 	{
-		String_array_free(map, data->map.map_ysize);
+		string_array_free(map, data->map.map_ysize);
 		return (errors);
 	}
-	Stack_push(&stack, to_vec(data->camera.pos));
-	while (Stack_height(stack) != 0)
+	stack_push(&stack, to_vec(data->camera.pos));
+	while (stack_height(stack) != 0)
 	{
 		if (flood_fill(data, &stack, map) == FALSE)
 			return (CODE_ERR_MAP_CLOSE_ERROR);

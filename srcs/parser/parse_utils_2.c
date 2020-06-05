@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 22:02:13 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/06/03 23:35:17 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/06/05 16:09:43 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ int		is_spec(const char *id)
 	index = 0;
 	while (index < ID_SIZE)
 	{
-		idlen = ft_strlen(ids[index].id);
-		if (ft_strncmp(ids[index].id, id, idlen) == 0)
+		idlen = ft_strlen(g_ids[index].id);
+		if (ft_strncmp(g_ids[index].id, id, idlen) == 0)
 			return (TRUE);
 		index++;
 	}

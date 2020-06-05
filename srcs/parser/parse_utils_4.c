@@ -6,19 +6,19 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/21 19:45:40 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/06/04 21:33:49 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/06/05 16:03:46 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-void	Stack_free(t_stack **root)
+void	stack_free(t_stack **root)
 {
-	while (Stack_height(*root) != 0)
-		Stack_pop(root);
+	while (stack_height(*root) != 0)
+		stack_pop(root);
 }
 
-void 	String_array_free(char **strs, int size)
+void 	string_array_free(char **strs, int size)
 {
 	int index;
 
@@ -28,7 +28,7 @@ void 	String_array_free(char **strs, int size)
 	free(strs);
 }
 
-char	**String_array_copy(char **strs, int size)
+char	**string_array_copy(char **strs, int size)
 {
 	char	**copy;
 	char	*tmp;
@@ -45,7 +45,7 @@ char	**String_array_copy(char **strs, int size)
 		{
 			if (index != 0)
 			{
-				String_array_free(copy, index);
+				string_array_free(copy, index);
 				free(copy);
 			}
 			free(copy);

@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/18 17:39:44 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/06/04 14:56:20 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/06/05 16:11:03 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,12 @@ static int infos_parser(t_game *data, int fd)
 		index = 0;
 		while (index < ID_SIZE)
 		{
-			if (ft_strncmp(data->map.line, ids[index].id, ft_strlen(ids[index].id)) == 0)
+			if (ft_strncmp(data->map.line, g_ids[index].id, ft_strlen(g_ids[index].id)) == 0)
 			{
-				err |= parse_callbacks[ids[index].index](data, ids[index].id, data->map.line);
-				if (specs & ids[index].flag)
+				err |= g_parse_callbacks[g_ids[index].index](data, g_ids[index].id, data->map.line);
+				if (specs & g_ids[index].flag)
 					err |= CODE_ERR_DUPLICATE_SPECS;
-				specs |= ids[index].flag;
+				specs |= g_ids[index].flag;
 				data->map.specs_number++;
 				break;
 			}
@@ -104,9 +104,9 @@ int		parse(t_game *data, const char *path)
 	errors = 0;
 	data->map.specs_number = 0;
 	if (has_valid_ext(path) == FALSE)
-		return (Errors_print(CODE_ERR_BAD_FILE_EXT, FALSE));
+		return (errors_print(CODE_ERR_BAD_FILE_EXT, FALSE));
 	if ((fd = open(path, O_RDONLY)) < 0)
-		Error_std(EXE_NAME);
+		error_std(EXE_NAME);
 	errors |= infos_parser(data, fd);
 	if (errors & CODE_ERR_INCONSISTENT_SPECS)
 	{

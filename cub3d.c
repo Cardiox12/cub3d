@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 01:45:36 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/06/05 14:36:32 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/06/05 16:05:24 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 static void	errexit(t_game *data, unsigned int errors, int listall)
 {
 	free_game(data);
-	Errors_print(errors, listall);
+	errors_print(errors, listall);
 	exit(1);
 }
 

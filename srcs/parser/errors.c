@@ -6,13 +6,13 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/22 15:45:25 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/06/05 15:01:25 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/06/05 16:06:31 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-int		Errors_print(unsigned int errors, int listall)
+int		errors_print(unsigned int errors, int listall)
 {
 	int index;
 
@@ -32,7 +32,7 @@ int		Errors_print(unsigned int errors, int listall)
 	return (g_errors_array[index].mask);
 }
 
-int		Error_std(const char *exe)
+int		error_std(const char *exe)
 {
 	ft_putstr(ERROR_BASE_MSG);
 	perror(exe);
