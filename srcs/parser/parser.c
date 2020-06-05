@@ -6,66 +6,57 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/18 17:39:44 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/06/05 16:11:03 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/06/05 22:30:59 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-// Remove when final push
-#include <stdio.h>
-
-void		Debug_print_bits(unsigned int val)
-{
-	int index;
-
-	index = sizeof(val) * 8;
-	while (index >= 0)
-	{
-		--index;
-		if (val & (1U << index))
-			printf("1");
-		else
-			printf("0");
-	}
-	printf("\n");
-}
-
-static int infos_parser(t_game *data, int fd)
+static int	check_id(t_game *data)
 {
 	unsigned int	err;
-	unsigned int	specs;
-	int				index;
+	int				i;
 
-	data->map.line = NULL;
-	specs = 0;
 	err = 0;
-	while (get_next_line(fd, &data->map.line) > 0 && !is_mapline(data->map.line))
+	i = 0;
+	while (i < ID_SIZE)
 	{
-		index = 0;
-		while (index < ID_SIZE)
+		if (ft_strncmp(data->map.line, g_ids[i].id,
+		ft_strlen(g_ids[i].id)) == 0)
 		{
-			if (ft_strncmp(data->map.line, g_ids[index].id, ft_strlen(g_ids[index].id)) == 0)
-			{
-				err |= g_parse_callbacks[g_ids[index].index](data, g_ids[index].id, data->map.line);
-				if (specs & g_ids[index].flag)
-					err |= CODE_ERR_DUPLICATE_SPECS;
-				specs |= g_ids[index].flag;
-				data->map.specs_number++;
-				break;
-			}
-			else if (*data->map.line != '\0' && *data->map.line != SPACE && !is_spec(data->map.line))
-				err |= CODE_ERR_BAD_SPEC;
-			index++;
+			err |= g_parse_callbacks[g_ids[i].index](data, g_ids[i].id,
+			data->map.line);
+			if (data->map.specs & g_ids[i].flag)
+				err |= CODE_ERR_DUPLICATE_SPECS;
+			data->map.specs |= g_ids[i].flag;
+			break ;
 		}
+		else if (*data->map.line != '\0' && *data->map.line != SPACE
+		&& !is_spec(data->map.line))
+			err |= CODE_ERR_BAD_SPEC;
+		i++;
+	}
+	return (err);
+}
+
+static int	infos_parser(t_game *data, int fd)
+{
+	unsigned int	err;
+
+	err = 0;
+	data->map.line = NULL;
+	while (get_next_line(fd, &data->map.line) > 0 &&
+	!is_mapline(data->map.line))
+	{
+		err |= check_id(data);
 		freeline(data);
 	}
-	if (data->map.specs_number != SPECS_NUMBER)
+	if (data->map.specs != SPECS_MAX)
 		err |= CODE_ERR_INCONSISTENT_SPECS;
 	return (err);
 }
 
-static int get_line(t_game *data, int index)
+static int	get_line(t_game *data, int index)
 {
 	size_t maxlen;
 
@@ -75,7 +66,7 @@ static int get_line(t_game *data, int index)
 	return (maxlen);
 }
 
-static int map_parser(t_game *data, int fd)
+static int	map_parser(t_game *data, int fd)
 {
 	size_t maxlen;
 	size_t index;
@@ -96,13 +87,13 @@ static int map_parser(t_game *data, int fd)
 	return (RET_NO_ERROR);
 }
 
-int		parse(t_game *data, const char *path)
+int			parse(t_game *data, const char *path)
 {
-	unsigned int errors;
-	int	fd;
+	unsigned int	errors;
+	int				fd;
 
 	errors = 0;
-	data->map.specs_number = 0;
+	data->map.specs = 0;
 	if (has_valid_ext(path) == FALSE)
 		return (errors_print(CODE_ERR_BAD_FILE_EXT, FALSE));
 	if ((fd = open(path, O_RDONLY)) < 0)

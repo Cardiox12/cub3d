@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 02:01:35 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/06/05 16:12:17 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/06/05 22:28:01 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ int					check_eof(t_game *data, int fd);
 # define RGB_SIZE 3
 # define CALLBACKS_SIZE 3
 # define SPECS_NUMBER 8
+# define SPECS_MAX 255
 
 enum	e_callback_index
 {

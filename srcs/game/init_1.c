@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/25 17:35:27 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/06/05 17:18:51 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/06/05 22:25:18 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	init_game(t_game *data)
 	}
 	data->camera.field_of_view = FIELD_OF_VIEW;
 	data->camera.debug = FALSE;
-	data->map.specs_number = 0;
+	data->map.specs = 0;
 	data->minimap.size = minres * ((float)MINIMAP_RATIO / 100);
 	data->minimap.square_size = data->minimap.size / minsize;
 	return (RET_NO_ERROR);

@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 14:33:13 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/06/05 20:28:09 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/06/05 22:25:36 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,7 @@ typedef struct		s_map
 	int				map_xsize;
 	int				map_ysize;
 	char			*line;
-	unsigned int	specs_number;
+	unsigned int	specs;
 	unsigned int	square_size;
 }					t_map;
 
