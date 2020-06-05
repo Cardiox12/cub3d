@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/25 17:35:27 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/06/04 05:08:15 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/06/05 16:33:18 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,8 @@ int	init_game_image(t_game *data)
 
 int	init_sprite_variables(t_game *data)
 {
-	data->camera.ZBuffer = malloc(sizeof(double) * data->map.resolution.x);
-	if (data->camera.ZBuffer == NULL)
+	data->camera.zbuffer = malloc(sizeof(double) * data->map.resolution.x);
+	if (data->camera.zbuffer == NULL)
 		return (RET_ERROR);
 	data->camera.sprite_order = malloc(sizeof(int) * data->map.sprites.cursor);
 	if (data->camera.sprite_order == NULL)

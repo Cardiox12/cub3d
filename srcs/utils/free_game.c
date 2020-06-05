@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/03 21:20:00 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/06/04 21:16:28 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/06/05 16:33:18 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ static void free_textures(t_game *data)
 
 void	free_game(t_game *data)
 {
-	if (data->camera.ZBuffer != NULL)
-		free(data->camera.ZBuffer);
+	if (data->camera.zbuffer != NULL)
+		free(data->camera.zbuffer);
 	if (data->camera.sprite_distance != NULL)
 		free(data->camera.sprite_distance);
 	if (data->camera.sprite_order != NULL)

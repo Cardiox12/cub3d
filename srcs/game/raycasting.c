@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/09 23:14:30 by tony              #+#    #+#             */
-/*   Updated: 2020/06/02 23:29:36 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/06/05 16:33:41 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ void	cast_sprites(t_game *data)
 		{
 			tex.x = (int)(256 * (stripe.x - (-sprite_res.x / 2 + sprite_screen_x)) * tex_res.x / sprite_res.x) / 256;
 
-			if (transform.y > 0 && stripe.x > 0 && stripe.x < data->map.resolution.x && transform.y < data->camera.ZBuffer[stripe.x])
+			if (transform.y > 0 && stripe.x > 0 && stripe.x < data->map.resolution.x && transform.y < data->camera.zbuffer[stripe.x])
 			{
 				stripe.y = draw_start.y;
 				while (stripe.y < draw_end.y)
@@ -155,15 +155,15 @@ void	map_texture(t_game *data, int x)
 	texture = &data->map.textures[texture_choser(data)];
 	// texture = &data->map.textures[IDX_NORTH];
     
-	// Calculate value of wallX, wallX is the exact position of where the wall was hit
+	// Calculate value of wall_x, wall_x is the exact position of where the wall was hit
 	if (data->camera.side == 0)
-		data->camera.wallX = data->camera.pos.y + data->camera.perp_wall_dist * data->camera.ray_dir.y;
+		data->camera.wall_x = data->camera.pos.y + data->camera.perp_wall_dist * data->camera.ray_dir.y;
 	else
-		data->camera.wallX = data->camera.pos.x + data->camera.perp_wall_dist * data->camera.ray_dir.x;
-	data->camera.wallX -= floor(data->camera.wallX);
+		data->camera.wall_x = data->camera.pos.x + data->camera.perp_wall_dist * data->camera.ray_dir.x;
+	data->camera.wall_x -= floor(data->camera.wall_x);
 	
 	// Calculating x coordinate of the texture
-	data->camera.tex.x = (int)(data->camera.wallX * (double)texture->width);
+	data->camera.tex.x = (int)(data->camera.wall_x * (double)texture->width);
 	
 	if (data->camera.side == 0 && data->camera.ray_dir.x > 0)
 		data->camera.tex.x = texture->width - data->camera.tex.x - 1;
@@ -255,10 +255,10 @@ static void    get_perp_dist(t_game *data)
 static void    init_raycast_variables(t_game *data, int x)
 {
 		//calculate ray position and direction
-    data->camera.cameraX = 2 * x / (double)data->map.resolution.x - 1;
+    data->camera.camera_x = 2 * x / (double)data->map.resolution.x - 1;
 	
-    data->camera.ray_dir.x = data->camera.plan_front.x + data->camera.plan_right.x * data->camera.cameraX;
-    data->camera.ray_dir.y = data->camera.plan_front.y + data->camera.plan_right.y * data->camera.cameraX;
+    data->camera.ray_dir.x = data->camera.plan_front.x + data->camera.plan_right.x * data->camera.camera_x;
+    data->camera.ray_dir.y = data->camera.plan_front.y + data->camera.plan_right.y * data->camera.camera_x;
 
     //which box of the map we're in
     data->camera.map_pos = to_vec(data->camera.pos);
@@ -284,7 +284,7 @@ void	raycasting(t_game *data)
 		perform_dda(data);
 		get_perp_dist(data);
 		map_texture(data, x);
-		data->camera.ZBuffer[x] = data->camera.perp_wall_dist;
+		data->camera.zbuffer[x] = data->camera.perp_wall_dist;
 		x++;
 	}
 	cast_sprites(data);
