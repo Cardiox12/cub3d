@@ -6,7 +6,7 @@
 #    By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/25 00:45:19 by bbellavi          #+#    #+#              #
-#    Updated: 2020/06/05 14:47:18 by bbellavi         ###   ########.fr        #
+#    Updated: 2020/06/05 17:13:37 by bbellavi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,7 +53,8 @@ SRCS		+= $(UTILS_DIR)/free_game.c
 SRCS		+= $(GAME_DIR)/init_1.c
 SRCS		+= $(GAME_DIR)/render.c
 SRCS		+= $(GAME_DIR)/loop.c
-SRCS		+= $(GAME_DIR)/image.c
+SRCS		+= $(GAME_DIR)/image1.c
+SRCS		+= $(GAME_DIR)/image2.c
 SRCS		+= $(GAME_DIR)/rays.c
 SRCS		+= $(GAME_DIR)/minimap.c
 SRCS		+= $(GAME_DIR)/movements.c
