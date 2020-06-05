@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/21 06:27:08 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/06/05 16:02:40 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/06/05 22:09:40 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_stack	*stack_new_node(t_vec pos)
 	return (node);
 }
 
-t_stack *stack_push(t_stack **root, t_vec pos)
+t_stack	*stack_push(t_stack **root, t_vec pos)
 {
 	t_stack *node;
 
@@ -57,7 +57,7 @@ t_vec	stack_peek(t_stack *root)
 	return (root->pos);
 }
 
-int 	stack_height(t_stack *root)
+int		stack_height(t_stack *root)
 {
 	int height;
 

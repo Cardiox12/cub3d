@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/21 19:45:40 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/06/05 16:03:46 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/06/05 22:11:25 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	stack_free(t_stack **root)
 		stack_pop(root);
 }
 
-void 	string_array_free(char **strs, int size)
+void	string_array_free(char **strs, int size)
 {
 	int index;
 
@@ -32,7 +32,7 @@ char	**string_array_copy(char **strs, int size)
 {
 	char	**copy;
 	char	*tmp;
-	int 	index;
+	int		index;
 
 	copy = (char**)malloc(sizeof(char*) * (size + 1));
 	if (copy == NULL)
@@ -40,8 +40,7 @@ char	**string_array_copy(char **strs, int size)
 	index = 0;
 	while (index < size)
 	{
-		tmp = ft_strdup(strs[index]);
-		if (tmp == NULL)
+		if ((tmp = ft_strdup(strs[index])) == NULL)
 		{
 			if (index != 0)
 			{
@@ -58,10 +57,10 @@ char	**string_array_copy(char **strs, int size)
 	return (copy);
 }
 
-int	is_empty_line(t_game *data)
+int		is_empty_line(t_game *data)
 {
 	char *line;
-	
+
 	line = skip_spaces(data->map.line);
 	if (*line != '\0')
 		return (CODE_ERR_NON_EMPTY_LINE_AT_EOF);

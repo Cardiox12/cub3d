@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 22:02:13 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/06/05 16:09:43 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/06/05 22:08:54 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,11 @@ int		is_mapline(const char *line)
 	return (TRUE);
 }
 
-
 int		is_spec(const char *id)
 {
 	int idlen;
 	int index;
-	
+
 	index = 0;
 	while (index < ID_SIZE)
 	{
