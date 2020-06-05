@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   rays.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tony <tony@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/27 20:19:19 by tony              #+#    #+#             */
-/*   Updated: 2020/05/03 15:29:41 by tony             ###   ########.fr       */
+/*   Updated: 2020/06/05 05:40:16 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "render.h"
 #include "types.h"
 #include "utils.h"
 

@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 14:33:13 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/06/03 21:24:14 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/06/05 05:36:45 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@
 #include <stddef.h>
 #include <limits.h>
 
-# define CLOCKWISE 1
-# define ANTI_CLOCKWISE 0
 # define TRUE 1
 # define FALSE 0
 # define MINIMAP_RATIO 30

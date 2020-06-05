@@ -1,32 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   vec_get_angle.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/25 03:18:15 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/06/05 05:38:01 by bbellavi         ###   ########.fr       */
+/*   Created: 2020/06/05 05:26:23 by bbellavi          #+#    #+#             */
+/*   Updated: 2020/06/05 05:26:36 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_UTILS_H
-# define FT_UTILS_H
+#include "vectors.h"
 
-#include <math.h>
-#include <stdlib.h>
-#include "types.h"
-#include "mlx.h"
+float	get_angle(t_vec a, t_vec b)
+{
+	const float dot = dot_vec(a, b);
 
-float	to_radians(float degrees);
-float	to_degrees(float radians);
-int     is_wall(int c);
+	return (acos(dot / (mag_vec(a) * mag_vec(b))));
+}
 
-int		max(int a, int b);
-int		min(int a, int b);
-void    check_screen_size(t_game *data);
+float	get_angle2(t_vec2 a, t_vec2 b)
+{
+	const float dot = dot_vec2(a, b);
 
-void	sort_pairs(t_pair *pairs, int size);
-void	free_game(t_game *data);
-
-#endif
+	return (acos(dot / (mag_vec2(a) * mag_vec2(b))));
+}

@@ -1,32 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   vec_norm.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/25 03:18:15 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/06/05 05:38:01 by bbellavi         ###   ########.fr       */
+/*   Created: 2020/06/05 05:22:11 by bbellavi          #+#    #+#             */
+/*   Updated: 2020/06/05 05:22:32 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_UTILS_H
-# define FT_UTILS_H
+#include "vectors.h"
 
-#include <math.h>
-#include <stdlib.h>
-#include "types.h"
-#include "mlx.h"
+t_vec2	norm_vec2(t_vec2 a)
+{
+	const double mag = sqrt((a.x * a.x) + (a.y * a.y));
+	t_vec2	res;
 
-float	to_radians(float degrees);
-float	to_degrees(float radians);
-int     is_wall(int c);
+	res.x = a.x / (float)mag;
+	res.y = a.y / (float)mag;
+	return (res);
+}
 
-int		max(int a, int b);
-int		min(int a, int b);
-void    check_screen_size(t_game *data);
+t_vec	norm_vec(t_vec a)
+{
+	const double	mag = sqrt((a.x * a.x) + (a.y * a.y));
+	t_vec			res;
 
-void	sort_pairs(t_pair *pairs, int size);
-void	free_game(t_game *data);
-
-#endif
+	res.x = a.x / mag;
+	res.y = a.y / mag;
+	return (res);
+}

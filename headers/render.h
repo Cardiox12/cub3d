@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 20:48:48 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/06/03 00:50:37 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/06/05 05:35:38 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 #include "ft_string.h"
 #include "graphics_utils.h"
 #include "types.h"
+#include "vectors.h"
 
 # define ANGLE_south 180
 # define ANGLE_north 0

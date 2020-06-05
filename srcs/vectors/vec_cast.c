@@ -1,32 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   vec_cast.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/25 03:18:15 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/06/05 05:38:01 by bbellavi         ###   ########.fr       */
+/*   Created: 2020/06/05 05:23:51 by bbellavi          #+#    #+#             */
+/*   Updated: 2020/06/05 05:24:00 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_UTILS_H
-# define FT_UTILS_H
+#include "vectors.h"
 
-#include <math.h>
-#include <stdlib.h>
-#include "types.h"
-#include "mlx.h"
+t_vec	to_vec(t_vec2 a)
+{
+	t_vec ret;
 
-float	to_radians(float degrees);
-float	to_degrees(float radians);
-int     is_wall(int c);
+	ret.x = (int)a.x;
+	ret.y = (int)a.y;
+	return (ret);
+}
 
-int		max(int a, int b);
-int		min(int a, int b);
-void    check_screen_size(t_game *data);
+t_vec2	to_vec2(t_vec a)
+{
+	t_vec2 ret;
 
-void	sort_pairs(t_pair *pairs, int size);
-void	free_game(t_game *data);
-
-#endif
+	ret.x = (float)a.x;
+	ret.y = (float)a.y;
+	return (ret);
+}
