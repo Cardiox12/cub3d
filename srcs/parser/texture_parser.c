@@ -6,15 +6,13 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 01:53:16 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/05/25 06:40:29 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/06/05 22:57:40 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-#include <stdio.h>
-
-static t_texture *get_index(t_game *data, const char *id)
+static t_texture	*get_index(t_game *data, const char *id)
 {
 	t_texture *ret;
 
@@ -32,7 +30,7 @@ static t_texture *get_index(t_game *data, const char *id)
 	return (ret);
 }
 
-int		parse_texture(t_game *data, const char *id, char *line)
+int					parse_texture(t_game *data, const char *id, char *line)
 {
 	const size_t	id_len = ft_strlen(id);
 	size_t			path_len;
