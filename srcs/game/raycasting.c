@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/09 23:14:30 by tony              #+#    #+#             */
-/*   Updated: 2020/06/05 16:33:41 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/06/05 21:10:51 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,119 +29,6 @@ static int	texture_choser(t_game *data)
 	if (data->camera.side == 0 && ((angle >= 270 && angle <= 360) || (angle >= 0 && angle <= 90)))
 		return (IDX_WEST);
 	return (IDX_NORTH);
-}
-
-int		sort_sprites(int *order, double *dist, int amount)
-{
-	t_pair *pairs;
-	int i;
-
-	i = 0;
-	pairs = malloc(sizeof(t_pair) * amount);
-	if (pairs == NULL)
-		return (RET_ERROR);
-	while (i < amount)
-	{
-		pairs[i].val = dist[i];
-		pairs[i].index = order[i];
-		i++;
-	}
-	sort_pairs(pairs, amount);
-	i = 0;
-	while (i < amount)
-	{
-		dist[i] = pairs[i].val;
-		order[i] = pairs[i].index;
-		i++;
-	}
-	free(pairs);
-	return (RET_NO_ERROR);
-}
-
-void	cast_sprites(t_game *data)
-{
-	t_vec2	sprite;
-	t_vec2	transform;
-	t_vec	draw_start;
-	t_vec	draw_end;
-	t_vec	sprite_res;
-	const double	inv_det = 1.0 / (data->camera.plan_right.x * data->camera.plan_front.y - data->camera.plan_front.x * data->camera.plan_right.y);
-	int		sprite_screen_x;
-	int		i;
-	t_vec	stripe;
-	t_vec	tex;
-	const t_vec	tex_res = (t_vec){data->map.textures[IDX_SPRITE].width, data->map.textures[IDX_SPRITE].height};
-	int		v_move_screen;
-
-	i = 0;
-	while (i < data->map.sprites.cursor)
-	{
-		data->camera.sprite_order[i] = i;
-		data->camera.sprite_distance[i] = (pow(data->camera.pos.x - data->map.sprites.sprites[i].pos.x, 2) + pow(data->camera.pos.y - data->map.sprites.sprites[i].pos.y, 2));
-		i++;
-	}
-	sort_sprites(data->camera.sprite_order, data->camera.sprite_distance, data->map.sprites.cursor);
-	i = 0;
-	while (i < data->map.sprites.cursor)
-	{
-		sprite = (t_vec2){
-			data->map.sprites.sprites[data->camera.sprite_order[i]].pos.x - data->camera.pos.x,
-			data->map.sprites.sprites[data->camera.sprite_order[i]].pos.y - data->camera.pos.y,
-		};
-
-		transform = (typeof(transform)){
-			inv_det * (data->camera.plan_front.y * sprite.x - data->camera.plan_front.x * sprite.y),
-			inv_det * (-data->camera.plan_right.y * sprite.x + data->camera.plan_right.x * sprite.y)
-		};
-
-		v_move_screen = data->map.sprites.sprites[data->camera.sprite_order[i]].v_move / transform.y;
-
-		sprite_screen_x = (int)((data->map.resolution.x / 2) * (1 + transform.x / transform.y));
-		// SpriteHeight
-		sprite_res.y = abs((int)(data->map.resolution.y / transform.y)) / data->map.sprites.sprites[data->camera.sprite_order[i]].v_div;
-
-		draw_start.y = -sprite_res.y / 2 + data->map.resolution.y / 2 + v_move_screen;
-		if (draw_start.y < 0)
-			draw_start.y = 0;
-		draw_end.y = sprite_res.y / 2 + data->map.resolution.y / 2 + v_move_screen;
-		if (draw_end.y >= data->map.resolution.y)
-			draw_end.y = data->map.resolution.y - 1;
-
-		// SpriteWidth
-		sprite_res.x = abs((int)(data->map.resolution.y / transform.y)) / data->map.sprites.sprites[data->camera.sprite_order[i]].u_div;
-		draw_start.x = -sprite_res.x / 2 + sprite_screen_x;
-		if (draw_start.x < 0)
-			draw_start.x = 0;
-		draw_end.x = sprite_res.x / 2 + sprite_screen_x;
-		if (draw_end.x >= data->map.resolution.x)
-			draw_end.x = data->map.resolution.x - 1;
-
-		stripe.x = draw_start.x;
-		while (stripe.x < draw_end.x)
-		{
-			tex.x = (int)(256 * (stripe.x - (-sprite_res.x / 2 + sprite_screen_x)) * tex_res.x / sprite_res.x) / 256;
-
-			if (transform.y > 0 && stripe.x > 0 && stripe.x < data->map.resolution.x && transform.y < data->camera.zbuffer[stripe.x])
-			{
-				stripe.y = draw_start.y;
-				while (stripe.y < draw_end.y)
-				{
-					int d = (stripe.y - v_move_screen) * 256 - data->map.resolution.y * 128 + sprite_res.y * 128;
-					tex.y = ((d * tex_res.y) / sprite_res.y) / 256;
-
-					if (tex.x >= 0 && tex.x < tex_res.x && tex.y >= 0 && tex.y < tex_res.y)
-					{
-						uint32_t color = get_color(&data->map.textures[IDX_SPRITE].image, tex, tex_res.x);
-						if ((color & 0x00FFFFFF) != 0)
-							set_color(data, stripe, color);
-					}
-					stripe.y++;
-				}
-			}
-			stripe.x++;
-		}
-		i++;
-	}
 }
 
 void	map_texture(t_game *data, int x)
@@ -254,22 +141,14 @@ static void    get_perp_dist(t_game *data)
 
 static void    init_raycast_variables(t_game *data, int x)
 {
-		//calculate ray position and direction
-    data->camera.camera_x = 2 * x / (double)data->map.resolution.x - 1;
-	
-    data->camera.ray_dir.x = data->camera.plan_front.x + data->camera.plan_right.x * data->camera.camera_x;
-    data->camera.ray_dir.y = data->camera.plan_front.y + data->camera.plan_right.y * data->camera.camera_x;
-
-    //which box of the map we're in
-    data->camera.map_pos = to_vec(data->camera.pos);
-    
-	// Check if not 0, so we do not divide by zero
-    data->camera.ray_dir.x = (data->camera.ray_dir.x == 0) ? 1 : data->camera.ray_dir.x;
-    data->camera.ray_dir.y = (data->camera.ray_dir.y == 0) ? 1 : data->camera.ray_dir.y;
-	
-    //calculate step and initial sideDist
-    data->camera.delta_dist.x = fabs(1 / data->camera.ray_dir.x);
-    data->camera.delta_dist.y = fabs(1 / data->camera.ray_dir.y);
+	data->camera.camera_x = 2 * x / (double)data->map.resolution.x - 1;
+	data->camera.ray_dir.x = data->camera.plan_front.x + data->camera.plan_right.x * data->camera.camera_x;
+	data->camera.ray_dir.y = data->camera.plan_front.y + data->camera.plan_right.y * data->camera.camera_x;
+	data->camera.map_pos = to_vec(data->camera.pos);
+	data->camera.ray_dir.x = (data->camera.ray_dir.x == 0) ? 1 : data->camera.ray_dir.x;
+	data->camera.ray_dir.y = (data->camera.ray_dir.y == 0) ? 1 : data->camera.ray_dir.y;
+	data->camera.delta_dist.x = fabs(1 / data->camera.ray_dir.x);
+	data->camera.delta_dist.y = fabs(1 / data->camera.ray_dir.y);
 }
 
 void	raycasting(t_game *data)

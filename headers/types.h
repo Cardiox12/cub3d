@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 14:33:13 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/06/05 16:45:53 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/06/05 20:28:09 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,18 @@ typedef struct		s_sprites
 {
 	t_sprite		sprites[SPRITE_NUMBERS];
 	int				cursor;
+
+	t_vec2			transform;
+	t_vec			draw_start;
+	t_vec			draw_end;
+	t_vec			sprite_res;
+	int				sprite_screen_x;
+	t_vec			stripe;
+	t_vec			tex;
+	int				v_move_screen;
+	double			inv_det;
+	t_vec			tex_res;
+	t_vec2			sprite;
 }					t_sprites;
 
 typedef struct		s_map

@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 20:48:48 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/06/05 16:21:24 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/06/05 21:07:44 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,7 @@ int			init_textures(t_game *data);
 int			init_game(t_game *data);
 int			init_game_image(t_game *data);
 int			init_sprite_variables(t_game *data);
+void		cast_sprites(t_game *data);
+void		sort_sprites_dist(t_game *data);
 
 #endif
