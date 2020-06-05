@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/29 20:42:29 by tony              #+#    #+#             */
-/*   Updated: 2020/06/05 15:45:18 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/06/05 16:20:49 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	player_move_down(t_game *data)
 	if (is_out_of_bound(tmp, data) == FALSE)
 	{
 		data->camera.pos = tmp;
-		Rays_update(data->camera.rays, tmp);
+		rays_update(data->camera.rays, tmp);
 	}
 }
 
@@ -55,7 +55,7 @@ void	player_move_up(t_game *data)
 	if (is_out_of_bound(tmp, data) == FALSE)
 	{
 		data->camera.pos = tmp;
-		Rays_update(data->camera.rays, tmp);
+		rays_update(data->camera.rays, tmp);
 	}
 }
 
@@ -69,7 +69,7 @@ void	player_move_left(t_game *data)
 	if (is_out_of_bound(tmp, data) == FALSE)
 	{
 		data->camera.pos = tmp;
-		Rays_update(data->camera.rays, tmp);
+		rays_update(data->camera.rays, tmp);
 	}
 }
 
@@ -83,7 +83,7 @@ void	player_move_right(t_game *data)
 	if (is_out_of_bound(tmp, data) == FALSE)
 	{
 		data->camera.pos = tmp;
-		Rays_update(data->camera.rays, tmp);
+		rays_update(data->camera.rays, tmp);
 	}
 }
 
@@ -106,5 +106,5 @@ void	player_rotate(t_game *data)
 	}
 	data->camera.plan_front = rotate(data->camera.plan_front, to_radians(1), dir);
 	data->camera.plan_right = rotate(data->camera.plan_right, to_radians(1), dir);
-	Rays_rotate(data->camera.rays, to_radians(1), dir);
+	rays_rotate(data->camera.rays, to_radians(1), dir);
 }

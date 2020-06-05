@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 20:33:14 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/06/04 05:05:48 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/06/05 16:20:49 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ void	init_rays(t_camera *player)
 		player->rays[index].particle.y = 0;
 		player->rays[index].dir = dir;
 		player->rays[index].angle = 0;
-		Ray_rotate(&player->rays[index], to_radians(step * index), CLOCKWISE);
+		ray_rotate(&player->rays[index], to_radians(step * index), CLOCKWISE);
 		index++;
 	}
 	if (RAYS_NUMBER != 1)
-		Rays_rotate(player->rays, to_radians(fov_mid), ANTI_CLOCKWISE);
+		rays_rotate(player->rays, to_radians(fov_mid), ANTI_CLOCKWISE);
 }
 
 int		is_cardinal_point(char c)
@@ -53,18 +53,18 @@ void	set_heading(t_camera *player, char cardinal_p)
 
 	angle = 0.0f;
 	if (cardinal_p == S_SOUTH)
-		angle = to_radians(ANGLE_south);
+		angle = to_radians(ANGLE_SOUTH);
 	else if (cardinal_p == S_NORTH)
-		angle = to_radians(ANGLE_north);
+		angle = to_radians(ANGLE_NORTH);
 	else if (cardinal_p == S_WEST)
-		angle = to_radians(ANGLE_west);
+		angle = to_radians(ANGLE_WEST);
 	else if (cardinal_p == S_EAST)
-		angle = to_radians(ANGLE_east);
+		angle = to_radians(ANGLE_EAST);
 
 	player->plan_front = rotate(player->plan_front, angle + to_radians(1), CLOCKWISE);
 	player->plan_right = rotate(player->plan_right, angle + to_radians(1), CLOCKWISE);
 	player->camera_angle = to_degrees(angle);
-	Rays_rotate(player->rays, angle + to_radians(1), CLOCKWISE);
+	rays_rotate(player->rays, angle + to_radians(1), CLOCKWISE);
 	init_rays(player);
 }
 
