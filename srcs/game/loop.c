@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 14:23:36 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/06/05 15:45:18 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/06/05 17:19:59 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ int		loop(t_game *data)
 		data->infos.win_ptr,
 		data->image.img_ref,
 		0,
-		0
-	);
+		0);
 	return (0);
 }
