@@ -6,7 +6,7 @@
 #    By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/25 00:45:19 by bbellavi          #+#    #+#              #
-#    Updated: 2020/06/05 05:58:46 by bbellavi         ###   ########.fr        #
+#    Updated: 2020/06/05 14:47:18 by bbellavi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,6 @@ VEC_DIR		= $(SRCS_DIR)/vectors
 
 HEADERS		= headers
 HEADERS_SRC = $(HEADERS)/bitmap.h\
-$(HEADERS)/colors.h\
 $(HEADERS)/cub3d.h\
 $(HEADERS)/errors.h\
 $(HEADERS)/event_hooks.h\

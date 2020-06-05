@@ -6,14 +6,13 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 01:45:36 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/06/05 14:24:36 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/06/05 14:36:32 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "parser.h"
 #include "render.h"
-#include "colors.h"
 #include "render.h"
 #include <errno.h>
 
