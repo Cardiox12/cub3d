@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/22 15:45:25 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/06/04 14:55:53 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/06/05 15:01:25 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,16 @@ int		Errors_print(unsigned int errors, int listall)
 	ft_putstr(ERROR_BASE_MSG);
 	while (index < ERR_ARRAY_SIZE)
 	{
-		if (errors & errors_array[index].mask)
+		if (errors & g_errors_array[index].mask)
 		{
-			ft_putstr(errors_array[index].strerror);
+			ft_putstr(g_errors_array[index].strerror);
 			ft_putchar('\n');
 			if (!listall)
-				return errors_array[index].mask;
+				return g_errors_array[index].mask;
 		}
 		index++;
 	}
-	return (errors_array[index].mask);
+	return (g_errors_array[index].mask);
 }
 
 int		Error_std(const char *exe)
