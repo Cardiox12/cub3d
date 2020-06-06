@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 13:48:41 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/06/05 22:51:32 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/06/06 02:48:40 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ enum	e_err_code
 static const t_errors g_errors_array[ERR_ARRAY_SIZE] = {
 	{CODE_ERR_MAP_CLOSE_ERROR, "Map isn't closed properly"},
 	{CODE_ERR_MAP_CONFIG_ERROR, "Map contains incorrect characters"},
-	{CODE_ERR_COLOR_OUT_OF_RANGE, "Color out of range, should be [0 ; 255]"},
+	{CODE_ERR_COLOR_OUT_OF_RANGE, "Color out of range, should be [0, 255]"},
 	{CODE_ERR_COLOR_MISSING, "Missing color"},
 	{CODE_ERR_COLOR_BAD_FORMAT, "Color not well formatted"},
 	{CODE_ERR_TEXTURE_BAD_INDENT, "Texture bad indented"},

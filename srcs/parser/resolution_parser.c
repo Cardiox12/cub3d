@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 01:52:30 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/06/05 22:55:40 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/06/06 02:41:12 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int			parse_resolution(t_game *data, const char *id, char *line)
 
 	line = &line[id_len];
 	res = &data->map.resolution.x;
+	i = 0;
 	while (i < 2)
 	{
 		if (i == 1)
