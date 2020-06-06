@@ -6,16 +6,16 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/09 14:53:31 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/06/05 05:40:34 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/06/06 02:19:26 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vectors.h"
 
 /*
-	Rotate 2d vector by theta angle.
-
-	IMPORTANT : The angle is in radians.
+**	Rotate 2d vector by theta angle.
+**
+**	IMPORTANT : The angle is in radians.
 */
 
 t_vec2	rotate(t_vec2 u, double theta, char clockwise)
