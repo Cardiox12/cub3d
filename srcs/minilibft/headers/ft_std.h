@@ -6,13 +6,13 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 00:14:12 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/01/30 00:16:27 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/06/06 02:22:11 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#   ifndef FT_STD_H
-#   define FT_STD_H
+#ifndef FT_STD_H
+# define FT_STD_H
 
-int			ft_atoi(const char *str);
+int	ft_atoi(const char *str);
 
-#   endif
+#endif
