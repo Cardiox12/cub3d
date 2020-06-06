@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/13 02:04:34 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/01/31 01:04:23 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/06/06 02:27:09 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	ft_isinset(const char *set, int c)
 	return (0);
 }
 
-char	*ft_strtrim(char const *s, char const *set)
+char		*ft_strtrim(char const *s, char const *set)
 {
 	const size_t	end = ft_strlen(s);
 	int				left;
